@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Elena的英语小笑话 · English Jokes Collection</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fef9c3,#fde68a 40%,#fed7aa 100%);min-height:100vh;padding:24px 16px}
+
+/* Persistent back button */
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
+
+.wrap{max-width:1100px;margin:0 auto}
+
+/* Hero */
+.hero{text-align:center;margin:30px auto 32px}
+.hero-em{font-size:54px;margin-bottom:8px}
+.hero-title{font-size:42px;font-weight:900;background:linear-gradient(135deg,#f59e0b,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+.hero-py{font-size:16px;color:#a16207;font-weight:700;margin-top:6px}
+.hero-en{font-size:13px;color:#888;font-style:italic;margin-top:4px}
+.hero-tag{display:inline-block;margin-top:12px;background:#fff;border:2px solid #f59e0b;border-radius:999px;padding:5px 14px;font-size:11.5px;font-weight:800;color:#c2410c}
+
+/* Toggle bar — pinyin / English helpers */
+.tools{display:flex;gap:8px;justify-content:center;margin:14px 0 22px;flex-wrap:wrap}
+.tgl{background:#fff;color:#c2410c;border:2px solid #fdba74;padding:5px 12px;border-radius:999px;font-size:11px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.04)}
+
+/* Grid */
+.grid{display:grid;grid-template-columns:1fr;gap:18px}
+@media(min-width:680px){.grid{grid-template-columns:1fr 1fr}}
+@media(min-width:1000px){.grid{grid-template-columns:1fr 1fr 1fr}}
+
+/* Joke cards */
+.joke{background:#fff;border-radius:22px;padding:18px 18px 16px;box-shadow:0 6px 24px rgba(245,158,11,0.18);position:relative;display:flex;flex-direction:column;gap:8px;border:3px solid transparent;transition:.25s}
+.joke:hover{border-color:#fde68a;transform:translateY(-3px);box-shadow:0 10px 30px rgba(245,158,11,0.25)}
+
+.joke-head{display:flex;align-items:center;gap:10px;border-bottom:2px dashed #fde68a;padding-bottom:8px;margin-bottom:4px}
+.joke-num{background:linear-gradient(135deg,#f59e0b,#ea580c);color:#fff;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:13px;flex-shrink:0}
+.joke-em{font-size:32px;line-height:1}
+.joke-tag{margin-left:auto;background:#fef3c7;color:#a16207;font-size:9px;font-weight:800;padding:3px 8px;border-radius:999px;letter-spacing:.3px}
+
+.joke-q{font-size:15px;font-weight:800;color:#1a1a2e;line-height:1.35}
+.joke-q-zh{font-size:12px;color:#a16207;font-weight:700;line-height:1.4}
+.joke-q-py{font-size:10px;color:#7c3aed;font-weight:600;line-height:1.4;display:none}
+body.show-py .joke-q-py{display:block}
+
+.reveal-btn{background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#fff;border:none;padding:9px 14px;border-radius:14px;font-weight:900;font-size:12.5px;cursor:pointer;font-family:inherit;transition:.18s;margin-top:6px;display:flex;align-items:center;justify-content:center;gap:6px}
+.reveal-btn:hover{background:linear-gradient(135deg,#f59e0b,#ea580c);transform:scale(1.02)}
+.reveal-btn::after{content:" 🤔"}
+
+.joke-answer{display:none;animation:slideIn .35s ease;margin-top:4px}
+.joke.revealed .joke-answer{display:block}
+.joke.revealed .reveal-btn{display:none}
+@keyframes slideIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+
+.a-card{background:linear-gradient(135deg,#fef3c7,#fed7aa);border-radius:14px;padding:11px 14px;border:2px dashed #f59e0b}
+.a-label{font-size:8.5px;font-weight:900;color:#c2410c;letter-spacing:.4px;margin-bottom:3px}
+.a-en{font-size:17px;font-weight:900;color:#9a3412;line-height:1.25}
+.a-en em{font-style:normal;background:#fef9c3;padding:0 4px;border-radius:5px;color:#a16207}
+.a-zh{font-size:11.5px;color:#7c2d12;font-weight:700;line-height:1.45;margin-top:4px}
+.a-py{font-size:10px;color:#7c3aed;font-weight:600;line-height:1.4;display:none;margin-top:1px}
+body.show-py .a-py{display:block}
+
+.pun-box{background:#fff;border-radius:11px;padding:9px 11px;margin-top:7px;border-left:4px solid #ec4899;font-size:11px;line-height:1.55;color:#444}
+.pun-box b{color:#ec4899}
+.pun-zh{color:#a16207;font-weight:700;margin-top:2px;display:block}
+.pun-py{color:#7c3aed;font-weight:600;font-size:9.5px;display:none;line-height:1.4}
+body.show-py .pun-py{display:block}
+
+/* Visual joke effect — strikethrough vs sound */
+.sound{color:#ec4899;font-weight:900}
+.gloss{color:#16a34a;font-weight:800;font-style:italic}
+
+/* Special card types — illustrate the joke */
+.deer-eye{display:inline-block;width:1.1em;height:1.1em;border-radius:50%;background:#1f2937;vertical-align:middle;position:relative}
+.deer-eye.no::before{content:"";position:absolute;inset:0.25em;background:#fef3c7;border-radius:50%;border:0.1em dashed #1f2937}
+.deer-eye.no::after{content:"";position:absolute;inset:0.3em;transform:rotate(45deg);width:0.5em;height:0.08em;background:#dc2626;top:50%;left:50%;margin-left:-0.25em;margin-top:-0.04em}
+
+/* Footer */
+.foot{text-align:center;margin:36px 0 12px;font-size:11px;color:#a16207}
+.foot-em{font-size:24px;margin-bottom:6px}
+
+/* "Reveal all" button */
+.all-btn{background:#fff;color:#c2410c;border:2px solid #fbbf24;padding:6px 14px;border-radius:999px;font-weight:800;font-size:11.5px;cursor:pointer;font-family:inherit;transition:.15s}
+.all-btn:hover{background:#fef3c7}
+.all-btn.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+</style>
+</head>
+<body>
+
+<a class="home-btn" href="index.html">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
+
+<div class="wrap">
+
+<div class="hero">
+  <div class="hero-em">😂🎈🐝</div>
+  <div class="hero-title">英语小笑话集</div>
+  <div class="hero-py">yīngyǔ xiǎo xiàohuà jí</div>
+  <div class="hero-en">English Jokes Collection — for Elena</div>
+  <div class="hero-tag">🎯 16 个笑话 · gè xiàohuà · 16 jokes</div>
+  <div style="font-size:12px;color:#888;margin-top:10px;line-height:1.6">
+    学英语也可以很好玩！<br>
+    <span style="color:#7c3aed;font-weight:600">xué yīngyǔ yě kěyǐ hěn hǎowán!</span><br>
+    <span style="font-style:italic">Learning English can be really fun too!</span>
+  </div>
+</div>
+
+<div class="tools">
+  <button class="tgl" id="tpy" onclick="tPY()">拼音 pīnyīn</button>
+  <button class="all-btn" id="allbtn" onclick="toggleAll()">🎉 显示所有答案 show all answers</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<div class="foot">
+  <div class="foot-em">🌟</div>
+  <div>笑一笑，更聪明！xiào yī xiào, gèng cōngmíng! · A laugh a day keeps the doctor away!</div>
+  <div style="margin-top:4px;color:#aaa">📅 2026年6月3日 · liù yuè sān rì · June 3, 2026</div>
+</div>
+
+</div>
+
+<script>
+const JOKES=[
+  {
+    num:'01',em:'🦌',cat:'animal · 动物',
+    q:'What do you call a deer with no eye?',
+    qzh:'没有眼睛的鹿是什么鹿？',
+    qpy:'méiyǒu yǎnjing de lù shì shénme lù?',
+    a:'<em>No eye deer.</em>',
+    azh:'无眼鹿',
+    apy:'wú yǎn lù',
+    pun:'<b>No eye deer</b> 听起来像 <span class="sound">"No idea"</span> = 我不知道！',
+    punpy:'tīng qǐlái xiàng "No idea" — wǒ bù zhīdào!',
+    punen:'"No eye deer" sounds like "No idea" 🤷'
+  },
+  {
+    num:'02',em:'🍅',cat:'food · 食物',
+    q:'What did a late tomato say to the other tomatoes?',
+    qzh:'一个迟到的番茄会对其他番茄说什么？',
+    qpy:'yī gè chídào de fānqié huì duì qítā fānqié shuō shénme?',
+    a:'<em>I will ketchup!</em>',
+    azh:'"我会赶上！"',
+    apy:'wǒ huì gǎn shàng!',
+    pun:'<b>ketchup</b>（番茄酱）听起来像 <span class="sound">"catch up"</span> = 追上 / 赶上',
+    punpy:'"ketchup" (fānqié jiàng) tīng qǐlái xiàng "catch up"',
+    punen:'"ketchup" sounds like "catch up" 🏃'
+  },
+  {
+    num:'03',em:'🔤',cat:'alphabet · 字母',
+    q:'— I only know 25 letters of the alphabet. — Why?',
+    qzh:'— 26 个字母我只认识 25 个。— 为什么？',
+    qpy:'èrshíliù gè zìmǔ wǒ zhǐ rènshi èrshíwǔ gè. wèi shénme?',
+    a:'<em>I don\'t know Y.</em>',
+    azh:'我不认识 Y。（我不知道为什么）',
+    apy:'wǒ bù rènshi Y. (wǒ bù zhīdào wèi shénme)',
+    pun:'字母 <b>Y</b> 听起来跟 <span class="sound">"why"</span>（为什么）一样！',
+    punpy:'zìmǔ "Y" tīng qǐlái gēn "why" yīyàng!',
+    punen:'The letter "Y" sounds exactly like "why" 🤔'
+  },
+  {
+    num:'04',em:'🐝',cat:'animal · 动物',
+    q:'What do you call a bee that comes from America?',
+    qzh:'来自美国的蜜蜂叫什么？',
+    qpy:'lái zì Měiguó de mìfēng jiào shénme?',
+    a:'<em>A USB!</em>',
+    azh:'USB！（U + S + bee = 美国蜜蜂）',
+    apy:'U + S + bee = Měiguó mìfēng',
+    pun:'<b>US bee</b>（美国蜜蜂）听起来像 <span class="sound">"USB"</span>（U盘的U-S-B）！',
+    punpy:'"US bee" (Měiguó mìfēng) tīng qǐlái xiàng "USB"',
+    punen:'"US bee" sounds like "USB" — like the cable! 💾'
+  },
+  {
+    num:'05',em:'🐄',cat:'animal · 动物',
+    q:'How do we count cows?',
+    qzh:'牛用什么来数？',
+    qpy:'niú yòng shénme lái shǔ?',
+    a:'<em>With a Cowculator.</em>',
+    azh:'用"数牛器"',
+    apy:'yòng "shǔ niú qì"',
+    pun:'<b>Cow + calculator</b>（牛 + 计算器）= <span class="sound">Cowculator</span>（数牛器）！',
+    punpy:'niú + jìsuàn qì = "Cowculator"',
+    punen:'Cow + calculator = Cowculator 🐄🔢'
+  },
+  {
+    num:'06',em:'🥵',cat:'words · 单词',
+    q:'Which is faster, hot or cold?',
+    qzh:'冷和热，哪个更快？',
+    qpy:'lěng hé rè, nǎge gèng kuài?',
+    a:'<em>Hot. Because you can catch a cold.</em>',
+    azh:'热。因为你可以"追上"冷 / 感冒。',
+    apy:'rè. yīnwèi nǐ kěyǐ "zhuī shàng" lěng / gǎnmào.',
+    pun:'<b>catch a cold</b> 有两个意思：① <span class="sound">追上冷</span> ② <span class="sound">感冒</span>！',
+    punpy:'"catch a cold" yǒu liǎng gè yìsi: ① zhuī shàng lěng ② gǎnmào',
+    punen:'"Catch a cold" means BOTH "catch the cold one" AND "get sick" 🤧'
+  },
+  {
+    num:'07',em:'🌑',cat:'spelling · 拼写',
+    q:'Why is "dark" spelled with a "k" and not a "c"?',
+    qzh:'为什么 "dark" 不能写成 "darc"？',
+    qpy:'wèi shénme "dark" bù néng xiě chéng "darc"?',
+    a:'<em>Because you can\'t c in the dark!</em>',
+    azh:'因为在黑暗里你看不见啊！',
+    apy:'yīnwèi zài hēi\'àn lǐ nǐ kàn bù jiàn a!',
+    pun:'字母 <b>c</b> 听起来像 <span class="sound">"see"</span>（看见）— 你在黑里看不到 c！',
+    punpy:'zìmǔ "c" tīng qǐlái xiàng "see" — nǐ zài hēi lǐ kàn bù dào!',
+    punen:'The letter "c" sounds like "see" — you can\'t see in the dark! 🌚'
+  },
+  {
+    num:'08',em:'❄️',cat:'movies · 电影',
+    q:'Why shouldn\'t we give Elsa a balloon?',
+    qzh:'为什么不能给艾莎气球？',
+    qpy:'wèi shénme bù néng gěi Àishā qìqiú?',
+    a:'<em>Because she will Let It Go.</em>',
+    azh:'因为她会把它"放手 / 放走"。',
+    apy:'yīnwèi tā huì bǎ tā "fàng shǒu / fàng zǒu".',
+    pun:'<b>"Let It Go"</b> 是 <span class="sound">《冰雪奇缘》(Frozen)</span> 的主题曲，也是 <span class="sound">"放手"</span> 的意思！',
+    punpy:'"Let It Go" shì "Bīngxuě Qíyuán" de zhǔtí qǔ, yěshì "fàng shǒu" de yìsi!',
+    punen:'"Let It Go" is the Frozen song AND means to let something go 🎈'
+  },
+  {
+    num:'09',em:'🐕',cat:'math · 数学',
+    q:'What did my dog say when I asked him: what is 2 minus 2?',
+    qzh:'当我问我家的狗 2 减 2 等于多少，他说了什么？',
+    qpy:'dāng wǒ wèn wǒ jiā de gǒu 2 jiǎn 2 děngyú duōshǎo, tā shuō le shénme?',
+    a:'<em>He said nothing.</em>',
+    azh:'他什么也没说！（2-2 = 0 = nothing 什么都没有）',
+    apy:'tā shénme yě méi shuō! (2-2=0=shénme dōu méi yǒu)',
+    pun:'<span class="sound">2 - 2 = 0 = "nothing"</span>（什么都没有），狗也没说话！',
+    punpy:'2 jiǎn 2 děngyú líng, "nothing" yěshì shénme dōu méi yǒu',
+    punen:'2 minus 2 = 0 = "nothing" — and the dog said nothing! 🐕💭'
+  },
+  {
+    num:'10',em:'👨‍👩‍👧',cat:'family · 家人',
+    q:'Who is closer to you — your mom or your dad?',
+    qzh:'谁离你更近？妈妈还是爸爸？',
+    qpy:'shéi lí nǐ gèng jìn? māma háishi bàba?',
+    a:'<em>Mom is closer, because dad is far<u>ther</u>.</em>',
+    azh:'妈妈更近，因为爸爸更远。',
+    apy:'māma gèng jìn, yīnwèi bàba gèng yuǎn.',
+    pun:'<b>father</b>（爸爸）和 <span class="sound">farther</span>（更远）听起来一模一样！',
+    punpy:'"father" (bàba) hé "farther" (gèng yuǎn) tīng qǐlái yī mú yīyàng!',
+    punen:'"father" sounds exactly like "farther" 👨📏'
+  },
+  {
+    num:'11',em:'🐂',cat:'animal · 动物',
+    q:'What do you call a sleeping bull?',
+    qzh:'睡着的公牛叫什么？',
+    qpy:'shuì zháo de gōngniú jiào shénme?',
+    a:'<em>A Bulldozer!</em>',
+    azh:'推土机！🚜（其实是"打盹的公牛"）',
+    apy:'tuī tǔ jī! (qíshí shì "dǎ dǔn de gōngniú")',
+    pun:'<b>Bull</b>（公牛）+ <b>doze</b>（打盹）= <span class="sound">Bulldozer</span>（推土机 / 打盹的公牛）！',
+    punpy:'"bull" (gōngniú) + "doze" (dǎ dǔn) = "bulldozer"',
+    punen:'Bull + doze (= nap) = Bulldozer 🚜💤'
+  },
+  {
+    num:'12',em:'🥫',cat:'tools · 工具',
+    q:'What do you call a can opener that doesn\'t work?',
+    qzh:'打不开罐头的开罐器叫什么？',
+    qpy:'dǎ bù kāi guàntou de kāi guàn qì jiào shénme?',
+    a:'<em>A can\'t opener!</em>',
+    azh:'"不能"开罐器！（can\'t = 不能）',
+    apy:'"bù néng" kāi guàn qì! (can\'t = bù néng)',
+    pun:'<b>can</b>（能 / 罐子）+ <b>n\'t</b>（不）= <span class="sound">can\'t opener</span>（开不了罐器）！',
+    punpy:'"can" (néng / guànzi) + "n\'t" (bù) = "can\'t opener"',
+    punen:'"Can" + "n\'t" = "can\'t opener" — it can\'t open! 🚫'
+  },
+  {
+    num:'13',em:'🐘',cat:'animal · 动物',
+    q:'Why don\'t elephants use computers?',
+    qzh:'大象为什么不用电脑？',
+    qpy:'dà xiàng wèi shénme bù yòng diànnǎo?',
+    a:'<em>They\'re afraid of the mouse!</em>',
+    azh:'它们怕"鼠标"/"老鼠"！🐭',
+    apy:'tāmen pà "shǔbiāo" / "lǎoshǔ"!',
+    pun:'<b>mouse</b> 有两个意思：① <span class="sound">老鼠</span> ② <span class="sound">鼠标</span>！大象怕老鼠！',
+    punpy:'"mouse" yǒu liǎng gè yìsi: ① lǎoshǔ ② shǔbiāo',
+    punen:'"Mouse" means BOTH the animal AND the computer thing 🐘🖱️'
+  },
+  {
+    num:'14',em:'🍓',cat:'fruit · 水果',
+    q:'What do you call a sad strawberry?',
+    qzh:'伤心的草莓叫什么？',
+    qpy:'shāngxīn de cǎoméi jiào shénme?',
+    a:'<em>A blueberry!</em>',
+    azh:'蓝莓！🫐（blue = 蓝色 / 忧郁）',
+    apy:'lánméi! (blue = lán sè / yōuyù)',
+    pun:'英语里 <b>blue</b> 不只是 <span class="sound">蓝色</span>，也是 <span class="sound">"忧郁、伤心"</span> 的意思！',
+    punpy:'yīngyǔ lǐ "blue" bù zhǐshì lán sè, yěshì "yōuyù, shāngxīn" de yìsi!',
+    punen:'In English, "blue" can also mean "sad" 💙'
+  },
+  {
+    num:'15',em:'🐻',cat:'animal · 动物',
+    q:'What do you call a bear with no ears?',
+    qzh:'没有耳朵的熊叫什么？',
+    qpy:'méi yǒu ěrduo de xióng jiào shénme?',
+    a:'<em>B.</em>',
+    azh:'B！（Bear - ear = B）',
+    apy:'B! (Bear jiǎn diào "ear" jiù shì "B")',
+    pun:'<b>B</b><span class="gloss">ear</span> - <span class="sound">ear</span> = <b>B</b> — 熊去掉耳朵就剩下 "B"！',
+    punpy:'"Bear" jiǎn diào "ear" jiù shèng xià "B"!',
+    punen:'"Bear" minus "ear" leaves "B" 🐻➖👂'
+  },
+  {
+    num:'16',em:'🐔',cat:'days · 星期',
+    q:'On what day of the week do chickens hide?',
+    qzh:'星期几小鸡会躲起来？',
+    qpy:'xīngqī jǐ xiǎo jī huì duǒ qǐlái?',
+    a:'<em>Fry-day!</em>',
+    azh:'炸鸡日！（Fry-day 听起来像 Friday 星期五）',
+    apy:'zhájī rì! (Fry-day tīng qǐlái xiàng Friday — xīngqī wǔ)',
+    pun:'<b>Fry</b>（炸 / 煎）+ <b>day</b> = <span class="sound">Fry-day</span>，听起来像 <span class="sound">Friday</span>（星期五）！',
+    punpy:'"Fry" (zhá) + "day" = "Fry-day", tīng qǐlái xiàng "Friday" (xīngqī wǔ)',
+    punen:'"Fry-day" sounds like "Friday" — chickens hide so they don\'t get fried! 🍗'
+  },
+];
+
+// Render
+const grid=document.getElementById('grid');
+JOKES.forEach((j,i)=>{
+  const card=document.createElement('div');
+  card.className='joke';
+  card.innerHTML=`
+    <div class="joke-head">
+      <div class="joke-num">${j.num}</div>
+      <div class="joke-em">${j.em}</div>
+      <div class="joke-tag">${j.cat}</div>
+    </div>
+    <div class="joke-q">${j.q}</div>
+    <div class="joke-q-zh">${j.qzh}</div>
+    <div class="joke-q-py">${j.qpy}</div>
+    <button class="reveal-btn" onclick="reveal(${i})">点击看答案 · click for answer</button>
+    <div class="joke-answer">
+      <div class="a-card">
+        <div class="a-label">😆 答案 dá'àn · ANSWER</div>
+        <div class="a-en">${j.a}</div>
+        <div class="a-zh">${j.azh}</div>
+        <div class="a-py">${j.apy}</div>
+      </div>
+      <div class="pun-box">
+        💡 ${j.pun}
+        <span class="pun-py">${j.punpy}</span>
+        <span style="display:block;color:#666;font-style:italic;margin-top:3px;font-size:10.5px">${j.punen}</span>
+      </div>
+    </div>
+  `;
+  grid.appendChild(card);
+});
+
+function reveal(i){
+  grid.children[i].classList.add('revealed');
+}
+
+let allOn=false;
+function toggleAll(){
+  allOn=!allOn;
+  const btn=document.getElementById('allbtn');
+  if(allOn){
+    btn.textContent='🙈 隐藏所有答案 hide all answers';
+    btn.classList.add('on');
+    document.querySelectorAll('.joke').forEach(j=>j.classList.add('revealed'));
+  }else{
+    btn.textContent='🎉 显示所有答案 show all answers';
+    btn.classList.remove('on');
+    document.querySelectorAll('.joke').forEach(j=>j.classList.remove('revealed'));
+  }
+}
+
+let pyOn=false;
+function tPY(){
+  pyOn=!pyOn;
+  document.body.classList.toggle('show-py',pyOn);
+  const b=document.getElementById('tpy');
+  b.textContent=pyOn?'拼音 pīnyīn ✓':'拼音 pīnyīn';
+  b.classList.toggle('on',pyOn);
+}
+</script>
+</body>
+</html>
