@@ -227,7 +227,7 @@ body.show-en .gen{display:block}
     <span class="ctag">🥤 新饮料 xīn yǐnliào · new drinks</span>
     <span class="ctag">💬 8 对话 duìhuà · dialogues</span>
     <span class="ctag">🎭 角色扮演 juésè bànyǎn · role-play</span>
-    <span class="ctag">🎮 8 游戏 yóuxì · games</span>
+    <span class="ctag">🎮 11 游戏 yóuxì · games</span>
     <span class="ctag">💰 买单 mǎidān · pay the bill</span>
   </div>
   <div style="background:#fff;border:2px solid #fdba74;border-radius:14px;padding:9px 16px;font-size:11px;color:#c2410c;margin-top:8px;max-width:600px;line-height:1.6">
@@ -236,7 +236,7 @@ body.show-en .gen{display:block}
     <span style="color:#7c3aed;font-weight:600;font-size:10px">yóuxì lǐ mòrèn zhǐ yǒu zhōngwén. diǎn shàngfāng ànniǔ kěyǐ dǎkāi pīnyīn hé yīngwén!</span><br>
     <span style="color:#888;font-style:italic;font-size:10px">Games show only Chinese by default. Click the buttons above to turn on pinyin and English!</span>
   </div>
-  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sān shí yè · 30 pages</div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">33 页 sānshísān yè · 33 pages</div>
 </div>
 </div>
 
@@ -1000,13 +1000,13 @@ body.show-en .gen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 26: GAME 6 — MEMORY MATCH ════════════════ -->
+<!-- ════════════════ SLIDE 26: GAME 6 — RESTAURANT MEMORY MATCH ════════════════ -->
 <div class="slide">
 <div class="toggle-bar"><button class="tgl" id="tpy6" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten6" onclick="tEN()">English</button></div>
 <span class="badge co">🎮 game 6</span>
 <div class="tag co">🎮 游戏 yóuxì · game</div>
-<div class="title" style="margin-top:6px">记忆配对 jìyì pèiduì</div>
-<div class="title-en">memory match — flip the cards and find pairs!</div>
+<div class="title" style="margin-top:6px">餐厅词汇配对 cāntīng cíhuì pèiduì</div>
+<div class="title-en">restaurant items memory match — menu, chopsticks, food &amp; more!</div>
 <div class="gw">
   <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
     <div class="gsbar">🎯 配对 pèiduì · matches <span id="mm">0</span>/6</div>
@@ -1018,10 +1018,64 @@ body.show-en .gen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 27: GAME 7 — FILL IN BLANKS ════════════════ -->
+<!-- ════════════════ SLIDE 27: GAME 7 — FOOD MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 7</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">食物记忆配对 shíwù jìyì pèiduì</div>
+<div class="title-en">food memory match — find the pair for each Chinese food word!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 pèiduì · matches <span id="mfm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 fān · flips <span id="mff">0</span></div>
+    <button class="gbtn" onclick="initMemFood()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="mgrid" id="mfgrid"></div>
+  <div class="gres" id="mfres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 28: GAME 8 — DRINKS MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 8</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">饮料记忆配对 yǐnliào jìyì pèiduì</div>
+<div class="title-en">drinks memory match — find the pair for each drink!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 pèiduì · matches <span id="mdm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 fān · flips <span id="mdf">0</span></div>
+    <button class="gbtn" onclick="initMemDrink()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="mgrid" id="mdgrid"></div>
+  <div class="gres" id="mdres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 29: GAME 9 — MEASURE WORDS MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 9</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">量词记忆配对 liàngcí jìyì pèiduì</div>
+<div class="title-en">measure words memory match — match the measure word with the right food/drink!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 pèiduì · matches <span id="mwm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 fān · flips <span id="mwf">0</span></div>
+    <button class="gbtn" onclick="initMemMw()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="mgrid" id="mwgrid"></div>
+  <div class="gres" id="mwres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 30: GAME 10 — FILL IN BLANKS ════════════════ -->
 <div class="slide">
 <div class="toggle-bar"><button class="tgl" id="tpy7" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten7" onclick="tEN()">English</button></div>
-<span class="badge co">🎮 game 7</span>
+<span class="badge co">🎮 game 10</span>
 <div class="tag co">🎮 游戏 yóuxì · game</div>
 <div class="title" style="margin-top:6px">填空 tiánkòng</div>
 <div class="title-en">fill in the blanks — click words to complete the dialogue!</div>
@@ -1036,10 +1090,10 @@ body.show-en .gen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 28: GAME 8 — WAITER RESPONSE ════════════════ -->
+<!-- ════════════════ SLIDE 31: GAME 11 — WAITER RESPONSE ════════════════ -->
 <div class="slide">
 <div class="toggle-bar"><button class="tgl" id="tpy8" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" id="ten8" onclick="tEN()">English</button></div>
-<span class="badge co">🎮 game 8</span>
+<span class="badge co">🎮 game 11</span>
 <div class="tag co">🎮 游戏 yóuxì · game</div>
 <div class="title" style="margin-top:6px">服务员说什么？fúwùyuán shuō shénme?</div>
 <div class="title-en">how do you respond? — pick the right reply to the waiter!</div>
@@ -1063,7 +1117,7 @@ body.show-en .gen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 29: PHRASE SUMMARY ════════════════ -->
+<!-- ════════════════ SLIDE 32: PHRASE SUMMARY ════════════════ -->
 <div class="slide">
 <span class="badge cy">总结</span>
 <div class="tag cy">📋 短语总结 duǎnyǔ zǒngjié · phrase summary</div>
@@ -1125,7 +1179,7 @@ body.show-en .gen{display:block}
 </div>
 </div>
 
-<!-- ════════════════ SLIDE 30: END CELEBRATION ════════════════ -->
+<!-- ════════════════ SLIDE 33: END CELEBRATION ════════════════ -->
 <div class="slide">
 <div class="endb">
   <div style="font-size:54px">🌟🥢🎉</div>
@@ -1152,7 +1206,10 @@ body.show-en .gen{display:block}
     <span class="ck">🎮 饮料问答 yǐnliào wèndá · drink quiz</span>
     <span class="ck">🎮 食物问答 shíwù wèndá · food quiz</span>
     <span class="ck">🎮 动词配对 dòngcí pèiduì · verb match</span>
-    <span class="ck">🎮 记忆配对 jìyì pèiduì · memory match</span>
+    <span class="ck">🎮 餐厅词汇配对 cāntīng cíhuì pèiduì · restaurant items match</span>
+    <span class="ck">🎮 食物记忆配对 shíwù jìyì pèiduì · food memory match</span>
+    <span class="ck">🎮 饮料记忆配对 yǐnliào jìyì pèiduì · drinks memory match</span>
+    <span class="ck">🎮 量词记忆配对 liàngcí jìyì pèiduì · measure words match</span>
     <span class="ck">🎮 填空 tiánkòng · fill-in-blank</span>
     <span class="ck">🎮 服务员问答 fúwùyuán wèndá · waiter Q&amp;A</span>
   </div>
@@ -1521,7 +1578,175 @@ function initMem(){
 }
 GI[25]=initMem;
 
-// ════ GAME 7: Fill-in-blank (slide 27, index 26) ════
+// ════ GAME 7: Food Memory Match (slide 27, index 26) ════
+const MEM_FOOD=[
+  {id:1,hz:'米饭',py:'mǐfàn',en:'rice',em:'🍚'},
+  {id:2,hz:'面条',py:'miàntiáo',en:'noodles',em:'🍜'},
+  {id:3,hz:'饺子',py:'jiǎozi',en:'dumplings',em:'🥟'},
+  {id:4,hz:'汉堡',py:'hànbǎo',en:'burger',em:'🍔'},
+  {id:5,hz:'蛋糕',py:'dàngāo',en:'cake',em:'🍰'},
+  {id:6,hz:'冰淇淋',py:'bīngqílín',en:'ice cream',em:'🍦'},
+  {id:7,hz:'沙拉',py:'shālā',en:'salad',em:'🥗'},
+  {id:8,hz:'比萨',py:'bǐsà',en:'pizza',em:'🍕'},
+];
+let mfFlipped=[],mfMatched=0,mfFlips=0,mfLock=false;
+function initMemFood(){
+  mfFlipped=[];mfMatched=0;mfFlips=0;mfLock=false;
+  $id('mfm').textContent='0';$id('mff').textContent='0';$id('mfres').style.display='none';
+  const cards=[];
+  MEM_FOOD.forEach(p=>{
+    cards.push({id:p.id,side:'hz',hz:p.hz,py:p.py,en:p.en});
+    cards.push({id:p.id,side:'em',em:p.em});
+  });
+  const grid=$id('mfgrid');grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(mfLock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='hz'){
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div class="mcard-py gpy">${card.py}</div>
+          <div class="mcard-hz">${card.hz}</div>
+          <div class="gen" style="font-size:8px;color:#888;font-style:italic">${card.en}</div>
+        </div>`;
+      }else{el.innerHTML=`<div style="font-size:34px">${card.em}</div>`;}
+      mfFlipped.push({el,card});
+      if(mfFlipped.length===2){
+        mfFlips++;$id('mff').textContent=mfFlips;
+        if(mfFlipped[0].card.id===mfFlipped[1].card.id){
+          mfFlipped[0].el.classList.add('match');mfFlipped[1].el.classList.add('match');
+          mfFlipped=[];mfMatched++;$id('mfm').textContent=mfMatched;
+          if(mfMatched===8){setTimeout(()=>{const r=$id('mfres');r.style.display='block';r.textContent='🎉 '+mfFlips+' 翻 fān · 太棒了！tài bàng le!';},400);}
+        }else{
+          mfLock=true;setTimeout(()=>{
+            mfFlipped[0].el.classList.remove('flip');mfFlipped[0].el.textContent='🎴';
+            mfFlipped[1].el.classList.remove('flip');mfFlipped[1].el.textContent='🎴';
+            mfFlipped=[];mfLock=false;
+          },900);
+        }
+      }
+    };
+    grid.appendChild(el);
+  });
+}
+GI[26]=initMemFood;
+
+// ════ GAME 8: Drinks Memory Match (slide 28, index 27) ════
+const MEM_DRINK=[
+  {id:1,hz:'水',py:'shuǐ',en:'water',em:'💧'},
+  {id:2,hz:'牛奶',py:'niúnǎi',en:'milk',em:'🥛'},
+  {id:3,hz:'茶',py:'chá',en:'tea',em:'🍵'},
+  {id:4,hz:'奶茶',py:'nǎichá',en:'milk tea',em:'🧋'},
+  {id:5,hz:'可乐',py:'kělè',en:'cola',em:'<span class="cancan cancan-cola"></span>'},
+  {id:6,hz:'雪碧',py:'xuěbì',en:'sprite',em:'<span class="cancan cancan-sprite"></span>'},
+  {id:7,hz:'果汁',py:'guǒzhī',en:'juice',em:'🧃'},
+  {id:8,hz:'热水',py:'rè shuǐ',en:'hot water',em:'<span class="hotcup"></span>'},
+];
+let mdFlipped=[],mdMatched=0,mdFlips=0,mdLock=false;
+function initMemDrink(){
+  mdFlipped=[];mdMatched=0;mdFlips=0;mdLock=false;
+  $id('mdm').textContent='0';$id('mdf').textContent='0';$id('mdres').style.display='none';
+  const cards=[];
+  MEM_DRINK.forEach(p=>{
+    cards.push({id:p.id,side:'hz',hz:p.hz,py:p.py,en:p.en});
+    cards.push({id:p.id,side:'em',em:p.em});
+  });
+  const grid=$id('mdgrid');grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(mdLock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='hz'){
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div class="mcard-py gpy">${card.py}</div>
+          <div class="mcard-hz">${card.hz}</div>
+          <div class="gen" style="font-size:8px;color:#888;font-style:italic">${card.en}</div>
+        </div>`;
+      }else{el.innerHTML=`<div style="font-size:34px;line-height:1">${card.em}</div>`;}
+      mdFlipped.push({el,card});
+      if(mdFlipped.length===2){
+        mdFlips++;$id('mdf').textContent=mdFlips;
+        if(mdFlipped[0].card.id===mdFlipped[1].card.id){
+          mdFlipped[0].el.classList.add('match');mdFlipped[1].el.classList.add('match');
+          mdFlipped=[];mdMatched++;$id('mdm').textContent=mdMatched;
+          if(mdMatched===8){setTimeout(()=>{const r=$id('mdres');r.style.display='block';r.textContent='🎉 '+mdFlips+' 翻 fān · 太棒了！tài bàng le!';},400);}
+        }else{
+          mdLock=true;setTimeout(()=>{
+            mdFlipped[0].el.classList.remove('flip');mdFlipped[0].el.textContent='🎴';
+            mdFlipped[1].el.classList.remove('flip');mdFlipped[1].el.textContent='🎴';
+            mdFlipped=[];mdLock=false;
+          },900);
+        }
+      }
+    };
+    grid.appendChild(el);
+  });
+}
+GI[27]=initMemDrink;
+
+// ════ GAME 9: Measure Words Memory Match (slide 29, index 28) ════
+// Pair each measure word with its typical food/drink partner
+const MEM_MW=[
+  {id:1,mw:'一杯',mwpy:'yī bēi',mwen:'a cup of',food:'水',foodpy:'shuǐ',fooden:'water',em:'💧'},
+  {id:2,mw:'一碗',mwpy:'yī wǎn',mwen:'a bowl of',food:'米饭',foodpy:'mǐfàn',fooden:'rice',em:'🍚'},
+  {id:3,mw:'一盘',mwpy:'yī pán',mwen:'a plate of',food:'饺子',foodpy:'jiǎozi',fooden:'dumplings',em:'🥟'},
+  {id:4,mw:'一份',mwpy:'yī fèn',mwen:'a serving of',food:'沙拉',foodpy:'shālā',fooden:'salad',em:'🥗'},
+  {id:5,mw:'一瓶',mwpy:'yī píng',mwen:'a bottle of',food:'可乐',foodpy:'kělè',fooden:'cola',em:'<span class="cancan cancan-cola"></span>'},
+  {id:6,mw:'一个',mwpy:'yī gè',mwen:'one',food:'汉堡',foodpy:'hànbǎo',fooden:'burger',em:'🍔'},
+];
+let mwFlipped=[],mwMatched=0,mwFlips=0,mwLock=false;
+function initMemMw(){
+  mwFlipped=[];mwMatched=0;mwFlips=0;mwLock=false;
+  $id('mwm').textContent='0';$id('mwf').textContent='0';$id('mwres').style.display='none';
+  const cards=[];
+  MEM_MW.forEach(p=>{
+    cards.push({id:p.id,side:'mw',mw:p.mw,mwpy:p.mwpy,mwen:p.mwen});
+    cards.push({id:p.id,side:'food',food:p.food,foodpy:p.foodpy,fooden:p.fooden,em:p.em});
+  });
+  const grid=$id('mwgrid');grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(mwLock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='mw'){
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div class="mcard-hz" style="font-size:17px;color:#e91e8c">${card.mw}</div>
+          <div class="mcard-py gpy" style="color:#7c3aed">${card.mwpy}</div>
+          <div class="gen" style="font-size:7.5px;color:#888;font-style:italic">${card.mwen}</div>
+        </div>`;
+      }else{
+        el.innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;gap:1px">
+          <div style="font-size:24px;line-height:1">${card.em}</div>
+          <div class="mcard-hz" style="font-size:11px">${card.food}</div>
+          <div class="mcard-py gpy" style="font-size:8.5px">${card.foodpy}</div>
+          <div class="gen" style="font-size:7.5px;color:#888;font-style:italic">${card.fooden}</div>
+        </div>`;
+      }
+      mwFlipped.push({el,card});
+      if(mwFlipped.length===2){
+        mwFlips++;$id('mwf').textContent=mwFlips;
+        if(mwFlipped[0].card.id===mwFlipped[1].card.id){
+          mwFlipped[0].el.classList.add('match');mwFlipped[1].el.classList.add('match');
+          mwFlipped=[];mwMatched++;$id('mwm').textContent=mwMatched;
+          if(mwMatched===6){setTimeout(()=>{const r=$id('mwres');r.style.display='block';r.textContent='🎉 '+mwFlips+' 翻 fān · 完美！wánměi! · perfect!';},400);}
+        }else{
+          mwLock=true;setTimeout(()=>{
+            mwFlipped[0].el.classList.remove('flip');mwFlipped[0].el.textContent='🎴';
+            mwFlipped[1].el.classList.remove('flip');mwFlipped[1].el.textContent='🎴';
+            mwFlipped=[];mwLock=false;
+          },900);
+        }
+      }
+    };
+    grid.appendChild(el);
+  });
+}
+GI[28]=initMemMw;
+
+// ════ GAME 10: Fill-in-blank (slide 30, index 29) ════
 const FB_ROUNDS=[
   {
     sentence:'欢迎光临！请问 ___ ?',
@@ -1608,9 +1833,9 @@ function renderFb(){
 function nextFb(){
   if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}
 }
-GI[26]=initFb;
+GI[29]=initFb;
 
-// ════ GAME 8: Waiter Response (slide 28, index 27) ════
+// ════ GAME 11: Waiter Response (slide 31, index 30) ════
 const RR=[
   {
     q:{hz:'欢迎光临！请问几位？',py:'huānyíng guānglín! qǐng wèn jǐ wèi?',en:'Welcome! How many people?'},
@@ -1697,7 +1922,7 @@ function showRr(){
     el.appendChild(btn);
   });
 }
-GI[27]=initRr;
+GI[30]=initRr;
 </script>
 </body>
 </html>
