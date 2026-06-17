@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Elena的中文课 · 国家 · Countries Around the World</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#dbeafe,#ede9fe 50%,#fce7f3);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.app{width:880px;position:relative}
+
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
+
+.slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.cp{color:#e91e8c}.cu{color:#7c3aed}.ct{color:#0891b2}.co{color:#ea580c}.cg{color:#16a34a}.cb{color:#2563eb}.cy{color:#ca8a04}.cr{color:#dc2626}
+.bp{background:#fce7f3}.bu{background:#ede9fe}.bt{background:#cffafe}.bo{background:#ffedd5}.bg{background:#dcfce7}.bb{background:#dbeafe}.by{background:#fef9c3}.br{background:#fee2e2}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.c6{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.c7{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+
+.tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
+.title{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:1px}
+.title-py{font-size:11px;color:#2563eb;font-weight:700;margin-bottom:1px}
+.title-en{font-size:10.5px;color:#888;font-style:italic;margin-bottom:6px}
+.sub{font-size:10.5px;color:#888;margin-bottom:8px}
+.lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
+.badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
+.card{border-radius:11px;padding:8px 10px}
+
+/* Country card with flag */
+.country-card{border-radius:11px;padding:8px 5px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+.country-card .flag{font-size:36px;line-height:1;margin-bottom:2px}
+.country-card .py{font-size:9px;color:#2563eb;font-weight:700}
+.country-card .hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.country-card .en{font-size:8.5px;color:#888}
+.country-card .capital{font-size:8px;color:#7c3aed;font-weight:600;background:rgba(255,255,255,.6);padding:1px 5px;border-radius:5px;margin-top:2px}
+
+/* CSS Flag designs */
+.flag-css{display:inline-block;width:1.6em;height:1em;border-radius:0.08em;overflow:hidden;box-shadow:0 0.04em 0.12em rgba(0,0,0,.2);position:relative;vertical-align:-0.15em}
+.flag-china{background:#dc2626;display:flex;align-items:center;justify-content:flex-start;padding-left:0.15em}
+.flag-china::before{content:"★";color:#fde047;font-size:0.5em;line-height:1}
+.flag-china::after{content:"★ ★ ★ ★";color:#fde047;font-size:0.22em;position:absolute;left:0.5em;top:0.15em;letter-spacing:0.1em;line-height:1.4}
+.flag-japan{background:#fff;display:flex;align-items:center;justify-content:center;border:0.04em solid #ddd}
+.flag-japan::before{content:"";width:0.45em;height:0.45em;background:#dc2626;border-radius:50%}
+.flag-france{background:linear-gradient(90deg,#1e40af 33%,#fff 33% 66%,#dc2626 66%)}
+.flag-germany{background:linear-gradient(180deg,#000 33%,#dc2626 33% 66%,#fde047 66%)}
+.flag-italy{background:linear-gradient(90deg,#16a34a 33%,#fff 33% 66%,#dc2626 66%)}
+.flag-spain{background:linear-gradient(180deg,#dc2626 25%,#fde047 25% 75%,#dc2626 75%)}
+.flag-uk{background:#1e40af;position:relative;overflow:hidden}
+.flag-uk::before{content:"";position:absolute;left:0;right:0;top:42%;height:16%;background:#fff}
+.flag-uk::after{content:"";position:absolute;left:42%;right:0;top:0;bottom:0;width:16%;background:#fff}
+.flag-uk-cross{position:absolute;inset:0;background:linear-gradient(45deg,transparent 45%,#fff 45% 55%,transparent 55%),linear-gradient(135deg,transparent 45%,#fff 45% 55%,transparent 55%)}
+.flag-usa{background:repeating-linear-gradient(180deg,#dc2626 0 0.13em,#fff 0.13em 0.26em);position:relative;overflow:hidden}
+.flag-usa::before{content:"";position:absolute;left:0;top:0;width:45%;height:55%;background:#1e40af}
+.flag-usa::after{content:"⋆⋆⋆⋆⋆";position:absolute;left:0.05em;top:0.05em;color:#fff;font-size:0.18em;line-height:1.2;letter-spacing:0.05em;width:45%}
+.flag-canada{background:linear-gradient(90deg,#dc2626 25%,#fff 25% 75%,#dc2626 75%);display:flex;align-items:center;justify-content:center}
+.flag-canada::before{content:"🍁";font-size:0.5em;line-height:1;filter:grayscale(0)}
+.flag-korea{background:#fff;display:flex;align-items:center;justify-content:center;position:relative;border:0.04em solid #eee}
+.flag-korea::before{content:"";width:0.45em;height:0.45em;background:linear-gradient(180deg,#dc2626 50%,#1e40af 50%);border-radius:50%}
+.flag-australia{background:#1e40af;position:relative}
+.flag-australia::before{content:"✦";color:#fff;font-size:0.5em;position:absolute;right:0.1em;top:0.2em;line-height:1}
+.flag-australia::after{content:"✦✦";color:#fff;font-size:0.25em;position:absolute;right:0.2em;bottom:0.1em;line-height:1}
+.flag-brazil{background:radial-gradient(ellipse at center,#fde047 30%,#16a34a 30% 100%);display:flex;align-items:center;justify-content:center}
+.flag-brazil::before{content:"";width:0.5em;height:0.5em;background:#1e40af;border-radius:50%}
+.flag-mexico{background:linear-gradient(90deg,#16a34a 33%,#fff 33% 66%,#dc2626 66%);display:flex;align-items:center;justify-content:center}
+.flag-mexico::before{content:"🦅";font-size:0.35em;filter:none}
+.flag-russia{background:linear-gradient(180deg,#fff 33%,#1e40af 33% 66%,#dc2626 66%)}
+.flag-india{background:linear-gradient(180deg,#ea580c 33%,#fff 33% 66%,#16a34a 66%);display:flex;align-items:center;justify-content:center}
+.flag-india::before{content:"☸";color:#1e40af;font-size:0.4em;line-height:1}
+
+/* Bigger flag display */
+.bigflag{display:inline-block;width:64px;height:40px;border-radius:4px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.2);font-size:64px;position:relative;vertical-align:middle}
+
+/* Dialogue bubbles */
+.dlg{flex:1;display:flex;flex-direction:column;gap:5px}
+.dlg-turn{display:flex;gap:8px;align-items:flex-start}
+.dlg-turn.right{flex-direction:row-reverse}
+.avi{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.avi.w{background:linear-gradient(135deg,#a5b4fc,#6366f1)}
+.avi.c{background:linear-gradient(135deg,#f9a8d4,#ec4899)}
+.avi.c2{background:linear-gradient(135deg,#fcd34d,#f59e0b)}
+.avi.c3{background:linear-gradient(135deg,#86efac,#22c55e)}
+.avi.c4{background:linear-gradient(135deg,#67e8f9,#0891b2)}
+.bub{border-radius:14px;padding:6px 11px;max-width:80%;position:relative}
+.bub.w{background:#dbeafe;border-top-left-radius:4px}
+.bub.c{background:#fce7f3;border-top-right-radius:4px}
+.bub.c2{background:#fef3c7;border-top-right-radius:4px}
+.bub.c3{background:#dcfce7;border-top-right-radius:4px}
+.bub.c4{background:#cffafe;border-top-right-radius:4px}
+.bub .hz{font-size:12px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.bub .py{font-size:8.5px;color:#2563eb;font-weight:700;margin-top:1px;line-height:1.2}
+.bub .en{font-size:8px;color:#777;font-style:italic;margin-top:1px;line-height:1.2}
+.who{font-size:7.5px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:1px}
+
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11.5px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8.5px;color:#2563eb;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
+.sp .ex{font-size:10.5px;font-weight:700;margin-top:3px}
+.sp .expy{font-size:8px;color:#aaa}
+.sp .exen{font-size:8.5px;color:#999;font-style:italic}
+
+.cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cov-title{font-size:40px;font-weight:900;background:linear-gradient(135deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#dbeafe;color:#1e40af;border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin:3px}
+
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:760px}
+.ck{background:#dbeafe;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#1e40af}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.nbtn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:15px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:.2s;color:#333;display:flex;align-items:center;justify-content:center}
+.nbtn:hover{transform:scale(1.1)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:680px}
+.dot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+.dot.active{background:#2563eb;transform:scale(1.4)}
+
+/* Games */
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gsbar{font-size:12px;font-weight:800;color:#1e40af;background:#dbeafe;padding:3px 12px;border-radius:999px}
+.gbtn{background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
+.gbtn:hover{opacity:.85}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
+
+.toggle-bar{position:absolute;top:10px;right:14px;display:flex;gap:6px;z-index:10}
+.tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.05)}
+.slide:has(.toggle-bar) .badge{display:none}
+
+.gpy,.gen{display:none}
+.gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
+.gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
+body.show-py .gpy{display:block}
+body.show-en .gen{display:block}
+
+.qq{background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:14px;padding:12px 18px;text-align:center;width:100%;max-width:380px}
+.qqmain{font-size:30px;font-weight:900;color:#1a1a2e;line-height:1.1}
+.qqlbl{font-size:11px;color:#888;margin-top:3px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:460px}
+.qopts.three{grid-template-columns:repeat(3,1fr)}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:8px 10px;font-weight:800;cursor:pointer;transition:.15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:50px;justify-content:center}
+.qopt:hover{border-color:#2563eb;background:#eff6ff}
+.qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopt-hz{font-size:14px}
+
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;max-width:660px}
+.mcard{background:linear-gradient(135deg,#2563eb,#7c3aed);border-radius:10px;height:72px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard.flip{background:#fff;border:2px solid #2563eb;cursor:default}
+.mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
+.mcard-py{font-size:9px;color:#2563eb;font-weight:700}
+.mcard-hz{font-size:14px;font-weight:900;color:#1a1a2e}
+
+.fib{background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:14px;padding:13px 18px;width:100%;max-width:560px}
+.fib-row{font-size:15px;line-height:2.1;color:#1a1a2e;font-weight:700;text-align:center}
+.fib-blank{display:inline-block;min-width:80px;border-bottom:3px solid #2563eb;padding:0 6px;font-weight:900;color:#2563eb;text-align:center;margin:0 2px;cursor:pointer}
+.fib-blank.filled{border-bottom-color:#16a34a;color:#15803d;background:#dcfce7;border-radius:6px}
+.fib-bank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.fib-tok{background:#fff;border:2px solid #2563eb;color:#1a1a2e;padding:5px 13px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.fib-tok:hover{background:#dbeafe}
+.fib-tok.used{opacity:.3;pointer-events:none}
+
+.phr{display:flex;align-items:center;gap:9px;border-radius:10px;padding:6px 11px;margin-bottom:4px}
+.phr .em{font-size:18px;flex-shrink:0}
+.phr .hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.phr .py{font-size:9px;color:#2563eb;font-weight:700}
+.phr .en{font-size:9px;color:#888;font-style:italic}
+
+/* Hello cards */
+.hello-card{border-radius:12px;padding:10px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}
+.hello-card .flag{font-size:24px;line-height:1}
+.hello-card .greeting{font-size:14px;font-weight:900;color:#1a1a2e;margin-top:3px}
+.hello-card .lang{font-size:9px;color:#2563eb;font-weight:700}
+.hello-card .langhz{font-size:8.5px;color:#888}
+
+/* World map continents */
+.world-map{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;flex:1}
+.continent{border-radius:12px;padding:9px 8px;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.continent .cem{font-size:24px;line-height:1}
+.continent .chz{font-size:13px;font-weight:900;color:#1a1a2e;margin-top:2px}
+.continent .cpy{font-size:9px;color:#2563eb;font-weight:700}
+.continent .cen{font-size:8.5px;color:#888}
+.continent .ccount{font-size:8.5px;color:#7c3aed;font-weight:600;background:rgba(255,255,255,.7);padding:1px 6px;border-radius:5px;margin-top:2px}
+
+/* Landmark cards */
+.landmark{border-radius:12px;padding:9px 7px;display:flex;flex-direction:column;align-items:center;gap:2px;text-align:center;position:relative}
+.landmark .lem{font-size:34px;line-height:1}
+.landmark .lhz{font-size:11.5px;font-weight:900;color:#1a1a2e;margin-top:3px;line-height:1.2}
+.landmark .lpy{font-size:8.5px;color:#2563eb;font-weight:700}
+.landmark .len{font-size:7.5px;color:#888}
+.landmark .lcountry{font-size:8px;color:#7c3aed;font-weight:600;background:rgba(255,255,255,.7);padding:1px 5px;border-radius:5px;margin-top:2px}
+
+/* Flag → country game cards (4 flags shown, click correct) */
+.flag-quiz-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;max-width:380px;width:100%}
+.flag-quiz-card{background:#fff;border:3px solid #e0e0e0;border-radius:14px;padding:10px;cursor:pointer;transition:.18s;display:flex;flex-direction:column;align-items:center;gap:4px}
+.flag-quiz-card:hover{border-color:#2563eb;background:#eff6ff;transform:scale(1.03)}
+.flag-quiz-card.ok{background:#dcfce7;border-color:#16a34a}
+.flag-quiz-card.no{background:#fee2e2;border-color:#dc2626}
+.flag-quiz-card .bigflag-em{font-size:42px;line-height:1}
+.flag-quiz-card .flag-hz{font-size:14px;font-weight:900;color:#1a1a2e}
+</style>
+</head>
+<body>
+<a class="home-btn" href="index.html" title="返回课程列表">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
+<div class="app">
+
+<!-- ════════════════ SLIDE 1: COVER ════════════════ -->
+<div class="slide active">
+<div class="cov">
+  <div style="font-size:48px">🌍✈️🗺️</div>
+  <div class="cov-title">国家<br><span style="font-size:18px;font-weight:700;background:none;-webkit-text-fill-color:#888">guójiā · Countries Around the World</span></div>
+  <div style="background:linear-gradient(135deg,#dbeafe,#ede9fe);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#1e40af">📅 2026年6月2日 · liù yuè èr rì · June 2, 2026</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:720px">
+    <span class="ctag">🌍 七大洲 qī dà zhōu · 7 continents</span>
+    <span class="ctag">🏳️ 国旗 guóqí · flags</span>
+    <span class="ctag">🏛️ 首都 shǒudū · capitals</span>
+    <span class="ctag">🗣️ 语言 yǔyán · languages</span>
+    <span class="ctag">👋 你好 nǐ hǎo · hello around the world</span>
+    <span class="ctag">🗽 地标 dìbiāo · landmarks</span>
+    <span class="ctag">💬 4 对话 duìhuà · dialogues</span>
+    <span class="ctag">🎮 12 游戏 yóuxì · games!</span>
+    <span class="ctag">🎭 角色扮演 juésè bànyǎn · role-play</span>
+  </div>
+  <div style="background:#fff;border:2px solid #c4b5fd;border-radius:14px;padding:9px 16px;font-size:11px;color:#5b21b6;margin-top:8px;max-width:600px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b><br>
+    游戏里默认只有中文。点右上方按钮可以打开拼音和英文！<br>
+    <span style="color:#7c3aed;font-weight:600;font-size:10px">yóuxì lǐ mòrèn zhǐ yǒu zhōngwén. diǎn yòu shàngfāng ànniǔ kěyǐ dǎkāi pīnyīn hé yīngwén!</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">Games show Chinese only by default. Use the toggles to show pinyin &amp; English!</span>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sānshí yè · 30 pages</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 2: 7 CONTINENTS ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 1</span>
+<div class="tag cb">🌍 七大洲 qī dà zhōu · the seven continents</div>
+<div class="title">世界的七大洲 shìjiè de qī dà zhōu</div>
+<div class="title-en">the seven continents of the world</div>
+<div class="world-map" style="margin-bottom:6px">
+  <div class="continent bb"><div class="cem">🌏</div><div class="chz">亚洲</div><div class="cpy">Yàzhōu</div><div class="cen">Asia</div><div class="ccount">中国 日本 印度</div></div>
+  <div class="continent bg"><div class="cem">🌍</div><div class="chz">欧洲</div><div class="cpy">Ōuzhōu</div><div class="cen">Europe</div><div class="ccount">英国 法国 德国</div></div>
+  <div class="continent bo"><div class="cem">🌍</div><div class="chz">非洲</div><div class="cpy">Fēizhōu</div><div class="cen">Africa</div><div class="ccount">埃及 南非</div></div>
+  <div class="continent bp"><div class="cem">🌎</div><div class="chz">北美洲</div><div class="cpy">Běi Měizhōu</div><div class="cen">N. America</div><div class="ccount">美国 加拿大</div></div>
+  <div class="continent by"><div class="cem">🌎</div><div class="chz">南美洲</div><div class="cpy">Nán Měizhōu</div><div class="cen">S. America</div><div class="ccount">巴西 阿根廷</div></div>
+  <div class="continent bt"><div class="cem">🌏</div><div class="chz">大洋洲</div><div class="cpy">Dàyángzhōu</div><div class="cen">Oceania</div><div class="ccount">澳大利亚</div></div>
+  <div class="continent bu"><div class="cem">🧊</div><div class="chz">南极洲</div><div class="cpy">Nánjízhōu</div><div class="cen">Antarctica</div><div class="ccount">🐧 企鹅</div></div>
+  <div class="continent br"><div class="cem">🌐</div><div class="chz">世界</div><div class="cpy">shìjiè</div><div class="cen">world</div><div class="ccount">all of these!</div></div>
+</div>
+<div class="card bb" style="font-size:10.5px">
+  <div class="lbl cb">💡 小贴士 xiǎo tiēshì · tip</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>洲 zhōu</b> = continent! 所以 <b>亚洲 Yàzhōu</b> = "亚 (Asia) + 洲 (continent)" = Asia continent!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">"洲" means continent, so 亚洲 = Asia, 欧洲 = Europe, etc!</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 3: ASIAN COUNTRIES ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 2</span>
+<div class="tag cb">🌏 亚洲国家 Yàzhōu guójiā · Asian countries</div>
+<div class="title">亚洲国家 Yàzhōu guójiā</div>
+<div class="title-en">countries in Asia</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="country-card br"><div class="flag"><span class="flag-css flag-china"></span></div><div class="py">Zhōngguó</div><div class="hz">中国</div><div class="en">China ⭐</div><div class="capital">🏛️ 北京 Běijīng</div></div>
+  <div class="country-card bp"><div class="flag"><span class="flag-css flag-japan"></span></div><div class="py">Rìběn</div><div class="hz">日本</div><div class="en">Japan</div><div class="capital">🏛️ 东京 Dōngjīng</div></div>
+  <div class="country-card bb"><div class="flag"><span class="flag-css flag-korea"></span></div><div class="py">Hánguó</div><div class="hz">韩国</div><div class="en">South Korea</div><div class="capital">🏛️ 首尔 Shǒu'ěr</div></div>
+  <div class="country-card bo"><div class="flag"><span class="flag-css flag-india"></span></div><div class="py">Yìndù</div><div class="hz">印度</div><div class="en">India</div><div class="capital">🏛️ 新德里 Xīn Délǐ</div></div>
+  <div class="country-card bg"><div class="flag">🇹🇭</div><div class="py">Tàiguó</div><div class="hz">泰国</div><div class="en">Thailand</div><div class="capital">🏛️ 曼谷 Màngǔ</div></div>
+  <div class="country-card by"><div class="flag">🇻🇳</div><div class="py">Yuènán</div><div class="hz">越南</div><div class="en">Vietnam</div><div class="capital">🏛️ 河内 Hénèi</div></div>
+  <div class="country-card bu"><div class="flag">🇸🇬</div><div class="py">Xīnjiāpō</div><div class="hz">新加坡</div><div class="en">Singapore</div><div class="capital">🏛️ 新加坡 Xīnjiāpō</div></div>
+  <div class="country-card bt"><div class="flag">🇲🇾</div><div class="py">Mǎláixīyà</div><div class="hz">马来西亚</div><div class="en">Malaysia</div><div class="capital">🏛️ 吉隆坡 Jílóngpō</div></div>
+</div>
+<div class="card br" style="font-size:11px">
+  <div class="lbl cr">⭐ 中国 Zhōngguó · "Middle Kingdom"</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>中 zhōng</b> = middle · <b>国 guó</b> = country → <b>中国 Zhōngguó</b> = "middle country"!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">All country names end in 国 guó (country) — easy to remember!</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 4: EUROPEAN COUNTRIES ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 3</span>
+<div class="tag cb">🌍 欧洲国家 Ōuzhōu guójiā · European countries</div>
+<div class="title">欧洲国家 Ōuzhōu guójiā</div>
+<div class="title-en">countries in Europe</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="country-card bb"><div class="flag"><span class="flag-css flag-uk"></span></div><div class="py">Yīngguó</div><div class="hz">英国</div><div class="en">UK / England</div><div class="capital">🏛️ 伦敦 Lúndūn</div></div>
+  <div class="country-card br"><div class="flag"><span class="flag-css flag-france"></span></div><div class="py">Fǎguó</div><div class="hz">法国</div><div class="en">France</div><div class="capital">🏛️ 巴黎 Bālí</div></div>
+  <div class="country-card by"><div class="flag"><span class="flag-css flag-germany"></span></div><div class="py">Déguó</div><div class="hz">德国</div><div class="en">Germany</div><div class="capital">🏛️ 柏林 Bólín</div></div>
+  <div class="country-card bg"><div class="flag"><span class="flag-css flag-italy"></span></div><div class="py">Yìdàlì</div><div class="hz">意大利</div><div class="en">Italy</div><div class="capital">🏛️ 罗马 Luómǎ</div></div>
+  <div class="country-card bo"><div class="flag"><span class="flag-css flag-spain"></span></div><div class="py">Xībānyá</div><div class="hz">西班牙</div><div class="en">Spain</div><div class="capital">🏛️ 马德里 Mǎdélǐ</div></div>
+  <div class="country-card bp"><div class="flag"><span class="flag-css flag-russia"></span></div><div class="py">Éluósī</div><div class="hz">俄罗斯</div><div class="en">Russia</div><div class="capital">🏛️ 莫斯科 Mòsīkē</div></div>
+  <div class="country-card bu"><div class="flag">🇳🇱</div><div class="py">Hélán</div><div class="hz">荷兰</div><div class="en">Netherlands</div><div class="capital">🏛️ 阿姆斯特丹 Āmǔsītèdān</div></div>
+  <div class="country-card bt"><div class="flag">🇨🇭</div><div class="py">Ruìshì</div><div class="hz">瑞士</div><div class="en">Switzerland</div><div class="capital">🏛️ 伯尔尼 Bó'ěrní</div></div>
+</div>
+<div class="card by" style="font-size:11px">
+  <div class="lbl cy">💡 注意 zhùyì · note</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>英 Yīng</b>（英国）= ① UK ② "hero" — <b>英语 Yīngyǔ</b> = English language!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Notice: 英 also means "English" (language)!</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 5: AMERICAS, AFRICA, OCEANIA ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 4</span>
+<div class="tag cb">🌎🌍 美洲、非洲、大洋洲 · Americas, Africa, Oceania</div>
+<div class="title">其他国家 qítā guójiā</div>
+<div class="title-en">other continents — Americas, Africa, Oceania</div>
+<div class="lbl cb" style="margin-bottom:3px;font-size:10px">🌎 美洲 Měizhōu · Americas</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="country-card bb"><div class="flag"><span class="flag-css flag-usa"></span></div><div class="py">Měiguó</div><div class="hz">美国</div><div class="en">USA ⭐</div><div class="capital">🏛️ 华盛顿 Huáshèngdùn</div></div>
+  <div class="country-card br"><div class="flag"><span class="flag-css flag-canada"></span></div><div class="py">Jiānádà</div><div class="hz">加拿大</div><div class="en">Canada</div><div class="capital">🏛️ 渥太华 Wòtàihuá</div></div>
+  <div class="country-card bg"><div class="flag"><span class="flag-css flag-mexico"></span></div><div class="py">Mòxīgē</div><div class="hz">墨西哥</div><div class="en">Mexico</div><div class="capital">🏛️ 墨西哥城</div></div>
+  <div class="country-card by"><div class="flag"><span class="flag-css flag-brazil"></span></div><div class="py">Bāxī</div><div class="hz">巴西</div><div class="en">Brazil</div><div class="capital">🏛️ 巴西利亚</div></div>
+</div>
+<div class="lbl cg" style="margin-bottom:3px;margin-top:5px;font-size:10px">🌍 非洲 Fēizhōu · Africa</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="country-card bo"><div class="flag">🇪🇬</div><div class="py">Āijí</div><div class="hz">埃及</div><div class="en">Egypt</div><div class="capital">🏛️ 开罗 Kāiluó</div></div>
+  <div class="country-card by"><div class="flag">🇿🇦</div><div class="py">Nánfēi</div><div class="hz">南非</div><div class="en">South Africa</div><div class="capital">🏛️ 比勒陀利亚</div></div>
+  <div class="country-card bp"><div class="flag">🇰🇪</div><div class="py">Kěnníyà</div><div class="hz">肯尼亚</div><div class="en">Kenya</div><div class="capital">🏛️ 内罗毕</div></div>
+  <div class="country-card bg"><div class="flag">🇲🇦</div><div class="py">Móluògē</div><div class="hz">摩洛哥</div><div class="en">Morocco</div><div class="capital">🏛️ 拉巴特</div></div>
+</div>
+<div class="lbl cu" style="margin-bottom:3px;margin-top:5px;font-size:10px">🌏 大洋洲 Dàyángzhōu · Oceania</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="country-card bt"><div class="flag"><span class="flag-css flag-australia"></span></div><div class="py">Àodàlìyà</div><div class="hz">澳大利亚</div><div class="en">Australia 🦘</div><div class="capital">🏛️ 堪培拉</div></div>
+  <div class="country-card bu"><div class="flag">🇳🇿</div><div class="py">Xīnxīlán</div><div class="hz">新西兰</div><div class="en">New Zealand 🥝</div><div class="capital">🏛️ 惠灵顿</div></div>
+  <div class="country-card bb"><div class="flag">🇫🇯</div><div class="py">Fěijǐ</div><div class="hz">斐济</div><div class="en">Fiji 🌴</div><div class="capital">🏛️ 苏瓦</div></div>
+  <div class="country-card br"><div class="flag">🇵🇬</div><div class="py">Bābùyà Xīn Jǐnèiyà</div><div class="hz">巴布亚新几内亚</div><div class="en">Papua NG</div><div class="capital">🏛️ 莫尔兹比港</div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 6: HELLO AROUND THE WORLD ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 5</span>
+<div class="tag cb">👋 你好世界 nǐ hǎo shìjiè · hello around the world!</div>
+<div class="title">不同国家说 "你好" bùtóng guójiā shuō "nǐ hǎo"</div>
+<div class="title-en">"Hello" in different countries!</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="hello-card br"><div class="flag"><span class="flag-css flag-china"></span></div><div class="greeting">你好！</div><div class="lang">nǐ hǎo</div><div class="langhz">中文 · Chinese</div></div>
+  <div class="hello-card bb"><div class="flag"><span class="flag-css flag-uk"></span></div><div class="greeting">Hello!</div><div class="lang">hè-lōu</div><div class="langhz">英语 · English</div></div>
+  <div class="hello-card bp"><div class="flag"><span class="flag-css flag-japan"></span></div><div class="greeting">こんにちは</div><div class="lang">Konnichiwa</div><div class="langhz">日语 · Japanese</div></div>
+  <div class="hello-card bu"><div class="flag"><span class="flag-css flag-korea"></span></div><div class="greeting">안녕하세요</div><div class="lang">Annyeong</div><div class="langhz">韩语 · Korean</div></div>
+  <div class="hello-card bg"><div class="flag"><span class="flag-css flag-france"></span></div><div class="greeting">Bonjour!</div><div class="lang">bōn-zhūr</div><div class="langhz">法语 · French</div></div>
+  <div class="hello-card by"><div class="flag"><span class="flag-css flag-germany"></span></div><div class="greeting">Hallo!</div><div class="lang">hà-luo</div><div class="langhz">德语 · German</div></div>
+  <div class="hello-card bo"><div class="flag"><span class="flag-css flag-spain"></span></div><div class="greeting">¡Hola!</div><div class="lang">ō-lā</div><div class="langhz">西班牙语 · Spanish</div></div>
+  <div class="hello-card bt"><div class="flag"><span class="flag-css flag-italy"></span></div><div class="greeting">Ciao!</div><div class="lang">chiào</div><div class="langhz">意大利语 · Italian</div></div>
+</div>
+<div class="card bp" style="font-size:10.5px">
+  <div class="lbl cp">🌍 fun fact</div>
+  <div style="line-height:1.7;margin-top:3px">
+    全世界有 <b>7000多种语言</b>！<br>
+    <span class="cb" style="font-size:9.5px">quán shìjiè yǒu qī qiān duō zhǒng yǔyán!</span>
+    <span style="color:#888;font-style:italic;font-size:9.5px"> There are over 7000 languages in the world! 🌎</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 7: NATIONALITIES ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 6</span>
+<div class="tag cb">🧑 国籍 guójí · nationalities — 国 + 人</div>
+<div class="title">"国" + "人" = 哪国人 nǎ guó rén</div>
+<div class="title-en">Country + 人 (rén · person) = nationality!</div>
+<div class="card by" style="font-size:11px;margin-bottom:6px">
+  <div class="lbl cy">📌 公式 gōngshì · the formula</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>国家 + 人</b> = "person from that country"<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Country name + 人 (rén = person) = nationality. Super easy! 🎉</span>
+  </div>
+</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="country-card br"><div class="flag"><span class="flag-css flag-china"></span></div><div class="py">Zhōngguó rén</div><div class="hz">中国人</div><div class="en">Chinese person</div></div>
+  <div class="country-card bb"><div class="flag"><span class="flag-css flag-usa"></span></div><div class="py">Měiguó rén</div><div class="hz">美国人</div><div class="en">American</div></div>
+  <div class="country-card bg"><div class="flag"><span class="flag-css flag-uk"></span></div><div class="py">Yīngguó rén</div><div class="hz">英国人</div><div class="en">British / English</div></div>
+  <div class="country-card bp"><div class="flag"><span class="flag-css flag-japan"></span></div><div class="py">Rìběn rén</div><div class="hz">日本人</div><div class="en">Japanese person</div></div>
+  <div class="country-card bo"><div class="flag"><span class="flag-css flag-france"></span></div><div class="py">Fǎguó rén</div><div class="hz">法国人</div><div class="en">French person</div></div>
+  <div class="country-card by"><div class="flag"><span class="flag-css flag-germany"></span></div><div class="py">Déguó rén</div><div class="hz">德国人</div><div class="en">German person</div></div>
+  <div class="country-card bt"><div class="flag"><span class="flag-css flag-canada"></span></div><div class="py">Jiānádà rén</div><div class="hz">加拿大人</div><div class="en">Canadian</div></div>
+  <div class="country-card bu"><div class="flag"><span class="flag-css flag-australia"></span></div><div class="py">Àodàlìyà rén</div><div class="hz">澳大利亚人</div><div class="en">Australian</div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 8: LANGUAGES ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 7</span>
+<div class="tag cb">🗣️ 语言 yǔyán · languages</div>
+<div class="title">语言 yǔyán</div>
+<div class="title-en">languages — say what you speak!</div>
+<div class="card by" style="font-size:11px;margin-bottom:6px">
+  <div class="lbl cy">📌 公式 gōngshì · formula</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>国家</b>（去掉"国"）+ <b>语</b> = language &nbsp;·&nbsp; e.g. 中<span style="text-decoration:line-through">国</span> + 语 → <b>中语 / 中文</b>!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">语 yǔ = language. Drop 国 and add 语! (中文 zhōngwén is also very common for "Chinese")</span>
+  </div>
+</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="country-card br"><div class="flag"><span class="flag-css flag-china"></span></div><div class="py">zhōngwén / hànyǔ</div><div class="hz">中文 / 汉语</div><div class="en">Chinese</div></div>
+  <div class="country-card bb"><div class="flag"><span class="flag-css flag-uk"></span></div><div class="py">yīngyǔ / yīngwén</div><div class="hz">英语 / 英文</div><div class="en">English</div></div>
+  <div class="country-card bp"><div class="flag"><span class="flag-css flag-japan"></span></div><div class="py">rìyǔ</div><div class="hz">日语</div><div class="en">Japanese</div></div>
+  <div class="country-card bu"><div class="flag"><span class="flag-css flag-korea"></span></div><div class="py">hányǔ</div><div class="hz">韩语</div><div class="en">Korean</div></div>
+  <div class="country-card bo"><div class="flag"><span class="flag-css flag-france"></span></div><div class="py">fǎyǔ</div><div class="hz">法语</div><div class="en">French</div></div>
+  <div class="country-card by"><div class="flag"><span class="flag-css flag-germany"></span></div><div class="py">déyǔ</div><div class="hz">德语</div><div class="en">German</div></div>
+  <div class="country-card bg"><div class="flag"><span class="flag-css flag-spain"></span></div><div class="py">xībānyáyǔ</div><div class="hz">西班牙语</div><div class="en">Spanish</div></div>
+  <div class="country-card bt"><div class="flag"><span class="flag-css flag-italy"></span></div><div class="py">yìdàlìyǔ</div><div class="hz">意大利语</div><div class="en">Italian</div></div>
+</div>
+<div class="card bp" style="font-size:10.5px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>我会说中文和英文。</b> <span class="cp" style="font-size:9px">wǒ huì shuō zhōngwén hé yīngwén.</span> <span style="color:#888;font-size:9.5px;font-style:italic">I can speak Chinese and English.</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 9: SENTENCE PATTERNS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 1</span>
+<div class="tag cg">💬 句型 jùxíng · sentence patterns about countries</div>
+<div class="title">说说你来自哪里 shuō shuō nǐ lái zì nǎli</div>
+<div class="title-en">talking about where you're from</div>
+<div class="two" style="gap:7px">
+  <div>
+    <div class="sp bb">
+      <div class="pat">你来自哪里？</div><div class="patpy">nǐ lái zì nǎli?</div>
+      <div class="paten">Where are you from?</div>
+      <div class="ex cb">我来自中国。<span class="expy"> wǒ lái zì Zhōngguó.</span></div><div class="exen">I'm from China.</div>
+    </div>
+    <div class="sp bp">
+      <div class="pat">你是哪国人？</div><div class="patpy">nǐ shì nǎ guó rén?</div>
+      <div class="paten">What nationality are you?</div>
+      <div class="ex cp">我是中国人。<span class="expy"> wǒ shì Zhōngguó rén.</span></div><div class="exen">I'm Chinese.</div>
+    </div>
+    <div class="sp bu">
+      <div class="pat">你住在哪里？</div><div class="patpy">nǐ zhù zài nǎli?</div>
+      <div class="paten">Where do you live?</div>
+      <div class="ex cu">我住在美国。<span class="expy"> wǒ zhù zài Měiguó.</span></div><div class="exen">I live in the USA.</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bo">
+      <div class="pat">你会说什么语言？</div><div class="patpy">nǐ huì shuō shénme yǔyán?</div>
+      <div class="paten">What languages can you speak?</div>
+      <div class="ex co">我会说中文和英语。<span class="expy"> wǒ huì shuō zhōngwén hé yīngyǔ.</span></div><div class="exen">I can speak Chinese and English.</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">___ 的首都是 ___ 。</div><div class="patpy">___ de shǒudū shì ___ .</div>
+      <div class="paten">The capital of ___ is ___.</div>
+      <div class="ex cy">中国的首都是北京。<span class="expy"> zhōngguó de shǒudū shì Běijīng.</span></div><div class="exen">The capital of China is Beijing.</div>
+    </div>
+    <div class="sp bg">
+      <div class="pat">___ 在 ___ 洲。</div><div class="patpy">___ zài ___ zhōu.</div>
+      <div class="paten">___ is in ___ (continent).</div>
+      <div class="ex cg">日本在亚洲。<span class="expy"> Rìběn zài Yàzhōu.</span></div><div class="exen">Japan is in Asia.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 10: DIALOGUE 1 — MEETING SOMEONE ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 1</span>
+<div class="tag ct">💬 对话 (一) duìhuà · meeting someone new</div>
+<div class="title">场景一：在公园 chǎngjǐng yī · zài gōngyuán</div>
+<div class="title-en">scene 1: meeting a friend at the park</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">😊</div><div class="bub w"><div class="who">新朋友 xīn péngyǒu · new friend</div>
+    <div class="hz">你好！我叫 Mia。你来自哪里？</div>
+    <div class="py">nǐ hǎo! wǒ jiào Mia. nǐ lái zì nǎli?</div>
+    <div class="en">Hello! I'm Mia. Where are you from?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">你好！我叫 Elena，我来自美国。你呢？</div>
+    <div class="py">nǐ hǎo! wǒ jiào Elena, wǒ lái zì Měiguó. nǐ ne?</div>
+    <div class="en">Hi! I'm Elena, I'm from the USA. And you?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">😊</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">我来自加拿大。你会说什么语言？</div>
+    <div class="py">wǒ lái zì Jiānádà. nǐ huì shuō shénme yǔyán?</div>
+    <div class="en">I'm from Canada. What languages do you speak?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我会说英语和中文。你呢？</div>
+    <div class="py">wǒ huì shuō yīngyǔ hé zhōngwén. nǐ ne?</div>
+    <div class="en">I speak English and Chinese. And you?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">😊</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">我会说英语和法语！很高兴认识你！</div>
+    <div class="py">wǒ huì shuō yīngyǔ hé fǎyǔ! hěn gāoxìng rènshi nǐ!</div>
+    <div class="en">I speak English and French! Nice to meet you!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 11: 🎮 GAME 1 — FLAG TO COUNTRY ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 1</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">国旗问答 guóqí wèndá</div>
+<div class="title-en">flag quiz — which country does this flag belong to?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="fgs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="fgq">1</span>/10</div>
+    <button class="gbtn" onclick="initFg()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="display:flex;justify-content:center;font-size:90px;line-height:1" id="fgflag"><span class="flag-css flag-china"></span></div>
+    <div class="qqlbl" style="margin-top:8px">这是哪个国家的国旗？<span class="gen">Which country's flag?</span></div>
+  </div>
+  <div class="qopts" id="fgo"></div>
+  <div class="gres" id="fgr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 12: 🎮 GAME 2 — COUNTRY TO CONTINENT ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 2</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">国家在哪个洲？guójiā zài nǎge zhōu?</div>
+<div class="title-en">which continent? — pick the right one!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="cts">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="ctq">1</span>/10</div>
+    <button class="gbtn" onclick="initCt()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="cthz">中国</div>
+    <div class="gpy" id="ctpy" style="color:#7c3aed;font-weight:700;text-align:center">Zhōngguó</div>
+    <div class="gen" id="cten" style="color:#888;font-style:italic;text-align:center">China</div>
+    <div class="qqlbl" style="margin-top:6px">在哪个洲？<span class="gen">Which continent?</span></div>
+  </div>
+  <div class="qopts three" id="cto" style="max-width:480px"></div>
+  <div class="gres" id="ctr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 13: 🎮 GAME 3 — HELLO QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 3</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">"你好" 哪个语言？"nǐ hǎo" nǎge yǔyán?</div>
+<div class="title-en">"hello" — which language is this greeting from?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="hgs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="hgq">1</span>/8</div>
+    <button class="gbtn" onclick="initHg()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="hghello" style="font-size:34px">Bonjour!</div>
+    <div class="qqlbl" style="margin-top:6px">这是哪国语言？<span class="gen">Which language?</span></div>
+  </div>
+  <div class="qopts" id="hgo"></div>
+  <div class="gres" id="hgr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 14: DIALOGUE 2 — ELENA'S FAMILY ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 2</span>
+<div class="tag ct">💬 对话 (二) · Elena's family</div>
+<div class="title">场景二：Elena 介绍家人</div>
+<div class="title-en">scene 2: Elena introduces her family's backgrounds</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师 lǎoshī · teacher</div>
+    <div class="hz">Elena，你的家人来自哪里？</div>
+    <div class="py">Elena, nǐ de jiārén lái zì nǎli?</div>
+    <div class="en">Elena, where is your family from?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我爸爸来自美国，我妈妈来自加拿大。</div>
+    <div class="py">wǒ bàba lái zì Měiguó, wǒ māma lái zì Jiānádà.</div>
+    <div class="en">My dad is from the USA, my mum is from Canada.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师</div>
+    <div class="hz">他们会说什么语言？</div>
+    <div class="py">tāmen huì shuō shénme yǔyán?</div>
+    <div class="en">What languages do they speak?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">爸爸会说英语，妈妈会说英语和法语。</div>
+    <div class="py">bàba huì shuō yīngyǔ, māma huì shuō yīngyǔ hé fǎyǔ.</div>
+    <div class="en">Dad speaks English, Mum speaks English and French.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我在学中文！🇨🇳</div>
+    <div class="py">wǒ zài xué zhōngwén!</div>
+    <div class="en">I'm learning Chinese!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 15: 🎮 GAME 4 — COUNTRY → CAPITAL ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 4</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">国家与首都 guójiā yǔ shǒudū</div>
+<div class="title-en">country &amp; capital — which is the capital?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="cas">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="caq">1</span>/10</div>
+    <button class="gbtn" onclick="initCa()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:48px" id="caflag"><span class="flag-css flag-china"></span></div>
+    <div class="qqmain" id="cahz" style="margin-top:4px">中国</div>
+    <div class="gpy" id="capy" style="color:#7c3aed;font-weight:700;text-align:center">Zhōngguó</div>
+    <div class="qqlbl" style="margin-top:6px">的首都是？<span class="gen">'s capital is?</span></div>
+  </div>
+  <div class="qopts" id="cao"></div>
+  <div class="gres" id="car"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 16: 🎮 GAME 5 — COUNTRY MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 5</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">国家记忆配对 guójiā jìyì pèiduì</div>
+<div class="title-en">country memory match — pair the flag with the country name!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mcm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 <span id="mcf">0</span></div>
+    <button class="gbtn" onclick="initMemC()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mcgrid"></div>
+  <div class="gres" id="mcres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 17: 🎮 GAME 6 — CAPITAL MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 6</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">首都记忆配对 shǒudū jìyì pèiduì</div>
+<div class="title-en">capital memory match — pair the country with its capital!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mkm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mkf">0</span></div>
+    <button class="gbtn" onclick="initMemK()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mkgrid"></div>
+  <div class="gres" id="mkres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 18: 🎮 GAME 7 — LANGUAGE MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 7</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">语言记忆配对 yǔyán jìyì pèiduì</div>
+<div class="title-en">language memory match — pair the country with its language!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mlm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mlf">0</span></div>
+    <button class="gbtn" onclick="initMemL()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mlgrid"></div>
+  <div class="gres" id="mlres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 19: LANDMARKS ════════════════ -->
+<div class="slide">
+<span class="badge cb">vocab 8</span>
+<div class="tag cb">🗽 地标 dìbiāo · world landmarks</div>
+<div class="title">世界著名地标 shìjiè zhùmíng dìbiāo</div>
+<div class="title-en">famous world landmarks</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="landmark br"><div class="lem">🏯</div><div class="lhz">长城</div><div class="lpy">Chángchéng</div><div class="len">Great Wall</div><div class="lcountry">🇨🇳 中国</div></div>
+  <div class="landmark bb"><div class="lem">🗽</div><div class="lhz">自由女神像</div><div class="lpy">Zìyóu Nǚshén Xiàng</div><div class="len">Statue of Liberty</div><div class="lcountry">🇺🇸 美国</div></div>
+  <div class="landmark bg"><div class="lem">🗼</div><div class="lhz">埃菲尔铁塔</div><div class="lpy">Āifēi'ěr Tiětǎ</div><div class="len">Eiffel Tower</div><div class="lcountry">🇫🇷 法国</div></div>
+  <div class="landmark by"><div class="lem">🕰️</div><div class="lhz">大本钟</div><div class="lpy">Dà Běn Zhōng</div><div class="len">Big Ben</div><div class="lcountry">🇬🇧 英国</div></div>
+  <div class="landmark bo"><div class="lem">⛩️</div><div class="lhz">富士山</div><div class="lpy">Fùshìshān</div><div class="len">Mt Fuji</div><div class="lcountry">🇯🇵 日本</div></div>
+  <div class="landmark bu"><div class="lem">🏛️</div><div class="lhz">比萨斜塔</div><div class="lpy">Bǐsà Xiétǎ</div><div class="len">Leaning Tower</div><div class="lcountry">🇮🇹 意大利</div></div>
+  <div class="landmark bp"><div class="lem">🏜️</div><div class="lhz">金字塔</div><div class="lpy">Jīnzìtǎ</div><div class="len">Pyramids</div><div class="lcountry">🇪🇬 埃及</div></div>
+  <div class="landmark bt"><div class="lem">🎡</div><div class="lhz">悉尼歌剧院</div><div class="lpy">Xīní Gējùyuàn</div><div class="len">Sydney Opera</div><div class="lcountry">🇦🇺 澳大利亚</div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 20: 🎮 GAME 8 — LANDMARK QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 8</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">地标在哪国？dìbiāo zài nǎ guó?</div>
+<div class="title-en">landmark quiz — which country is this from?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="lqs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="lqq">1</span>/8</div>
+    <button class="gbtn" onclick="initLq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:64px" id="lqem">🏯</div>
+    <div class="qqmain" id="lqhz" style="margin-top:4px">长城</div>
+    <div class="gpy" id="lqpy" style="color:#7c3aed;font-weight:700;text-align:center">Chángchéng</div>
+    <div class="qqlbl" style="margin-top:4px">在哪个国家？<span class="gen">In which country?</span></div>
+  </div>
+  <div class="qopts" id="lqo"></div>
+  <div class="gres" id="lqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 21: 🎮 GAME 9 — NATIONALITY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 9</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">国籍配对 guójí pèiduì</div>
+<div class="title-en">nationality quiz — what do you call a person from this country?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="nqs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="nqq">1</span>/8</div>
+    <button class="gbtn" onclick="initNq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:54px" id="nqflag"><span class="flag-css flag-china"></span></div>
+    <div class="qqmain" id="nqhz" style="margin-top:4px">中国</div>
+    <div class="gpy" id="nqpy" style="color:#7c3aed;font-weight:700;text-align:center">Zhōngguó</div>
+    <div class="qqlbl" style="margin-top:4px">人怎么说？<span class="gen">How do you say "person from here"?</span></div>
+  </div>
+  <div class="qopts three" id="nqo"></div>
+  <div class="gres" id="nqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 22: 🎮 GAME 10 — FILL IN BLANK ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 10</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">填空 tiánkòng</div>
+<div class="title-en">fill in the blanks — complete the sentence!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 关 guān · level <span id="fbround">1</span>/4</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来 chónglái · restart</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 →</button>
+  </div>
+  <div class="fib" id="fbwrap"></div>
+  <div class="gres" id="fbres" style="font-size:13px"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 23: DIALOGUE 3 — INTERNATIONAL PARTY ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 3</span>
+<div class="tag ct">💬 对话 (三) · international party 国际派对</div>
+<div class="title">场景三：国际派对 guójì pàiduì</div>
+<div class="title-en">scene 3: meeting friends from around the world!</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">大家好！我叫 Elena，我会说中文！</div>
+    <div class="py">dàjiā hǎo! wǒ jiào Elena, wǒ huì shuō zhōngwén!</div>
+    <div class="en">Hello everyone! I'm Elena, I can speak Chinese!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">🇯🇵</div><div class="bub c2"><div class="who">Yuki</div>
+    <div class="hz">こんにちは！我叫 Yuki，我来自日本。</div>
+    <div class="py">Konnichiwa! wǒ jiào Yuki, wǒ lái zì Rìběn.</div>
+    <div class="en">Hi! I'm Yuki, I'm from Japan.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">🇫🇷</div><div class="bub c3"><div class="who">Pierre</div>
+    <div class="hz">Bonjour! 我叫 Pierre，我是法国人！</div>
+    <div class="py">Bonjour! wǒ jiào Pierre, wǒ shì Fǎguó rén!</div>
+    <div class="en">Hello! I'm Pierre, I'm French!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c4">🇨🇦</div><div class="bub c4"><div class="who">Mia</div>
+    <div class="hz">Hi! 我来自加拿大，我会说法语和英语。</div>
+    <div class="py">Hi! wǒ lái zì Jiānádà, wǒ huì shuō fǎyǔ hé yīngyǔ.</div>
+    <div class="en">Hi! I'm from Canada, I speak French and English.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">太棒了！我们是国际朋友！🌍</div>
+    <div class="py">tài bàng le! wǒmen shì guójì péngyǒu!</div>
+    <div class="en">Awesome! We are international friends!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 24: 🎮 GAME 11 — MIXED QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 11</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">混合问答 hùnhé wèndá</div>
+<div class="title-en">mixed quiz — countries, flags, capitals, languages!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mxs">0</span>/12</div>
+    <div class="gsbar">题 tí · q.<span id="mxq">1</span>/12</div>
+    <button class="gbtn" onclick="initMx()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:11px;color:#7c3aed;font-weight:700;margin-bottom:4px" id="mxlbl">国家</div>
+    <div class="qqmain" id="mxq2" style="font-size:24px">请问...？</div>
+  </div>
+  <div class="qopts" id="mxo"></div>
+  <div class="gres" id="mxr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 25: ROLE-PLAY ════════════════ -->
+<div class="slide">
+<span class="badge cg">角色扮演</span>
+<div class="tag cg">🎭 角色扮演 juésè bànyǎn · role-play</div>
+<div class="title">Elena的世界旅行 Elena de shìjiè lǚxíng</div>
+<div class="title-en">Elena's world trip — visiting friends around the globe!</div>
+<div class="dlg" style="gap:3px">
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">爸爸妈妈，我想去中国！</div><div class="py">bàba māma, wǒ xiǎng qù Zhōngguó!</div><div class="en">Mum and Dad, I want to go to China!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2" style="background:linear-gradient(135deg,#a5b4fc,#6366f1)">👩</div><div class="bub c2" style="background:#e0e7ff;padding:5px 9px"><div class="who" style="text-align:right">妈妈 māma · mum</div><div class="hz" style="font-size:11.5px">为什么？</div><div class="py">wèi shénme?</div><div class="en">Why?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">我想看长城，吃饺子！</div><div class="py">wǒ xiǎng kàn Chángchéng, chī jiǎozi!</div><div class="en">I want to see the Great Wall and eat dumplings!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c3" style="background:linear-gradient(135deg,#86efac,#22c55e)">👨</div><div class="bub c3" style="background:#dcfce7;padding:5px 9px"><div class="who" style="text-align:right">爸爸 bàba · dad</div><div class="hz" style="font-size:11.5px">中国的首都是哪里？</div><div class="py">Zhōngguó de shǒudū shì nǎli?</div><div class="en">What's the capital of China?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">📚</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">北京！中国在亚洲！</div><div class="py">Běijīng! Zhōngguó zài Yàzhōu!</div><div class="en">Beijing! China is in Asia!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2" style="background:linear-gradient(135deg,#a5b4fc,#6366f1)">👩</div><div class="bub c2" style="background:#e0e7ff;padding:5px 9px"><div class="who" style="text-align:right">妈妈</div><div class="hz" style="font-size:11.5px">那我们也去法国看埃菲尔铁塔！</div><div class="py">nà wǒmen yě qù Fǎguó kàn Āifēi'ěr Tiětǎ!</div><div class="en">Then let's also go to France to see the Eiffel Tower!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🗼</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">太好了！Bonjour！</div><div class="py">tài hǎo le! Bonjour!</div><div class="en">Great! Bonjour!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c3" style="background:linear-gradient(135deg,#86efac,#22c55e)">👨</div><div class="bub c3" style="background:#dcfce7;padding:5px 9px"><div class="who" style="text-align:right">爸爸</div><div class="hz" style="font-size:11.5px">还想去哪里？</div><div class="py">hái xiǎng qù nǎli?</div><div class="en">Where else do you want to go?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌏</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">日本看富士山，意大利吃比萨！</div><div class="py">Rìběn kàn Fùshìshān, Yìdàlì chī bǐsà!</div><div class="en">Japan to see Mt Fuji, Italy to eat pizza!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2" style="background:linear-gradient(135deg,#a5b4fc,#6366f1)">👩</div><div class="bub c2" style="background:#e0e7ff;padding:5px 9px"><div class="who" style="text-align:right">妈妈</div><div class="hz" style="font-size:11.5px">哈哈，Elena 想环游世界！🌍</div><div class="py">hāha, Elena xiǎng huán yóu shìjiè!</div><div class="en">Haha, Elena wants to travel the world!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 26: 🎮 GAME 12 — WHO AM I? (HELLO + LANGUAGE → COUNTRY) ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cb">🎮 game 12</span>
+<div class="tag cb">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">他来自哪里？tā lái zì nǎli?</div>
+<div class="title-en">where is this person from? — read the clue and pick the country!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="wis">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="wiq">1</span>/8</div>
+    <button class="gbtn" onclick="initWi()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:36px" id="wiem">👋</div>
+    <div class="qqmain" id="wisay" style="font-size:18px;margin-top:4px">"Hello! I speak English."</div>
+    <div class="qqlbl" style="margin-top:6px">他来自哪国？<span class="gen">Which country?</span></div>
+  </div>
+  <div class="qopts" id="wio"></div>
+  <div class="gres" id="wir"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 27: PHRASE SUMMARY ════════════════ -->
+<div class="slide">
+<span class="badge cy">总结</span>
+<div class="tag cy">📋 短语总结 duǎnyǔ zǒngjié · phrase summary</div>
+<div class="title">国家话题必备短语</div>
+<div class="title-en">essential phrases for talking about countries!</div>
+<div class="two" style="gap:6px">
+  <div>
+    <div class="sp bb" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">你来自哪里？</div><div class="patpy">nǐ lái zì nǎli?</div>
+      <div class="paten">where are you from?</div>
+    </div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我来自 ___。</div><div class="patpy">wǒ lái zì ___ .</div>
+      <div class="paten">I'm from ___.</div>
+    </div>
+    <div class="sp bu" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">你是哪国人？</div><div class="patpy">nǐ shì nǎ guó rén?</div>
+      <div class="paten">what nationality?</div>
+    </div>
+    <div class="sp bg" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我是 ___ 人。</div><div class="patpy">wǒ shì ___ rén .</div>
+      <div class="paten">I'm ___.</div>
+    </div>
+    <div class="sp bo" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">你会说什么语言？</div><div class="patpy">nǐ huì shuō shénme yǔyán?</div>
+      <div class="paten">what languages?</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp by" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我会说 ___。</div><div class="patpy">wǒ huì shuō ___ .</div>
+      <div class="paten">I speak ___.</div>
+    </div>
+    <div class="sp bt" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 的首都是 ___。</div><div class="patpy">___ de shǒudū shì ___ .</div>
+      <div class="paten">capital of ___ is ___.</div>
+    </div>
+    <div class="sp bb" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 在 ___ 洲。</div><div class="patpy">___ zài ___ zhōu .</div>
+      <div class="paten">___ is in ___ continent.</div>
+    </div>
+    <div class="sp br" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我想去 ___。</div><div class="patpy">wǒ xiǎng qù ___ .</div>
+      <div class="paten">I want to go to ___.</div>
+    </div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">很高兴认识你！</div><div class="patpy">hěn gāoxìng rènshi nǐ !</div>
+      <div class="paten">nice to meet you!</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 28: SELF INTRODUCTION 2.0 ════════════════ -->
+<div class="slide">
+<span class="badge cg">自我介绍 2.0</span>
+<div class="tag cg">👋 Elena 的新自我介绍 · updated self-intro</div>
+<div class="title">Elena 的新自我介绍 zìwǒ jièshào</div>
+<div class="title-en">Elena's updated self-introduction with country vocab!</div>
+<div style="display:flex;flex-direction:column;gap:5px;flex:1">
+  <div style="display:flex;gap:9px;background:#fce7f3;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">😊</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">你好！我叫 Elena。</div>
+    <div style="font-size:9px;color:#2563eb;font-weight:600">nǐ hǎo! wǒ jiào Elena.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">Hello! My name is Elena.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dbeafe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px"><span class="flag-css flag-usa"></span></span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我来自美国，我是美国人。</div>
+    <div style="font-size:9px;color:#2563eb;font-weight:600">wǒ lái zì Měiguó, wǒ shì Měiguó rén.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I'm from the USA, I'm American.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ede9fe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🗣️</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我会说英语和中文。</div>
+    <div style="font-size:9px;color:#2563eb;font-weight:600">wǒ huì shuō yīngyǔ hé zhōngwén.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I can speak English and Chinese.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dcfce7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🌍</span>
+    <div><div style="font-size:12px;font-weight:900;color:#1a1a2e">我想去中国看长城，去法国看埃菲尔铁塔。</div>
+    <div style="font-size:8.5px;color:#2563eb;font-weight:600">wǒ xiǎng qù Zhōngguó kàn Chángchéng, qù Fǎguó kàn Āifēi'ěr Tiětǎ.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">I want to go to China to see the Great Wall, and France to see the Eiffel Tower.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#fef3c7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">👨‍👩‍👧</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我的家人来自美国和加拿大。</div>
+    <div style="font-size:9px;color:#2563eb;font-weight:600">wǒ de jiārén lái zì Měiguó hé Jiānádà.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">My family is from the USA and Canada.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ffedd5;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🤝</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">很高兴认识你！</div>
+    <div style="font-size:9px;color:#2563eb;font-weight:600">hěn gāoxìng rènshi nǐ!</div>
+    <div style="font-size:9px;color:#888;font-style:italic">Nice to meet you!</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 29: FUN FACTS ════════════════ -->
+<div class="slide">
+<span class="badge cu">趣味知识</span>
+<div class="tag cu">💡 趣味知识 qùwèi zhīshi · fun world facts</div>
+<div class="title">世界趣闻 shìjiè qùwén</div>
+<div class="title-en">fun facts about the world!</div>
+<div style="display:flex;flex-direction:column;gap:6px;flex:1">
+  <div class="card bb" style="font-size:11px">
+    <div class="lbl cb">🌍 1. 世界最大的国家 shìjiè zuì dà de guójiā</div>
+    <div style="margin-top:3px">
+      <b>俄罗斯 Éluósī</b> = the biggest country!<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Russia is the largest country by area in the world!</span>
+    </div>
+  </div>
+  <div class="card br" style="font-size:11px">
+    <div class="lbl cr">👥 2. 人口最多的国家 rénkǒu zuì duō</div>
+    <div style="margin-top:3px">
+      <b>中国 Zhōngguó</b> 和 <b>印度 Yìndù</b> are the most populous countries!<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Each has over 1.4 billion people!</span>
+    </div>
+  </div>
+  <div class="card by" style="font-size:11px">
+    <div class="lbl cy">🗣️ 3. 最多人说的语言 zuì duō rén shuō de yǔyán</div>
+    <div style="margin-top:3px">
+      <b>中文 Zhōngwén</b>! 14亿人说中文! (1.4 billion people)<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Chinese is the most spoken language by number of native speakers!</span>
+    </div>
+  </div>
+  <div class="card bg" style="font-size:11px">
+    <div class="lbl cg">🏛️ 4. 长城有多长 Chángchéng yǒu duō cháng?</div>
+    <div style="margin-top:3px">
+      <b>21,000 公里！gōnglǐ!</b> = 21,000 kilometers long!<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">The Great Wall can be seen from very far away!</span>
+    </div>
+  </div>
+  <div class="card bu" style="font-size:11px">
+    <div class="lbl cu">🐧 5. 南极洲没有人 Nánjízhōu méi yǒu rén</div>
+    <div style="margin-top:3px">
+      只有 <b>企鹅 qǐ'é</b> 和科学家！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Antarctica has no permanent residents — just penguins and scientists!</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 30: END CELEBRATION ════════════════ -->
+<div class="slide">
+<div class="endb">
+  <div style="font-size:54px">🌍🗺️🎉</div>
+  <div style="font-size:30px;font-weight:900;background:linear-gradient(135deg,#2563eb,#7c3aed);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Elena，你认识世界了！</div>
+  <div style="font-size:14px;color:#2563eb;font-weight:700">Elena, nǐ rènshi shìjiè le!</div>
+  <div style="font-size:12px;color:#888;font-style:italic">Elena, you know the world now!</div>
+  <div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.6">
+    总有一天，你可以去这些国家看一看！<br>
+    <span style="color:#2563eb;font-weight:700">zǒng yǒu yī tiān, nǐ kěyǐ qù zhèxiē guójiā kàn yī kàn!</span><br>
+    <span style="font-style:italic">One day, you'll get to visit all these countries!</span>
+  </div>
+  <div class="cklist">
+    <span class="ck">✅ 七大洲 qī dà zhōu</span>
+    <span class="ck">✅ 亚洲国家</span>
+    <span class="ck">✅ 欧洲国家</span>
+    <span class="ck">✅ 美洲国家</span>
+    <span class="ck">✅ 非洲 / 大洋洲</span>
+    <span class="ck">✅ 国旗 guóqí · flags</span>
+    <span class="ck">✅ 首都 shǒudū · capitals</span>
+    <span class="ck">✅ 语言 yǔyán · languages</span>
+    <span class="ck">✅ 国籍 guójí · nationalities</span>
+    <span class="ck">✅ 地标 dìbiāo · landmarks</span>
+    <span class="ck">✅ 4 个对话 duìhuà</span>
+    <span class="ck">✅ 角色扮演 juésè bànyǎn</span>
+    <span class="ck">🎮 国旗问答</span>
+    <span class="ck">🎮 国家→洲</span>
+    <span class="ck">🎮 你好语言</span>
+    <span class="ck">🎮 国家→首都</span>
+    <span class="ck">🎮 国家配对</span>
+    <span class="ck">🎮 首都配对</span>
+    <span class="ck">🎮 语言配对</span>
+    <span class="ck">🎮 地标问答</span>
+    <span class="ck">🎮 国籍问答</span>
+    <span class="ck">🎮 填空</span>
+    <span class="ck">🎮 混合问答</span>
+    <span class="ck">🎮 他来自哪里</span>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:6px">
+    太厉害了！tài lìhai le! · 12 个游戏！加油！jiā yóu! 💪
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年6月2日 · liù yuè èr rì · June 2, 2026</div>
+  <a href="index.html" style="background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
+</div>
+</div>
+
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">→</button>
+</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+let cur=0;
+slides.forEach((_,i)=>{
+  const d=document.createElement('div');d.className='dot'+(i===0?' active':'');
+  d.onclick=()=>go(i);dotsEl.appendChild(d);
+});
+function go(n){
+  slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');
+  cur=(n+slides.length)%slides.length;
+  slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');
+  if(GI[cur])GI[cur]();
+}
+document.addEventListener('keydown',e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);
+});
+const GI={};
+
+let showPY=false,showEN=false;
+function tPY(){
+  showPY=!showPY;document.body.classList.toggle('show-py',showPY);
+  document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('拼音')){b.textContent=showPY?'拼音 pīnyīn ✓':'拼音 pīnyīn';b.classList.toggle('on',showPY);}});
+}
+function tEN(){
+  showEN=!showEN;document.body.classList.toggle('show-en',showEN);
+  document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('English')){b.textContent=showEN?'English ✓':'English';b.classList.toggle('on',showEN);}});
+}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function $id(id){return document.getElementById(id)}
+
+// ════ COUNTRY DATA ════
+const COUNTRIES=[
+  {hz:'中国',py:'Zhōngguó',en:'China',flag:'<span class="flag-css flag-china"></span>',flagEm:'🇨🇳',continent:'亚洲',capital:'北京',capitalPy:'Běijīng',capitalEn:'Beijing',lang:'中文',langPy:'zhōngwén',langEn:'Chinese',hello:'你好！',helloPy:'nǐ hǎo'},
+  {hz:'美国',py:'Měiguó',en:'USA',flag:'<span class="flag-css flag-usa"></span>',flagEm:'🇺🇸',continent:'北美洲',capital:'华盛顿',capitalPy:'Huáshèngdùn',capitalEn:'Washington DC',lang:'英语',langPy:'yīngyǔ',langEn:'English',hello:'Hello!',helloPy:'hè-lōu'},
+  {hz:'英国',py:'Yīngguó',en:'UK',flag:'<span class="flag-css flag-uk"></span>',flagEm:'🇬🇧',continent:'欧洲',capital:'伦敦',capitalPy:'Lúndūn',capitalEn:'London',lang:'英语',langPy:'yīngyǔ',langEn:'English',hello:'Hello!',helloPy:'hè-lōu'},
+  {hz:'日本',py:'Rìběn',en:'Japan',flag:'<span class="flag-css flag-japan"></span>',flagEm:'🇯🇵',continent:'亚洲',capital:'东京',capitalPy:'Dōngjīng',capitalEn:'Tokyo',lang:'日语',langPy:'rìyǔ',langEn:'Japanese',hello:'こんにちは',helloPy:'Konnichiwa'},
+  {hz:'韩国',py:'Hánguó',en:'South Korea',flag:'<span class="flag-css flag-korea"></span>',flagEm:'🇰🇷',continent:'亚洲',capital:'首尔',capitalPy:'Shǒu\'ěr',capitalEn:'Seoul',lang:'韩语',langPy:'hányǔ',langEn:'Korean',hello:'안녕하세요',helloPy:'Annyeong'},
+  {hz:'法国',py:'Fǎguó',en:'France',flag:'<span class="flag-css flag-france"></span>',flagEm:'🇫🇷',continent:'欧洲',capital:'巴黎',capitalPy:'Bālí',capitalEn:'Paris',lang:'法语',langPy:'fǎyǔ',langEn:'French',hello:'Bonjour!',helloPy:'bōn-zhūr'},
+  {hz:'德国',py:'Déguó',en:'Germany',flag:'<span class="flag-css flag-germany"></span>',flagEm:'🇩🇪',continent:'欧洲',capital:'柏林',capitalPy:'Bólín',capitalEn:'Berlin',lang:'德语',langPy:'déyǔ',langEn:'German',hello:'Hallo!',helloPy:'hà-luo'},
+  {hz:'意大利',py:'Yìdàlì',en:'Italy',flag:'<span class="flag-css flag-italy"></span>',flagEm:'🇮🇹',continent:'欧洲',capital:'罗马',capitalPy:'Luómǎ',capitalEn:'Rome',lang:'意大利语',langPy:'yìdàlìyǔ',langEn:'Italian',hello:'Ciao!',helloPy:'chiào'},
+  {hz:'西班牙',py:'Xībānyá',en:'Spain',flag:'<span class="flag-css flag-spain"></span>',flagEm:'🇪🇸',continent:'欧洲',capital:'马德里',capitalPy:'Mǎdélǐ',capitalEn:'Madrid',lang:'西班牙语',langPy:'xībānyáyǔ',langEn:'Spanish',hello:'¡Hola!',helloPy:'ō-lā'},
+  {hz:'加拿大',py:'Jiānádà',en:'Canada',flag:'<span class="flag-css flag-canada"></span>',flagEm:'🇨🇦',continent:'北美洲',capital:'渥太华',capitalPy:'Wòtàihuá',capitalEn:'Ottawa',lang:'英语',langPy:'yīngyǔ',langEn:'English',hello:'Hello!',helloPy:'hè-lōu'},
+  {hz:'澳大利亚',py:'Àodàlìyà',en:'Australia',flag:'<span class="flag-css flag-australia"></span>',flagEm:'🇦🇺',continent:'大洋洲',capital:'堪培拉',capitalPy:'Kānpéilā',capitalEn:'Canberra',lang:'英语',langPy:'yīngyǔ',langEn:'English',hello:'G\'day!',helloPy:'gu-dei'},
+  {hz:'巴西',py:'Bāxī',en:'Brazil',flag:'<span class="flag-css flag-brazil"></span>',flagEm:'🇧🇷',continent:'南美洲',capital:'巴西利亚',capitalPy:'Bāxīlìyà',capitalEn:'Brasília',lang:'葡萄牙语',langPy:'pútáoyáyǔ',langEn:'Portuguese',hello:'Olá!',helloPy:'ō-lā'},
+  {hz:'墨西哥',py:'Mòxīgē',en:'Mexico',flag:'<span class="flag-css flag-mexico"></span>',flagEm:'🇲🇽',continent:'北美洲',capital:'墨西哥城',capitalPy:'Mòxīgē Chéng',capitalEn:'Mexico City',lang:'西班牙语',langPy:'xībānyáyǔ',langEn:'Spanish',hello:'¡Hola!',helloPy:'ō-lā'},
+  {hz:'印度',py:'Yìndù',en:'India',flag:'<span class="flag-css flag-india"></span>',flagEm:'🇮🇳',continent:'亚洲',capital:'新德里',capitalPy:'Xīn Délǐ',capitalEn:'New Delhi',lang:'印地语',langPy:'yìndìyǔ',langEn:'Hindi',hello:'नमस्ते',helloPy:'Namaste'},
+  {hz:'俄罗斯',py:'Éluósī',en:'Russia',flag:'<span class="flag-css flag-russia"></span>',flagEm:'🇷🇺',continent:'欧洲',capital:'莫斯科',capitalPy:'Mòsīkē',capitalEn:'Moscow',lang:'俄语',langPy:'éyǔ',langEn:'Russian',hello:'Привет',helloPy:'Privet'},
+];
+
+const CONTINENTS=[
+  {hz:'亚洲',py:'Yàzhōu',en:'Asia'},
+  {hz:'欧洲',py:'Ōuzhōu',en:'Europe'},
+  {hz:'非洲',py:'Fēizhōu',en:'Africa'},
+  {hz:'北美洲',py:'Běi Měizhōu',en:'N. America'},
+  {hz:'南美洲',py:'Nán Měizhōu',en:'S. America'},
+  {hz:'大洋洲',py:'Dàyángzhōu',en:'Oceania'},
+];
+
+// ════ GAME 1: Flag Quiz (slide 11, index 10) ════
+let fgScore=0,fgQ=0,fgItems=[];
+function initFg(){
+  fgScore=0;fgQ=0;fgItems=shuffle(COUNTRIES).slice(0,10);
+  $id('fgs').textContent='0';$id('fgq').textContent='1';$id('fgr').style.display='none';
+  showFg();
+}
+function showFg(){
+  if(fgQ>=10){const r=$id('fgr');r.style.display='block';r.textContent='🎉 '+fgScore+'/10 — '+(fgScore>=9?'完美！wánměi! · perfect!':fgScore>=7?'很好！hěn hǎo! · great!':'加油！jiā yóu!');$id('fgo').innerHTML='';return;}
+  const it=fgItems[fgQ];
+  $id('fgflag').innerHTML=it.flag;$id('fgq').textContent=fgQ+1;
+  const wrong=COUNTRIES.filter(o=>o.hz!==it.hz);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('fgo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');fgScore++;$id('fgs').textContent=fgScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      fgQ++;setTimeout(showFg,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[10]=initFg;
+
+// ════ GAME 2: Country → Continent (slide 12, index 11) ════
+let ctScore=0,ctQ=0,ctItems=[];
+function initCt(){
+  ctScore=0;ctQ=0;ctItems=shuffle(COUNTRIES).slice(0,10);
+  $id('cts').textContent='0';$id('ctq').textContent='1';$id('ctr').style.display='none';
+  showCt();
+}
+function showCt(){
+  if(ctQ>=10){const r=$id('ctr');r.style.display='block';r.textContent='🎉 '+ctScore+'/10 — '+(ctScore>=9?'完美！':ctScore>=7?'很好！':'加油！');$id('cto').innerHTML='';return;}
+  const it=ctItems[ctQ];
+  $id('cthz').textContent=it.hz;$id('ctpy').textContent=it.py;$id('cten').textContent=it.en;$id('ctq').textContent=ctQ+1;
+  const wrong=CONTINENTS.filter(o=>o.hz!==it.continent);
+  const correct=CONTINENTS.find(o=>o.hz===it.continent);
+  const opts=[correct,...shuffle(wrong).slice(0,2)];
+  const el=$id('cto');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:13px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.continent){btn.classList.add('ok');ctScore++;$id('cts').textContent=ctScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.continent)b.classList.add('ok');});}
+      ctQ++;setTimeout(showCt,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[11]=initCt;
+
+// ════ GAME 3: Hello Language Quiz (slide 13, index 12) ════
+let hgScore=0,hgQ=0,hgItems=[];
+function initHg(){
+  hgScore=0;hgQ=0;
+  const uniqueLangs={};
+  COUNTRIES.forEach(c=>{if(!uniqueLangs[c.lang])uniqueLangs[c.lang]=c;});
+  hgItems=shuffle(Object.values(uniqueLangs)).slice(0,8);
+  $id('hgs').textContent='0';$id('hgq').textContent='1';$id('hgr').style.display='none';
+  showHg();
+}
+function showHg(){
+  if(hgQ>=8){const r=$id('hgr');r.style.display='block';r.textContent='🎉 '+hgScore+'/8 — '+(hgScore===8?'完美！':hgScore>=6?'很好！':'加油！');$id('hgo').innerHTML='';return;}
+  const it=hgItems[hgQ];
+  $id('hghello').textContent=it.hello;$id('hgq').textContent=hgQ+1;
+  const allLangs=[];const seen={};
+  COUNTRIES.forEach(c=>{if(!seen[c.lang]){seen[c.lang]=true;allLangs.push({hz:c.lang,py:c.langPy,en:c.langEn});}});
+  const wrong=allLangs.filter(o=>o.hz!==it.lang);
+  const opts=[{hz:it.lang,py:it.langPy,en:it.langEn},...shuffle(wrong).slice(0,3)];
+  const el=$id('hgo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.lang){btn.classList.add('ok');hgScore++;$id('hgs').textContent=hgScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.lang)b.classList.add('ok');});}
+      hgQ++;setTimeout(showHg,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[12]=initHg;
+
+// ════ GAME 4: Country → Capital (slide 15, index 14) ════
+let caScore=0,caQ=0,caItems=[];
+function initCa(){
+  caScore=0;caQ=0;caItems=shuffle(COUNTRIES).slice(0,10);
+  $id('cas').textContent='0';$id('caq').textContent='1';$id('car').style.display='none';
+  showCa();
+}
+function showCa(){
+  if(caQ>=10){const r=$id('car');r.style.display='block';r.textContent='🎉 '+caScore+'/10 — '+(caScore>=9?'完美！':caScore>=7?'很好！':'加油！');$id('cao').innerHTML='';return;}
+  const it=caItems[caQ];
+  $id('caflag').innerHTML=it.flag;$id('cahz').textContent=it.hz;$id('capy').textContent=it.py;$id('caq').textContent=caQ+1;
+  const wrong=COUNTRIES.filter(o=>o.capital!==it.capital);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('cao');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:13px">${opt.capital}</span><span class="gpy">${opt.capitalPy}</span><span class="gen">${opt.capitalEn}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.capital===it.capital){btn.classList.add('ok');caScore++;$id('cas').textContent=caScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.capital)b.classList.add('ok');});}
+      caQ++;setTimeout(showCa,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[14]=initCa;
+
+// ════ Generic Memory Match builder ════
+function buildMemMatch(pairs, gridId, mEl, fEl, resEl, total, renderHz, renderEm){
+  let flipped=[],matched=0,flips=0,lock=false;
+  $id(mEl).textContent='0';$id(fEl).textContent='0';$id(resEl).style.display='none';
+  const cards=[];
+  pairs.forEach(p=>{
+    cards.push({id:p.id,side:'hz',data:p});
+    cards.push({id:p.id,side:'em',data:p});
+  });
+  const grid=$id(gridId);grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){
+      if(lock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');
+      if(card.side==='hz')el.innerHTML=renderHz(card.data);
+      else el.innerHTML=renderEm(card.data);
+      flipped.push({el,card});
+      if(flipped.length===2){
+        flips++;$id(fEl).textContent=flips;
+        if(flipped[0].card.id===flipped[1].card.id){
+          flipped[0].el.classList.add('match');flipped[1].el.classList.add('match');
+          flipped=[];matched++;$id(mEl).textContent=matched;
+          if(matched===total){setTimeout(()=>{const r=$id(resEl);r.style.display='block';r.textContent='🎉 '+flips+' 翻 · 太棒了！tài bàng le!';},400);}
+        }else{
+          lock=true;setTimeout(()=>{
+            flipped[0].el.classList.remove('flip');flipped[0].el.textContent='🎴';
+            flipped[1].el.classList.remove('flip');flipped[1].el.textContent='🎴';
+            flipped=[];lock=false;
+          },900);
+        }
+      }
+    };
+    grid.appendChild(el);
+  });
+}
+
+// ════ GAME 5: Country Memory Match (slide 16, index 15) ════
+const MEM_C=[
+  {id:1,hz:'中国',py:'Zhōngguó',en:'China',em:'<span class="flag-css flag-china"></span>'},
+  {id:2,hz:'美国',py:'Měiguó',en:'USA',em:'<span class="flag-css flag-usa"></span>'},
+  {id:3,hz:'日本',py:'Rìběn',en:'Japan',em:'<span class="flag-css flag-japan"></span>'},
+  {id:4,hz:'法国',py:'Fǎguó',en:'France',em:'<span class="flag-css flag-france"></span>'},
+  {id:5,hz:'德国',py:'Déguó',en:'Germany',em:'<span class="flag-css flag-germany"></span>'},
+  {id:6,hz:'英国',py:'Yīngguó',en:'UK',em:'<span class="flag-css flag-uk"></span>'},
+  {id:7,hz:'意大利',py:'Yìdàlì',en:'Italy',em:'<span class="flag-css flag-italy"></span>'},
+  {id:8,hz:'加拿大',py:'Jiānádà',en:'Canada',em:'<span class="flag-css flag-canada"></span>'},
+];
+function initMemC(){
+  buildMemMatch(MEM_C,'mcgrid','mcm','mcf','mcres',8,
+    d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+    d=>`<div style="font-size:42px;line-height:1">${d.em}</div>`
+  );
+}
+GI[15]=initMemC;
+
+// ════ GAME 6: Capital Memory Match (slide 17, index 16) ════
+const MEM_K=[
+  {id:1,hz:'中国',py:'Zhōngguó',cap:'北京',cappy:'Běijīng'},
+  {id:2,hz:'日本',py:'Rìběn',cap:'东京',cappy:'Dōngjīng'},
+  {id:3,hz:'英国',py:'Yīngguó',cap:'伦敦',cappy:'Lúndūn'},
+  {id:4,hz:'法国',py:'Fǎguó',cap:'巴黎',cappy:'Bālí'},
+  {id:5,hz:'美国',py:'Měiguó',cap:'华盛顿',cappy:'Huáshèngdùn'},
+  {id:6,hz:'意大利',py:'Yìdàlì',cap:'罗马',cappy:'Luómǎ'},
+];
+function initMemK(){
+  buildMemMatch(MEM_K,'mkgrid','mkm','mkf','mkres',6,
+    d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz" style="font-size:13px">${d.hz}</div><div class="gen" style="font-size:7.5px;color:#888;font-style:italic">country</div></div>`,
+    d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div style="font-size:16px">🏛️</div><div class="mcard-hz" style="font-size:12px;color:#7c3aed">${d.cap}</div><div class="mcard-py gpy" style="font-size:8.5px">${d.cappy}</div></div>`
+  );
+}
+GI[16]=initMemK;
+
+// ════ GAME 7: Language Memory Match (slide 18, index 17) ════
+const MEM_L=[
+  {id:1,hz:'中国',py:'Zhōngguó',lang:'中文',langpy:'zhōngwén'},
+  {id:2,hz:'日本',py:'Rìběn',lang:'日语',langpy:'rìyǔ'},
+  {id:3,hz:'韩国',py:'Hánguó',lang:'韩语',langpy:'hányǔ'},
+  {id:4,hz:'法国',py:'Fǎguó',lang:'法语',langpy:'fǎyǔ'},
+  {id:5,hz:'德国',py:'Déguó',lang:'德语',langpy:'déyǔ'},
+  {id:6,hz:'西班牙',py:'Xībānyá',lang:'西班牙语',langpy:'xībānyáyǔ'},
+];
+function initMemL(){
+  buildMemMatch(MEM_L,'mlgrid','mlm','mlf','mlres',6,
+    d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz" style="font-size:13px">${d.hz}</div><div class="gen" style="font-size:7.5px;color:#888;font-style:italic">country</div></div>`,
+    d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div style="font-size:16px">🗣️</div><div class="mcard-hz" style="font-size:12px;color:#16a34a">${d.lang}</div><div class="mcard-py gpy" style="font-size:8.5px">${d.langpy}</div></div>`
+  );
+}
+GI[17]=initMemL;
+
+// ════ GAME 8: Landmark Quiz (slide 20, index 19) ════
+const LANDMARKS=[
+  {em:'🏯',hz:'长城',py:'Chángchéng',en:'Great Wall',country:'中国'},
+  {em:'🗽',hz:'自由女神像',py:'Zìyóu Nǚshén Xiàng',en:'Statue of Liberty',country:'美国'},
+  {em:'🗼',hz:'埃菲尔铁塔',py:'Āifēi\'ěr Tiětǎ',en:'Eiffel Tower',country:'法国'},
+  {em:'🕰️',hz:'大本钟',py:'Dà Běn Zhōng',en:'Big Ben',country:'英国'},
+  {em:'⛩️',hz:'富士山',py:'Fùshìshān',en:'Mt Fuji',country:'日本'},
+  {em:'🏛️',hz:'比萨斜塔',py:'Bǐsà Xiétǎ',en:'Leaning Tower',country:'意大利'},
+  {em:'🏜️',hz:'金字塔',py:'Jīnzìtǎ',en:'Pyramids',country:'埃及'},
+  {em:'🎡',hz:'悉尼歌剧院',py:'Xīní Gējùyuàn',en:'Sydney Opera',country:'澳大利亚'},
+];
+const COUNTRY_EXT=[...COUNTRIES,{hz:'埃及',py:'Āijí',en:'Egypt'}];
+let lqScore=0,lqQ=0,lqItems=[];
+function initLq(){
+  lqScore=0;lqQ=0;lqItems=shuffle(LANDMARKS).slice(0,8);
+  $id('lqs').textContent='0';$id('lqq').textContent='1';$id('lqr').style.display='none';
+  showLq();
+}
+function showLq(){
+  if(lqQ>=8){const r=$id('lqr');r.style.display='block';r.textContent='🎉 '+lqScore+'/8 — '+(lqScore===8?'完美！':lqScore>=6?'很好！':'加油！');$id('lqo').innerHTML='';return;}
+  const it=lqItems[lqQ];
+  $id('lqem').textContent=it.em;$id('lqhz').textContent=it.hz;$id('lqpy').textContent=it.py;$id('lqq').textContent=lqQ+1;
+  const wrong=COUNTRY_EXT.filter(o=>o.hz!==it.country);
+  const correct=COUNTRY_EXT.find(o=>o.hz===it.country);
+  const opts=[correct,...shuffle(wrong).slice(0,3)];
+  const el=$id('lqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.country){btn.classList.add('ok');lqScore++;$id('lqs').textContent=lqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.country)b.classList.add('ok');});}
+      lqQ++;setTimeout(showLq,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[19]=initLq;
+
+// ════ GAME 9: Nationality Quiz (slide 21, index 20) ════
+let nqScore=0,nqQ=0,nqItems=[];
+function initNq(){
+  nqScore=0;nqQ=0;nqItems=shuffle(COUNTRIES).slice(0,8);
+  $id('nqs').textContent='0';$id('nqq').textContent='1';$id('nqr').style.display='none';
+  showNq();
+}
+function showNq(){
+  if(nqQ>=8){const r=$id('nqr');r.style.display='block';r.textContent='🎉 '+nqScore+'/8 — '+(nqScore===8?'完美！':nqScore>=6?'很好！':'加油！');$id('nqo').innerHTML='';return;}
+  const it=nqItems[nqQ];
+  $id('nqflag').innerHTML=it.flag;$id('nqhz').textContent=it.hz;$id('nqpy').textContent=it.py;$id('nqq').textContent=nqQ+1;
+  // correct = hz + 人
+  const correctNat=it.hz+'人';
+  const correctNatPy=it.py+' rén';
+  // build wrong options
+  const wrong=COUNTRIES.filter(o=>o.hz!==it.hz).map(o=>({nat:o.hz+'人',natpy:o.py+' rén',naten:o.en+' person'}));
+  const opts=[{nat:correctNat,natpy:correctNatPy,naten:it.en+' person'},...shuffle(wrong).slice(0,2)];
+  const el=$id('nqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12px">${opt.nat}</span><span class="gpy">${opt.natpy}</span><span class="gen">${opt.naten}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.nat===correctNat){btn.classList.add('ok');nqScore++;$id('nqs').textContent=nqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===correctNat)b.classList.add('ok');});}
+      nqQ++;setTimeout(showNq,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[20]=initNq;
+
+// ════ GAME 10: Fill in Blanks (slide 22, index 21) ════
+const FB_ROUNDS=[
+  {sentence:'你来自 ___ ？',py:'nǐ lái zì ___ ?',en:'Where are you from?',blanks:['哪里'],bank:['哪里','谁','什么','怎么']},
+  {sentence:'我是 ___ 人。',py:'wǒ shì ___ rén.',en:'I am ___ (nationality).',blanks:['美国'],bank:['美国','英语','北京','你好']},
+  {sentence:'中国的首都是 ___ 。',py:'Zhōngguó de shǒudū shì ___ .',en:'The capital of China is ___.',blanks:['北京'],bank:['北京','东京','伦敦','巴黎']},
+  {sentence:'我会 ___ 中文和 ___ 语。',py:'wǒ huì ___ zhōngwén hé ___ yǔ.',en:'I can speak Chinese and English.',blanks:['说','英'],bank:['说','英','吃','法','中','喝']},
+];
+let fbIdx=0,fbFilled=[];
+function initFb(){fbIdx=0;$id('fbres').style.display='none';$id('fbnext').style.display='none';$id('fbround').textContent='1';renderFb();}
+function renderFb(){
+  const round=FB_ROUNDS[fbIdx];fbFilled=round.blanks.map(()=>null);$id('fbround').textContent=(fbIdx+1);
+  const wrap=$id('fbwrap');let html='<div class="fib-row">';let bidx=0;
+  const parts=round.sentence.split('___');
+  parts.forEach((p,i)=>{html+=p;if(i<parts.length-1){html+=`<span class="fib-blank" id="fb-b${bidx}" data-bi="${bidx}">____</span>`;bidx++;}});
+  html+='</div>';
+  html+=`<div class="gpy" style="font-size:10px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
+  html+=`<div class="gen" style="font-size:9.5px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
+  html+='<div class="fib-bank">';
+  shuffle(round.bank).forEach(t=>{html+=`<button class="fib-tok" data-w="${t}">${t}</button>`;});
+  html+='</div>';
+  wrap.innerHTML=html;
+  wrap.querySelectorAll('.fib-tok').forEach(tok=>{
+    tok.onclick=function(){
+      const next=fbFilled.findIndex(x=>x===null);if(next<0)return;
+      const word=tok.dataset.w;const bk=$id('fb-b'+next);
+      bk.textContent=word;bk.classList.add('filled');fbFilled[next]=word;tok.classList.add('used');
+      bk.onclick=function(){bk.textContent='____';bk.classList.remove('filled');fbFilled[next]=null;wrap.querySelectorAll('.fib-tok').forEach(t=>{if(t.dataset.w===word&&t.classList.contains('used')){t.classList.remove('used');}});bk.onclick=null;};
+      if(fbFilled.every(w=>w!==null)){
+        const correct=fbFilled.every((w,i)=>w===round.blanks[i]);
+        const r=$id('fbres');r.style.display='block';
+        if(correct){r.style.background='linear-gradient(135deg,#dcfce7,#bbf7d0)';r.style.color='#15803d';r.textContent='🎉 对了！duì le! · correct!';$id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';if(fbIdx===FB_ROUNDS.length-1){setTimeout(()=>{r.textContent='🌟 全部完成！quánbù wánchéng! · all done!';},700);}}
+        else{r.style.background='linear-gradient(135deg,#fee2e2,#fca5a5)';r.style.color='#991b1b';r.textContent='❌ 再试一次！zài shì yī cì! · try again!';}
+      }
+    };
+  });
+}
+function nextFb(){if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}}
+GI[21]=initFb;
+
+// ════ GAME 11: Mixed Quiz (slide 24, index 23) ════
+let mxScore=0,mxQ=0,mxItems=[];
+function buildMxQuestions(){
+  const qs=[];
+  shuffle(COUNTRIES).slice(0,4).forEach(c=>{qs.push({type:'flag',label:'国旗',q:c.flag,qsize:'90px',correct:c.hz,wrong:COUNTRIES.filter(o=>o.hz!==c.hz).map(o=>o.hz)});});
+  shuffle(COUNTRIES).slice(0,4).forEach(c=>{qs.push({type:'capital',label:'首都',q:c.hz,qsize:'24px',correct:c.capital,wrong:COUNTRIES.filter(o=>o.capital!==c.capital).map(o=>o.capital)});});
+  shuffle(COUNTRIES).slice(0,4).forEach(c=>{qs.push({type:'language',label:'语言',q:c.hz,qsize:'24px',correct:c.lang,wrong:COUNTRIES.filter(o=>o.lang!==c.lang).map(o=>o.lang)});});
+  return shuffle(qs).slice(0,12);
+}
+function initMx(){
+  mxScore=0;mxQ=0;mxItems=buildMxQuestions();
+  $id('mxs').textContent='0';$id('mxq').textContent='1';$id('mxr').style.display='none';
+  showMx();
+}
+function showMx(){
+  if(mxQ>=12){const r=$id('mxr');r.style.display='block';r.textContent='🎉 '+mxScore+'/12 — '+(mxScore>=11?'完美！':mxScore>=8?'很好！':'加油！');$id('mxo').innerHTML='';return;}
+  const it=mxItems[mxQ];
+  let label='国家';
+  if(it.type==='flag')label='这个国旗是哪个国家？';
+  else if(it.type==='capital')label='的首都是？';
+  else if(it.type==='language')label='说什么语言？';
+  $id('mxlbl').textContent=label;
+  $id('mxq2').innerHTML=`<span style="font-size:${it.qsize}">${it.q}</span>`;
+  $id('mxq').textContent=mxQ+1;
+  const opts=[it.correct,...shuffle([...new Set(it.wrong)]).slice(0,3)];
+  const el=$id('mxo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:13px">${opt}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt===it.correct){btn.classList.add('ok');mxScore++;$id('mxs').textContent=mxScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.correct)b.classList.add('ok');});}
+      mxQ++;setTimeout(showMx,1100);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[23]=initMx;
+
+// ════ GAME 12: Who Am I (Hello + Language → Country) (slide 26, index 25) ════
+let wiScore=0,wiQ=0,wiItems=[];
+function initWi(){
+  wiScore=0;wiQ=0;
+  const uniqueByHello={};
+  COUNTRIES.forEach(c=>{if(!uniqueByHello[c.hello])uniqueByHello[c.hello]=c;});
+  wiItems=shuffle(Object.values(uniqueByHello)).slice(0,8);
+  $id('wis').textContent='0';$id('wiq').textContent='1';$id('wir').style.display='none';
+  showWi();
+}
+function showWi(){
+  if(wiQ>=8){const r=$id('wir');r.style.display='block';r.textContent='🎉 '+wiScore+'/8 — '+(wiScore===8?'完美！':wiScore>=6?'很好！':'加油！');$id('wio').innerHTML='';return;}
+  const it=wiItems[wiQ];
+  $id('wiem').innerHTML=it.flag;
+  $id('wisay').innerHTML=`<div style="font-size:22px">"${it.hello}"</div><div style="font-size:12px;color:#7c3aed;font-weight:700;margin-top:2px">"我说 ${it.lang}"</div><div class="gen" style="font-size:10.5px;color:#888;font-style:italic">"I speak ${it.langEn}"</div>`;
+  $id('wiq').textContent=wiQ+1;
+  const wrong=COUNTRIES.filter(o=>o.hz!==it.hz);
+  const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('wio');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){
+      if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');wiScore++;$id('wis').textContent=wiScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      wiQ++;setTimeout(showWi,1300);
+    };
+    el.appendChild(btn);
+  });
+}
+GI[25]=initWi;
+</script>
+</body>
+</html>
