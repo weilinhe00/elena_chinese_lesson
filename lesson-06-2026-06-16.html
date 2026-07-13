@@ -1,0 +1,1427 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Elena的中文课 · 服装 · Clothing &amp; Colors</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fce7f3,#fbcfe8 50%,#e0e7ff);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.app{width:880px;position:relative}
+
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#ec4899,#a855f7);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
+
+.slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.cp{color:#e91e8c}.cu{color:#7c3aed}.ct{color:#0891b2}.co{color:#ea580c}.cg{color:#16a34a}.cb{color:#2563eb}.cy{color:#ca8a04}.cr{color:#dc2626}
+.bp{background:#fce7f3}.bu{background:#ede9fe}.bt{background:#cffafe}.bo{background:#ffedd5}.bg{background:#dcfce7}.bb{background:#dbeafe}.by{background:#fef9c3}.br{background:#fee2e2}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+
+.tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
+.title{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:1px}
+.title-py{font-size:11px;color:#ec4899;font-weight:700;margin-bottom:1px}
+.title-en{font-size:10.5px;color:#888;font-style:italic;margin-bottom:6px}
+.sub{font-size:10.5px;color:#888;margin-bottom:8px}
+.lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
+.badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
+.card{border-radius:11px;padding:8px 10px}
+
+.vc{border-radius:10px;padding:7px 4px;text-align:center}
+.vc .py{font-size:9px;color:#ec4899;font-weight:700;margin-top:2px}
+.vc .hz{font-size:13px;font-weight:900;color:#1a1a2e;margin:1px 0}
+.vc .en{font-size:8.5px;color:#888}
+
+/* Clothing item card */
+.cloth{border-radius:12px;padding:8px 5px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+.cloth .cem{font-size:34px;line-height:1;margin-bottom:2px}
+.cloth .cpy{font-size:9px;color:#ec4899;font-weight:700}
+.cloth .chz{font-size:12.5px;font-weight:900;color:#1a1a2e}
+.cloth .cen{font-size:8.5px;color:#888}
+.cloth .cverb{font-size:8px;color:#7c3aed;font-weight:800;background:rgba(255,255,255,.7);padding:1px 6px;border-radius:5px;margin-top:2px}
+
+/* Color swatch */
+.color-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 0}
+.csw{border-radius:10px;padding:8px 6px;text-align:center;min-width:60px}
+.csw .py{font-size:8.5px;color:rgba(255,255,255,.9);font-weight:700}
+.csw .hz{font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.csw .en{font-size:8px;color:rgba(255,255,255,.85);margin-top:1px}
+
+/* Colored clothing display */
+.outfit-card{background:#fff;border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:10px;border:2px solid #f3f4f6}
+.outfit-card .outfit-em{font-size:34px;line-height:1}
+.outfit-card .outfit-info{flex:1}
+.outfit-card .outfit-hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.outfit-card .outfit-py{font-size:9px;color:#ec4899;font-weight:700}
+.outfit-card .outfit-en{font-size:9px;color:#888;font-style:italic}
+.outfit-card .outfit-swatch{width:22px;height:22px;border-radius:50%;flex-shrink:0;border:2px solid rgba(0,0,0,.1)}
+
+/* Dressing character display */
+.character{background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:16px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:5px;min-height:200px;position:relative}
+.character .ch-head{font-size:60px;line-height:1}
+.character .ch-outfit{display:flex;flex-direction:column;align-items:center;gap:2px;margin-top:4px}
+.character .ch-item{font-size:24px}
+
+/* Wear verb chart */
+.verb-chart{background:#fff;border-radius:14px;padding:12px;border:2px solid #fbcfe8}
+.verb-cell{display:flex;align-items:center;gap:8px;padding:4px 8px;border-radius:8px;margin:3px 0}
+.verb-cell .vem{font-size:24px}
+.verb-cell .vinfo{flex:1}
+.verb-cell .vhz{font-size:12px;font-weight:900}
+.verb-cell .vpy{font-size:9px;color:#ec4899;font-weight:700}
+.verb-cell .ven{font-size:9px;color:#888;font-style:italic}
+.verb-cell .vex{font-size:9.5px;color:#7c3aed;font-weight:700;background:rgba(255,255,255,.8);padding:2px 6px;border-radius:6px}
+
+/* Dialogue bubbles */
+.dlg{flex:1;display:flex;flex-direction:column;gap:5px}
+.dlg-turn{display:flex;gap:8px;align-items:flex-start}
+.dlg-turn.right{flex-direction:row-reverse}
+.avi{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.avi.w{background:linear-gradient(135deg,#fbbf24,#f59e0b)}
+.avi.c{background:linear-gradient(135deg,#f9a8d4,#ec4899)}
+.avi.c2{background:linear-gradient(135deg,#a5b4fc,#6366f1)}
+.avi.c3{background:linear-gradient(135deg,#86efac,#22c55e)}
+.bub{border-radius:14px;padding:6px 11px;max-width:80%;position:relative}
+.bub.w{background:#fef3c7;border-top-left-radius:4px}
+.bub.c{background:#fce7f3;border-top-right-radius:4px}
+.bub.c2{background:#e0e7ff;border-top-right-radius:4px}
+.bub.c3{background:#dcfce7;border-top-right-radius:4px}
+.bub .hz{font-size:12px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.bub .py{font-size:8.5px;color:#ec4899;font-weight:700;margin-top:1px;line-height:1.2}
+.bub .en{font-size:8px;color:#777;font-style:italic;margin-top:1px;line-height:1.2}
+.who{font-size:7.5px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:1px}
+
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11.5px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8.5px;color:#ec4899;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
+.sp .ex{font-size:10.5px;font-weight:700;margin-top:3px}
+.sp .expy{font-size:8px;color:#aaa}
+.sp .exen{font-size:8.5px;color:#999;font-style:italic}
+
+.cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cov-title{font-size:40px;font-weight:900;background:linear-gradient(135deg,#ec4899,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#fce7f3;color:#9d174d;border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin:3px}
+
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:760px}
+.ck{background:#fce7f3;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#9d174d}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.nbtn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:15px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:.2s;color:#333;display:flex;align-items:center;justify-content:center}
+.nbtn:hover{transform:scale(1.1)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:680px}
+.dot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+.dot.active{background:#ec4899;transform:scale(1.4)}
+
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gsbar{font-size:12px;font-weight:800;color:#9d174d;background:#fce7f3;padding:3px 12px;border-radius:999px}
+.gbtn{background:linear-gradient(135deg,#ec4899,#a855f7);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
+.gbtn:hover{opacity:.85}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
+
+.toggle-bar{position:absolute;top:10px;right:14px;display:flex;gap:6px;z-index:10}
+.tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.05)}
+.slide:has(.toggle-bar) .badge{display:none}
+
+.gpy,.gen{display:none}
+.gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
+.gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
+body.show-py .gpy{display:block}
+body.show-en .gen{display:block}
+
+.qq{background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:14px;padding:12px 18px;text-align:center;width:100%;max-width:380px}
+.qqmain{font-size:30px;font-weight:900;color:#1a1a2e;line-height:1.1}
+.qqlbl{font-size:11px;color:#888;margin-top:3px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:460px}
+.qopts.three{grid-template-columns:repeat(3,1fr)}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:8px 10px;font-weight:800;cursor:pointer;transition:.15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:50px;justify-content:center}
+.qopt:hover{border-color:#ec4899;background:#fdf2f8}
+.qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopt-hz{font-size:14px}
+
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;max-width:660px}
+.mcard{background:linear-gradient(135deg,#ec4899,#a855f7);border-radius:10px;height:72px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard.flip{background:#fff;border:2px solid #ec4899;cursor:default}
+.mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
+.mcard-py{font-size:9px;color:#ec4899;font-weight:700}
+.mcard-hz{font-size:14px;font-weight:900;color:#1a1a2e}
+
+.fib{background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:14px;padding:13px 18px;width:100%;max-width:560px}
+.fib-row{font-size:15px;line-height:2.1;color:#1a1a2e;font-weight:700;text-align:center}
+.fib-blank{display:inline-block;min-width:80px;border-bottom:3px solid #ec4899;padding:0 6px;font-weight:900;color:#ec4899;text-align:center;margin:0 2px;cursor:pointer}
+.fib-blank.filled{border-bottom-color:#16a34a;color:#15803d;background:#dcfce7;border-radius:6px}
+.fib-bank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.fib-tok{background:#fff;border:2px solid #ec4899;color:#1a1a2e;padding:5px 13px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.fib-tok:hover{background:#fce7f3}
+.fib-tok.used{opacity:.3;pointer-events:none}
+
+/* 穿 vs 戴 game */
+.cd-card{background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:14px;padding:14px 18px;text-align:center;width:100%;max-width:340px}
+.cd-em{font-size:52px;line-height:1}
+.cd-hz{font-size:20px;font-weight:900;color:#1a1a2e;margin-top:6px}
+.cd-py{font-size:11px;color:#7c3aed;font-weight:700}
+.cd-en{font-size:10px;color:#888;font-style:italic}
+.cd-btns{display:flex;gap:12px;max-width:400px;width:100%}
+.cd-btn{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.15s;font-weight:800}
+.cd-btn:hover{transform:scale(1.04)}
+.cd-btn.wear{background:linear-gradient(135deg,#fce7f3,#fbcfe8);color:#9d174d}
+.cd-btn.dai{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
+.cd-hz-btn{font-size:22px;font-weight:900}
+.cd-py-btn{font-size:9px;opacity:.85}
+.cd-en-btn{font-size:9px;font-style:italic;opacity:.85}
+
+/* Outfit builder */
+.outfit-builder{display:grid;grid-template-columns:1fr 1fr;gap:12px;flex:1;padding:6px 0}
+.season-box{border-radius:14px;padding:10px;background:#fff;border:2px solid #f3f4f6}
+.season-title{font-size:14px;font-weight:900;text-align:center;margin-bottom:5px}
+.season-clothes{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;font-size:24px}
+</style>
+</head>
+<body>
+<a class="home-btn" href="index.html" title="返回课程列表">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
+<div class="app">
+
+<!-- ════════════════ SLIDE 1: COVER ════════════════ -->
+<div class="slide active">
+<div class="cov">
+  <div style="font-size:48px">👗👔🎩</div>
+  <div class="cov-title">服装 + 颜色<br><span style="font-size:18px;font-weight:700;background:none;-webkit-text-fill-color:#888">fúzhuāng + yánsè · Clothing &amp; Colors</span></div>
+  <div style="background:linear-gradient(135deg,#fce7f3,#ede9fe);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#9d174d">📅 2026年6月16日 · liù yuè shíliù rì · June 16, 2026</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:720px">
+    <span class="ctag">👕 上衣 shàngyī · tops</span>
+    <span class="ctag">👖 裤子 kùzi · pants</span>
+    <span class="ctag">👗 裙子 qúnzi · skirts &amp; dresses</span>
+    <span class="ctag">👟 鞋子 xiézi · shoes</span>
+    <span class="ctag">🎩 配饰 pèishì · accessories</span>
+    <span class="ctag">🎨 颜色 yánsè · colors (review!)</span>
+    <span class="ctag">👕/🎩 穿 vs 戴</span>
+    <span class="ctag">💬 4 对话 duìhuà</span>
+    <span class="ctag">🎮 12 游戏 yóuxì</span>
+    <span class="ctag">🎭 角色扮演</span>
+  </div>
+  <div style="background:#fff;border:2px solid #fbcfe8;border-radius:14px;padding:9px 16px;font-size:11px;color:#9d174d;margin-top:8px;max-width:600px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b><br>
+    这节课学习服装的两个动词：<b>穿 chuān</b>（衣服/鞋）和 <b>戴 dài</b>（帽子/眼镜/围巾）！<br>
+    <span style="color:#7c3aed;font-weight:600;font-size:10px">liǎng gè dòngcí: chuān (yīfú) vs dài (màozi)!</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">Two verbs: 穿 chuān (wear clothes) vs 戴 dài (put on hats/glasses)!</span>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sānshí yè · 30 pages</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 2: TOPS ════════════════ -->
+<div class="slide">
+<span class="badge cp">vocab 1</span>
+<div class="tag cp">👕 上衣 shàngyī · tops (things you wear above the waist)</div>
+<div class="title">上衣 shàngyī</div>
+<div class="title-en">tops — shirts, sweaters, and jackets</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="cloth bp"><div class="cem">👕</div><div class="cpy">T-xù</div><div class="chz">T恤</div><div class="cen">T-shirt</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bu"><div class="cem">👔</div><div class="cpy">chènshān</div><div class="chz">衬衫</div><div class="cen">shirt</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bo"><div class="cem">🧥</div><div class="cpy">wàitào</div><div class="chz">外套</div><div class="cen">coat / jacket</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth by"><div class="cem">🧶</div><div class="cpy">máoyī</div><div class="chz">毛衣</div><div class="cen">sweater</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bg"><div class="cem">👚</div><div class="cpy">chènyī</div><div class="chz">衬衣</div><div class="cen">blouse</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bt"><div class="cem">🥼</div><div class="cpy">yǔróngfú</div><div class="chz">羽绒服</div><div class="cen">down jacket</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bb"><div class="cem">👔</div><div class="cpy">xīfú</div><div class="chz">西服</div><div class="cen">suit</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth br"><div class="cem">🎽</div><div class="cpy">bèixīn</div><div class="chz">背心</div><div class="cen">vest / tank</div><div class="cverb">穿 chuān</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>我今天穿一件红色的 T恤。</b> <span class="cp" style="font-size:9px">wǒ jīntiān chuān yī jiàn hóngsè de T-xù.</span><br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Today I'm wearing a red T-shirt. · 一件 yī jiàn = one piece (measure word for clothes)</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 3: BOTTOMS ════════════════ -->
+<div class="slide">
+<span class="badge cp">vocab 2</span>
+<div class="tag cp">👖 下装 xiàzhuāng · bottoms — pants, skirts, dresses</div>
+<div class="title">裤子和裙子 kùzi hé qúnzi</div>
+<div class="title-en">pants, skirts, dresses</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="cloth bb"><div class="cem">👖</div><div class="cpy">kùzi</div><div class="chz">裤子</div><div class="cen">pants</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth by"><div class="cem">🩳</div><div class="cpy">duǎnkù</div><div class="chz">短裤</div><div class="cen">shorts</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bu"><div class="cem">👖</div><div class="cpy">niúzǎikù</div><div class="chz">牛仔裤</div><div class="cen">jeans</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bg"><div class="cem">🩲</div><div class="cpy">yùndòngkù</div><div class="chz">运动裤</div><div class="cen">sweatpants</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bp"><div class="cem">👗</div><div class="cpy">liányīqún</div><div class="chz">连衣裙</div><div class="cen">dress</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bo"><div class="cem">👗</div><div class="cpy">qúnzi</div><div class="chz">裙子</div><div class="cen">skirt</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth br"><div class="cem">🩱</div><div class="cpy">yǒngyī</div><div class="chz">泳衣</div><div class="cen">swimsuit</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bt"><div class="cem">👘</div><div class="cpy">shuìyī</div><div class="chz">睡衣</div><div class="cen">pajamas</div><div class="cverb">穿 chuān</div></div>
+</div>
+<div class="card by" style="font-size:11px">
+  <div class="lbl cy">💡 记住 jì zhu · remember</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>裙 qún</b> = anything skirt-like → <b>裙子</b> skirt · <b>连衣裙</b> dress (连 = connected + 衣 = clothes + 裙)
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 4: SHOES & SOCKS ════════════════ -->
+<div class="slide">
+<span class="badge cp">vocab 3</span>
+<div class="tag cp">👟 鞋子和袜子 xiézi hé wàzi · shoes &amp; socks</div>
+<div class="title">鞋子和袜子 xiézi hé wàzi</div>
+<div class="title-en">shoes and socks — for your feet!</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="cloth bp"><div class="cem">👟</div><div class="cpy">yùndòngxié</div><div class="chz">运动鞋</div><div class="cen">sneakers</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bu"><div class="cem">👞</div><div class="cpy">píxié</div><div class="chz">皮鞋</div><div class="cen">leather shoes</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bo"><div class="cem">👠</div><div class="cpy">gāogēnxié</div><div class="chz">高跟鞋</div><div class="cen">high heels</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth by"><div class="cem">🥾</div><div class="cpy">xuēzi</div><div class="chz">靴子</div><div class="cen">boots</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bg"><div class="cem">🩴</div><div class="cpy">liángxié</div><div class="chz">凉鞋</div><div class="cen">sandals</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bt"><div class="cem">🥿</div><div class="cpy">tuōxié</div><div class="chz">拖鞋</div><div class="cen">slippers</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth bb"><div class="cem">🧦</div><div class="cpy">wàzi</div><div class="chz">袜子</div><div class="cen">socks</div><div class="cverb">穿 chuān</div></div>
+  <div class="cloth br"><div class="cem">🩰</div><div class="cpy">bālěixié</div><div class="chz">芭蕾鞋</div><div class="cen">ballet shoes</div><div class="cverb">穿 chuān</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>我穿一双白色的运动鞋。</b><br>
+    <span class="cp" style="font-size:9px">wǒ chuān yī shuāng báisè de yùndòngxié.</span><br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">I'm wearing white sneakers. · 一双 yī shuāng = a pair (of shoes)</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 5: ACCESSORIES ════════════════ -->
+<div class="slide">
+<span class="badge cp">vocab 4</span>
+<div class="tag cp">🎩 配饰 pèishì · accessories — hats, scarves, glasses</div>
+<div class="title">配饰 pèishì</div>
+<div class="title-en">accessories — these use 戴 dài, not 穿 chuān!</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="cloth bt"><div class="cem">🎩</div><div class="cpy">màozi</div><div class="chz">帽子</div><div class="cen">hat</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+  <div class="cloth bu"><div class="cem">👓</div><div class="cpy">yǎnjìng</div><div class="chz">眼镜</div><div class="cen">glasses</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+  <div class="cloth bp"><div class="cem">🧣</div><div class="cpy">wéijīn</div><div class="chz">围巾</div><div class="cen">scarf</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+  <div class="cloth bo"><div class="cem">🧤</div><div class="cpy">shǒutào</div><div class="chz">手套</div><div class="cen">gloves</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+  <div class="cloth by"><div class="cem">👜</div><div class="cpy">shǒutíbāo</div><div class="chz">手提包</div><div class="cen">handbag</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴/背</div></div>
+  <div class="cloth bg"><div class="cem">⌚</div><div class="cpy">shǒubiǎo</div><div class="chz">手表</div><div class="cen">watch</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+  <div class="cloth bb"><div class="cem">🎀</div><div class="cpy">tóushì</div><div class="chz">头饰</div><div class="cen">hair bow</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+  <div class="cloth br"><div class="cem">💍</div><div class="cpy">jièzhi</div><div class="chz">戒指</div><div class="cen">ring</div><div class="cverb" style="background:#dbeafe;color:#1e40af">戴 dài</div></div>
+</div>
+<div class="card bt" style="font-size:11px">
+  <div class="lbl ct">⚠️ 重要 zhòngyào · important!</div>
+  <div style="line-height:1.7;margin-top:3px">
+    小的东西（帽子、眼镜、手套、围巾、手表）都用 <b>戴 dài</b>！<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Small items (hats, glasses, gloves, scarves, watches) use 戴 dài — not 穿 chuān!</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 6: 穿 VS 戴 EXPLAINED ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 1</span>
+<div class="tag cg">👕 vs 🎩 · 穿 chuān vs 戴 dài — which verb?</div>
+<div class="title">穿 chuān 还是 戴 dài?</div>
+<div class="title-en">the two "wear" verbs — when to use each?</div>
+<div class="verb-chart">
+  <div style="display:flex;gap:8px">
+    <div style="flex:1;background:#fce7f3;border-radius:12px;padding:10px">
+      <div style="font-size:28px;text-align:center">👕</div>
+      <div style="font-size:20px;font-weight:900;color:#9d174d;text-align:center">穿 chuān</div>
+      <div style="font-size:11px;color:#666;text-align:center;font-style:italic">"put clothing on your body"</div>
+      <div style="margin-top:6px;font-size:11px;line-height:1.7">
+        <div class="verb-cell"><span class="vem">👕</span><div class="vinfo"><div class="vhz">穿 T恤</div><div class="vpy">chuān T-xù</div></div></div>
+        <div class="verb-cell"><span class="vem">👖</span><div class="vinfo"><div class="vhz">穿裤子</div><div class="vpy">chuān kùzi</div></div></div>
+        <div class="verb-cell"><span class="vem">👗</span><div class="vinfo"><div class="vhz">穿连衣裙</div><div class="vpy">chuān liányīqún</div></div></div>
+        <div class="verb-cell"><span class="vem">👟</span><div class="vinfo"><div class="vhz">穿鞋</div><div class="vpy">chuān xié</div></div></div>
+        <div class="verb-cell"><span class="vem">🧦</span><div class="vinfo"><div class="vhz">穿袜子</div><div class="vpy">chuān wàzi</div></div></div>
+      </div>
+    </div>
+    <div style="flex:1;background:#dbeafe;border-radius:12px;padding:10px">
+      <div style="font-size:28px;text-align:center">🎩</div>
+      <div style="font-size:20px;font-weight:900;color:#1e40af;text-align:center">戴 dài</div>
+      <div style="font-size:11px;color:#666;text-align:center;font-style:italic">"put small items on"</div>
+      <div style="margin-top:6px;font-size:11px;line-height:1.7">
+        <div class="verb-cell"><span class="vem">🎩</span><div class="vinfo"><div class="vhz">戴帽子</div><div class="vpy">dài màozi</div></div></div>
+        <div class="verb-cell"><span class="vem">👓</span><div class="vinfo"><div class="vhz">戴眼镜</div><div class="vpy">dài yǎnjìng</div></div></div>
+        <div class="verb-cell"><span class="vem">🧣</span><div class="vinfo"><div class="vhz">戴围巾</div><div class="vpy">dài wéijīn</div></div></div>
+        <div class="verb-cell"><span class="vem">🧤</span><div class="vinfo"><div class="vhz">戴手套</div><div class="vpy">dài shǒutào</div></div></div>
+        <div class="verb-cell"><span class="vem">⌚</span><div class="vinfo"><div class="vhz">戴手表</div><div class="vpy">dài shǒubiǎo</div></div></div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="card by" style="font-size:11px;margin-top:6px">
+  <div class="lbl cy">💡 简单规则 jiǎndān guīzé · simple rule</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>穿 chuān</b> = 覆盖身体 (covers body: shirts, pants, shoes) &nbsp;·&nbsp; <b>戴 dài</b> = 头/手上的小东西 (small items on head/hands)
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 7: COLOR REVIEW ════════════════ -->
+<div class="slide">
+<span class="badge cp">review</span>
+<div class="tag cp">🎨 颜色 yánsè · colors — review!</div>
+<div class="title">颜色复习 yánsè fùxí</div>
+<div class="title-en">colors we already know — perfect for describing outfits!</div>
+<div class="color-row" style="margin-bottom:8px">
+  <div class="csw" style="background:#ef4444"><div class="py">hóngsè</div><div class="hz">红色</div><div class="en">red</div></div>
+  <div class="csw" style="background:#f97316"><div class="py">chéngsè</div><div class="hz">橙色</div><div class="en">orange</div></div>
+  <div class="csw" style="background:#eab308"><div class="py">huángsè</div><div class="hz">黄色</div><div class="en">yellow</div></div>
+  <div class="csw" style="background:#22c55e"><div class="py">lǜsè</div><div class="hz">绿色</div><div class="en">green</div></div>
+  <div class="csw" style="background:#3b82f6"><div class="py">lánsè</div><div class="hz">蓝色</div><div class="en">blue</div></div>
+  <div class="csw" style="background:#a855f7"><div class="py">zǐsè</div><div class="hz">紫色</div><div class="en">purple</div></div>
+  <div class="csw" style="background:#ec4899"><div class="py">fěnsè</div><div class="hz">粉色</div><div class="en">pink</div></div>
+  <div class="csw" style="background:#000"><div class="py">hēisè</div><div class="hz">黑色</div><div class="en">black</div></div>
+  <div class="csw" style="background:#fff;color:#333;border:2px solid #ddd"><div class="py" style="color:#666">báisè</div><div class="hz" style="color:#333;text-shadow:none">白色</div><div class="en" style="color:#666">white</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 例句 lìjù · example sentences</div>
+  <div style="line-height:1.9;margin-top:3px">
+    我穿<b>红色</b>的 T恤和<b>蓝色</b>的裤子。<br>
+    <span class="cp" style="font-size:9px">wǒ chuān hóngsè de T-xù hé lánsè de kùzi.</span><br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">I'm wearing a red T-shirt and blue pants.</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 8: COLORED CLOTHING COMBOS ════════════════ -->
+<div class="slide">
+<span class="badge cp">vocab 5</span>
+<div class="tag cp">🌈 颜色 + 服装 · colored clothing combos!</div>
+<div class="title">彩色的衣服 cǎisè de yīfu</div>
+<div class="title-en">colorful clothing — put colors + clothes together!</div>
+<div class="c2" style="gap:7px;flex:1">
+  <div class="outfit-card">
+    <div class="outfit-em">👕</div>
+    <div class="outfit-info"><div class="outfit-hz">红色的 T恤</div><div class="outfit-py">hóngsè de T-xù</div><div class="outfit-en">red T-shirt</div></div>
+    <div class="outfit-swatch" style="background:#ef4444"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">👖</div>
+    <div class="outfit-info"><div class="outfit-hz">蓝色的牛仔裤</div><div class="outfit-py">lánsè de niúzǎikù</div><div class="outfit-en">blue jeans</div></div>
+    <div class="outfit-swatch" style="background:#3b82f6"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">👗</div>
+    <div class="outfit-info"><div class="outfit-hz">粉色的连衣裙</div><div class="outfit-py">fěnsè de liányīqún</div><div class="outfit-en">pink dress</div></div>
+    <div class="outfit-swatch" style="background:#ec4899"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">🎩</div>
+    <div class="outfit-info"><div class="outfit-hz">黑色的帽子</div><div class="outfit-py">hēisè de màozi</div><div class="outfit-en">black hat</div></div>
+    <div class="outfit-swatch" style="background:#000"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">🧥</div>
+    <div class="outfit-info"><div class="outfit-hz">棕色的外套</div><div class="outfit-py">zōngsè de wàitào</div><div class="outfit-en">brown jacket</div></div>
+    <div class="outfit-swatch" style="background:#78350f"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">👟</div>
+    <div class="outfit-info"><div class="outfit-hz">白色的运动鞋</div><div class="outfit-py">báisè de yùndòngxié</div><div class="outfit-en">white sneakers</div></div>
+    <div class="outfit-swatch" style="background:#fff;border:2px solid #ddd"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">🧣</div>
+    <div class="outfit-info"><div class="outfit-hz">紫色的围巾</div><div class="outfit-py">zǐsè de wéijīn</div><div class="outfit-en">purple scarf</div></div>
+    <div class="outfit-swatch" style="background:#a855f7"></div>
+  </div>
+  <div class="outfit-card">
+    <div class="outfit-em">🧤</div>
+    <div class="outfit-info"><div class="outfit-hz">黄色的手套</div><div class="outfit-py">huángsè de shǒutào</div><div class="outfit-en">yellow gloves</div></div>
+    <div class="outfit-swatch" style="background:#eab308"></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 9: SENTENCE PATTERNS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 2</span>
+<div class="tag cg">💬 句型 jùxíng · sentence patterns for outfits</div>
+<div class="title">怎么描述穿什么 zěnme miáoshù chuān shénme</div>
+<div class="title-en">how to describe what someone is wearing!</div>
+<div class="two" style="gap:7px">
+  <div>
+    <div class="sp bp">
+      <div class="pat">我穿 ___ 。</div><div class="patpy">wǒ chuān ___ .</div>
+      <div class="paten">I wear ___ (clothing).</div>
+      <div class="ex cp">我穿裙子。<span class="expy"> wǒ chuān qúnzi.</span></div><div class="exen">I wear a skirt.</div>
+    </div>
+    <div class="sp bt">
+      <div class="pat">我戴 ___ 。</div><div class="patpy">wǒ dài ___ .</div>
+      <div class="paten">I put on ___ (hat/glasses/etc).</div>
+      <div class="ex ct">我戴帽子。<span class="expy"> wǒ dài màozi.</span></div><div class="exen">I put on a hat.</div>
+    </div>
+    <div class="sp bo">
+      <div class="pat">我今天穿 ___ 色的 ___。</div><div class="patpy">wǒ jīntiān chuān ___ sè de ___ .</div>
+      <div class="paten">Today I wear a ___-colored ___.</div>
+      <div class="ex co">我今天穿红色的T恤。<span class="expy"> wǒ jīntiān chuān hóngsè de T-xù.</span></div><div class="exen">Today I wear a red T-shirt.</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bg">
+      <div class="pat">你喜欢什么颜色的 ___ ？</div><div class="patpy">nǐ xǐhuān shénme yánsè de ___ ?</div>
+      <div class="paten">What color ___ do you like?</div>
+      <div class="ex cg">你喜欢什么颜色的裙子？<span class="expy"> shénme yánsè de qúnzi?</span></div><div class="exen">What color skirt do you like?</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">___ 是什么颜色？</div><div class="patpy">___ shì shénme yánsè ?</div>
+      <div class="paten">What color is ___?</div>
+      <div class="ex cy">你的鞋是什么颜色？<span class="expy"> nǐ de xié shì shénme yánsè?</span></div><div class="exen">What color are your shoes?</div>
+    </div>
+    <div class="sp bb">
+      <div class="pat">我想买 ___ 。</div><div class="patpy">wǒ xiǎng mǎi ___ .</div>
+      <div class="paten">I want to buy ___.</div>
+      <div class="ex cb">我想买一条黑色的裤子。<span class="expy"> yī tiáo hēisè de kùzi.</span></div><div class="exen">I want to buy a pair of black pants.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 10: DIALOGUE 1 — WHAT ARE YOU WEARING? ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 1</span>
+<div class="tag ct">💬 对话 (一) · what are you wearing today?</div>
+<div class="title">场景一：你今天穿什么？chǎngjǐng yī</div>
+<div class="title-en">scene 1: what are you wearing today?</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">Mia · friend</div>
+    <div class="hz">Elena，你今天穿什么？</div>
+    <div class="py">Elena, nǐ jīntiān chuān shénme?</div>
+    <div class="en">Elena, what are you wearing today?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我穿粉色的连衣裙和白色的运动鞋。</div>
+    <div class="py">wǒ chuān fěnsè de liányīqún hé báisè de yùndòngxié.</div>
+    <div class="en">I'm wearing a pink dress and white sneakers.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">你戴什么？</div>
+    <div class="py">nǐ dài shénme?</div>
+    <div class="en">What are you wearing (accessories)?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🎀</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我戴一个粉色的头饰。</div>
+    <div class="py">wǒ dài yī gè fěnsè de tóushì.</div>
+    <div class="en">I'm wearing a pink hair bow.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">好漂亮！hǎo piàoliang! · so pretty!</div>
+    <div class="py">hǎo piàoliang!</div>
+    <div class="en">So pretty!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 11: 🎮 GAME 1 — CLOTHING QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 1</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">服装问答 fúzhuāng wèndá</div>
+<div class="title-en">clothing quiz — see the item, pick the Chinese!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="cqs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="cqq">1</span>/10</div>
+    <button class="gbtn" onclick="initCq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="cqem" style="font-size:64px">👕</div>
+    <div class="qqlbl" style="margin-top:6px">这是什么？<span class="gen">What is this?</span></div>
+  </div>
+  <div class="qopts" id="cqo"></div>
+  <div class="gres" id="cqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 12: 🎮 GAME 2 — 穿 VS 戴 ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 2</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">穿还是戴？chuān háishi dài?</div>
+<div class="title-en">wear it? — pick 穿 chuān or 戴 dài!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="cds">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="cdq">1</span>/10</div>
+    <button class="gbtn" onclick="initCd()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="cd-card" id="cdcard">
+    <div class="cd-em" id="cdem">👕</div>
+    <div class="cd-hz" id="cdhz">T恤</div>
+    <div class="cd-py gpy" id="cdpy">T-xù</div>
+    <div class="cd-en gen" id="cden">T-shirt</div>
+  </div>
+  <div class="cd-btns">
+    <button class="cd-btn wear" onclick="cdPick('chuan')">
+      <div class="cd-hz-btn">👕 穿</div>
+      <div class="cd-py-btn gpy">chuān</div>
+      <div class="cd-en-btn gen">wear clothing</div>
+    </button>
+    <button class="cd-btn dai" onclick="cdPick('dai')">
+      <div class="cd-hz-btn">🎩 戴</div>
+      <div class="cd-py-btn gpy">dài</div>
+      <div class="cd-en-btn gen">put on small items</div>
+    </button>
+  </div>
+  <div class="gres" id="cdr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 13: 🎮 GAME 3 — COLORED CLOTHING QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 3</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">彩色服装问答 cǎisè fúzhuāng wèndá</div>
+<div class="title-en">colored clothing quiz — describe the outfit!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="ccs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="ccq">1</span>/10</div>
+    <button class="gbtn" onclick="initCc()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div id="ccimage" style="display:flex;justify-content:center"></div>
+    <div class="qqlbl" style="margin-top:6px">这是什么？<span class="gen">Describe this!</span></div>
+  </div>
+  <div class="qopts" id="cco"></div>
+  <div class="gres" id="ccr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 14: DIALOGUE 2 — SHOPPING ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 2</span>
+<div class="tag ct">💬 对话 (二) · shopping for clothes 买衣服</div>
+<div class="title">场景二：买衣服 chǎngjǐng èr · mǎi yīfu</div>
+<div class="title-en">scene 2: shopping for clothes with mum!</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈 · mum</div>
+    <div class="hz">Elena，你需要什么衣服？</div>
+    <div class="py">Elena, nǐ xūyào shénme yīfu?</div>
+    <div class="en">Elena, what clothes do you need?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我想买一件蓝色的T恤和一条黑色的裤子。</div>
+    <div class="py">wǒ xiǎng mǎi yī jiàn lánsè de T-xù hé yī tiáo hēisè de kùzi.</div>
+    <div class="en">I want to buy a blue T-shirt and black pants.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">店员 · shop clerk</div>
+    <div class="hz">这件蓝色的T恤怎么样？</div>
+    <div class="py">zhè jiàn lánsè de T-xù zěnmeyàng?</div>
+    <div class="en">How about this blue T-shirt?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😍</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">很漂亮！多少钱？</div>
+    <div class="py">hěn piàoliang! duōshǎo qián?</div>
+    <div class="en">Very pretty! How much?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🙋‍♀️</div><div class="bub w"><div class="who">店员</div>
+    <div class="hz">一件五十块。</div>
+    <div class="py">yī jiàn wǔshí kuài.</div>
+    <div class="en">50 yuan for one.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c2">👩</div><div class="bub c2"><div class="who" style="text-align:right">妈妈</div>
+    <div class="hz">好，我们买！</div>
+    <div class="py">hǎo, wǒmen mǎi!</div>
+    <div class="en">Okay, we'll take it!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 15: 🎮 GAME 4 — CLOTHING MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 4</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">服装记忆配对 fúzhuāng jìyì pèiduì</div>
+<div class="title-en">clothing memory match — pair emoji with Chinese!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mfm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 <span id="mff">0</span></div>
+    <button class="gbtn" onclick="initMemF()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mfgrid"></div>
+  <div class="gres" id="mfres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 16: 🎮 GAME 5 — ACCESSORIES MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 5</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">配饰记忆配对 pèishì jìyì pèiduì</div>
+<div class="title-en">accessories memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mam">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="maf">0</span></div>
+    <button class="gbtn" onclick="initMemA()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="magrid"></div>
+  <div class="gres" id="mares"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 17: 🎮 GAME 6 — COLOR + CLOTHING MEMORY ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 6</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">彩色服装配对 cǎisè fúzhuāng pèiduì</div>
+<div class="title-en">colored clothing memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mcm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mcf">0</span></div>
+    <button class="gbtn" onclick="initMemC()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mcgrid"></div>
+  <div class="gres" id="mcres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 18: 🎮 GAME 7 — CLOTHING → BODY PART ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 7</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">穿在哪里？chuān zài nǎli?</div>
+<div class="title-en">where do you wear it? — head, hands, feet, body?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="bps">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="bpq">1</span>/8</div>
+    <button class="gbtn" onclick="initBp()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:56px" id="bpem">🎩</div>
+    <div class="qqmain" id="bphz" style="margin-top:2px">帽子</div>
+    <div class="gpy" id="bppy" style="color:#7c3aed;font-weight:700;text-align:center">màozi</div>
+    <div class="qqlbl" style="margin-top:4px">穿/戴在哪里？<span class="gen">Worn on what part of the body?</span></div>
+  </div>
+  <div class="qopts" id="bpo"></div>
+  <div class="gres" id="bpr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 19: DIALOGUE 3 — WEATHER + CLOTHING ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 3</span>
+<div class="tag ct">💬 对话 (三) · dressing for weather 天气和衣服</div>
+<div class="title">场景三：外面很冷 chǎngjǐng sān · wàimiàn hěn lěng</div>
+<div class="title-en">scene 3: it's cold outside!</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">Elena，外面很冷，多穿一点。</div>
+    <div class="py">Elena, wàimiàn hěn lěng, duō chuān yīdiǎn.</div>
+    <div class="en">Elena, it's cold outside, put on more clothes.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">好的，我穿毛衣和外套。</div>
+    <div class="py">hǎo de, wǒ chuān máoyī hé wàitào.</div>
+    <div class="en">Okay, I'll wear a sweater and coat.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">戴上手套和围巾，还有帽子。</div>
+    <div class="py">dài shàng shǒutào hé wéijīn, hái yǒu màozi.</div>
+    <div class="en">Also put on gloves, scarf, and a hat.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧣</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">好，我戴红色的围巾！</div>
+    <div class="py">hǎo, wǒ dài hóngsè de wéijīn!</div>
+    <div class="en">Okay, I'll wear the red scarf!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">很好！小心感冒。</div>
+    <div class="py">hěn hǎo! xiǎoxīn gǎnmào.</div>
+    <div class="en">Great! Careful not to catch a cold.</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 20: 🎮 GAME 8 — MEASURE WORDS ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 8</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">服装量词 fúzhuāng liàngcí</div>
+<div class="title-en">clothing measure words — 件 vs 条 vs 双!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mws">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="mwq">1</span>/8</div>
+    <button class="gbtn" onclick="initMw()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:36px" id="mwem">👕</div>
+    <div class="qqmain" id="mwhz">T恤</div>
+    <div class="gpy" id="mwpy" style="color:#7c3aed;font-weight:700;text-align:center">T-xù</div>
+    <div class="qqlbl" style="margin-top:4px">一 ___ T恤？<span class="gen">Which measure word?</span></div>
+  </div>
+  <div class="qopts three" id="mwo" style="max-width:520px"></div>
+  <div class="gres" id="mwr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 21: 🎮 GAME 9 — FILL IN BLANKS ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 9</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">填空 tiánkòng</div>
+<div class="title-en">fill in the blanks — complete the outfits!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 关 guān · level <span id="fbround">1</span>/4</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 →</button>
+  </div>
+  <div class="fib" id="fbwrap"></div>
+  <div class="gres" id="fbres" style="font-size:13px"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 22: DIALOGUE 4 — DAILY OUTFIT ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 4</span>
+<div class="tag ct">💬 对话 (四) · Elena's daily outfits · 每天穿什么</div>
+<div class="title">场景四：星期几穿什么？</div>
+<div class="title-en">scene 4: what to wear each day!</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师 · teacher</div>
+    <div class="hz">Elena，你星期一穿什么去学校？</div>
+    <div class="py">Elena, nǐ xīngqīyī chuān shénme qù xuéxiào?</div>
+    <div class="en">Elena, what do you wear to school on Monday?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">👕</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">星期一我穿蓝色的T恤和牛仔裤。</div>
+    <div class="py">xīngqīyī wǒ chuān lánsè de T-xù hé niúzǎikù.</div>
+    <div class="en">On Monday I wear a blue T-shirt and jeans.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师</div>
+    <div class="hz">星期六呢？你玩什么？</div>
+    <div class="py">xīngqīliù ne? nǐ wán shénme?</div>
+    <div class="en">And Saturday? What do you play?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">⚽</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">星期六我穿运动服和运动鞋去踢球。</div>
+    <div class="py">xīngqīliù wǒ chuān yùndòngfú hé yùndòngxié qù tī qiú.</div>
+    <div class="en">On Saturday I wear sportswear and sneakers to play soccer.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师</div>
+    <div class="hz">你有多少件衣服？</div>
+    <div class="py">nǐ yǒu duōshǎo jiàn yīfu?</div>
+    <div class="en">How many clothes do you have?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😄</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">很多！我妈妈说太多了！</div>
+    <div class="py">hěn duō! wǒ māma shuō tài duō le!</div>
+    <div class="en">A lot! My mum says too many!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 23: 🎮 GAME 10 — COMPLETE OUTFIT QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 10</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">穿什么？chuān shénme?</div>
+<div class="title-en">what to wear? — read the situation, pick the right outfit!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="ows">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="owq">1</span>/8</div>
+    <button class="gbtn" onclick="initOw()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:36px" id="owem">❄️</div>
+    <div class="qqmain" id="owsit" style="font-size:16px;margin-top:4px">外面很冷！</div>
+    <div class="gpy" id="owpy" style="color:#7c3aed;font-weight:700;text-align:center;margin-top:2px">wàimiàn hěn lěng!</div>
+    <div class="gen" id="owen" style="color:#888;font-style:italic;text-align:center">it's very cold outside!</div>
+  </div>
+  <div class="qopts" id="owo"></div>
+  <div class="gres" id="owr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 24: 🎮 GAME 11 — COLOR MEMORY ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 11</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">颜色记忆配对 yánsè jìyì pèiduì</div>
+<div class="title-en">colors memory match — all 8 colors!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mcolm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 <span id="mcolf">0</span></div>
+    <button class="gbtn" onclick="initMemCol()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mcolgrid"></div>
+  <div class="gres" id="mcolres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 25: 🎮 GAME 12 — MIXED FINAL ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge cp">🎮 game 12</span>
+<div class="tag cp">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">混合问答 hùnhé wèndá</div>
+<div class="title-en">mixed final quiz — clothing, verbs, colors, measure words!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mxs">0</span>/12</div>
+    <div class="gsbar">题 tí · q.<span id="mxq">1</span>/12</div>
+    <button class="gbtn" onclick="initMx()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:11px;color:#7c3aed;font-weight:700;margin-bottom:4px" id="mxlbl">服装</div>
+    <div id="mxq2" style="font-size:44px">👕</div>
+  </div>
+  <div class="qopts" id="mxo"></div>
+  <div class="gres" id="mxr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 26: ROLE-PLAY — GETTING DRESSED ════════════════ -->
+<div class="slide">
+<span class="badge cg">角色扮演</span>
+<div class="tag cg">🎭 角色扮演 juésè bànyǎn · role-play</div>
+<div class="title">Elena 参加生日派对 shēngrì pàiduì</div>
+<div class="title-en">Elena getting dressed for a birthday party!</div>
+<div class="dlg" style="gap:3px">
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">Elena，Mia 的生日派对是今天！</div><div class="py">Elena, Mia de shēngrì pàiduì shì jīntiān!</div><div class="en">Elena, Mia's birthday party is today!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">好棒！我穿什么？</div><div class="py">hǎo bàng! wǒ chuān shénme?</div><div class="en">Awesome! What should I wear?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">穿粉色的连衣裙好吗？</div><div class="py">chuān fěnsè de liányīqún hǎo ma?</div><div class="en">How about the pink dress?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">👗</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">好！我戴我的红色头饰。</div><div class="py">hǎo! wǒ dài wǒ de hóngsè tóushì.</div><div class="en">Yes! I'll wear my red hair bow.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="who">爸爸</div><div class="hz" style="font-size:11.5px">鞋子呢？</div><div class="py">xiézi ne?</div><div class="en">What about shoes?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">👟</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">白色的运动鞋！</div><div class="py">báisè de yùndòngxié!</div><div class="en">White sneakers!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="who">爸爸</div><div class="hz" style="font-size:11.5px">外面有点冷，穿一件外套。</div><div class="py">wàimiàn yǒudiǎn lěng, chuān yī jiàn wàitào.</div><div class="en">It's a bit cold, wear a jacket.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧥</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">好，我穿蓝色的外套。</div><div class="py">hǎo, wǒ chuān lánsè de wàitào.</div><div class="en">Okay, I'll wear my blue jacket.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">你今天很漂亮！走吧！</div><div class="py">nǐ jīntiān hěn piàoliang! zǒu ba!</div><div class="en">You look pretty today! Let's go!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 27: PHRASE SUMMARY ════════════════ -->
+<div class="slide">
+<span class="badge cy">总结</span>
+<div class="tag cy">📋 短语总结 duǎnyǔ zǒngjié · phrase summary</div>
+<div class="title">服装话题必备短语</div>
+<div class="title-en">essential phrases for talking about clothing!</div>
+<div class="two" style="gap:6px">
+  <div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我穿 ___。</div><div class="patpy">wǒ chuān ___ .</div>
+      <div class="paten">I wear ___ (clothing).</div>
+    </div>
+    <div class="sp bt" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我戴 ___。</div><div class="patpy">wǒ dài ___ .</div>
+      <div class="paten">I put on ___ (accessory).</div>
+    </div>
+    <div class="sp bo" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 是什么颜色？</div><div class="patpy">___ shì shénme yánsè ?</div>
+      <div class="paten">What color is ___?</div>
+    </div>
+    <div class="sp bg" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">你今天穿什么？</div><div class="patpy">nǐ jīntiān chuān shénme ?</div>
+      <div class="paten">What are you wearing today?</div>
+    </div>
+    <div class="sp by" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我今天穿 ___ 色的 ___。</div><div class="patpy">wǒ jīntiān chuān ___ sè de ___ .</div>
+      <div class="paten">I wear a ___-colored ___ today.</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bb" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我想买 ___。</div><div class="patpy">wǒ xiǎng mǎi ___ .</div>
+      <div class="paten">I want to buy ___.</div>
+    </div>
+    <div class="sp bu" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">一件 ___ (T恤/衣服)</div><div class="patpy">yī jiàn ___ (T-xù / yīfu)</div>
+      <div class="paten">one piece of clothing.</div>
+    </div>
+    <div class="sp br" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">一条 ___ (裤子/裙子)</div><div class="patpy">yī tiáo ___ (kùzi / qúnzi)</div>
+      <div class="paten">one pair (pants/skirt).</div>
+    </div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">一双 ___ (鞋/袜子)</div><div class="patpy">yī shuāng ___ (xié / wàzi)</div>
+      <div class="paten">a pair (shoes/socks).</div>
+    </div>
+    <div class="sp bo" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">很漂亮！/ 好帅！</div><div class="patpy">hěn piàoliang ! / hǎo shuài !</div>
+      <div class="paten">so pretty! / so cool!</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 28: MEASURE WORD SUMMARY ════════════════ -->
+<div class="slide">
+<span class="badge cg">量词</span>
+<div class="tag cg">🔢 服装量词 fúzhuāng liàngcí · clothing measure words</div>
+<div class="title">服装的量词 fúzhuāng de liàngcí</div>
+<div class="title-en">3 measure words for clothing you must know!</div>
+<div class="c3" style="gap:8px;margin-bottom:8px">
+  <div class="card bp" style="text-align:center;padding:14px 10px">
+    <div style="font-size:32px;font-weight:900;color:#ec4899">件</div>
+    <div style="font-size:11px;color:#7c3aed;font-weight:700">jiàn</div>
+    <div style="font-size:9.5px;color:#888;font-style:italic">for tops/upper clothes</div>
+    <div style="margin-top:8px;font-size:11px;line-height:1.7">
+      一件 T恤 · yī jiàn T-xù<br>
+      一件毛衣 · yī jiàn máoyī<br>
+      一件外套 · yī jiàn wàitào
+    </div>
+  </div>
+  <div class="card bb" style="text-align:center;padding:14px 10px">
+    <div style="font-size:32px;font-weight:900;color:#2563eb">条</div>
+    <div style="font-size:11px;color:#7c3aed;font-weight:700">tiáo</div>
+    <div style="font-size:9.5px;color:#888;font-style:italic">for long/thin items</div>
+    <div style="margin-top:8px;font-size:11px;line-height:1.7">
+      一条裤子 · yī tiáo kùzi<br>
+      一条裙子 · yī tiáo qúnzi<br>
+      一条围巾 · yī tiáo wéijīn
+    </div>
+  </div>
+  <div class="card bg" style="text-align:center;padding:14px 10px">
+    <div style="font-size:32px;font-weight:900;color:#16a34a">双</div>
+    <div style="font-size:11px;color:#7c3aed;font-weight:700">shuāng</div>
+    <div style="font-size:9.5px;color:#888;font-style:italic">for pairs (2 things)</div>
+    <div style="margin-top:8px;font-size:11px;line-height:1.7">
+      一双鞋 · yī shuāng xié<br>
+      一双袜子 · yī shuāng wàzi<br>
+      一双手套 · yī shuāng shǒutào
+    </div>
+  </div>
+</div>
+<div class="card by" style="font-size:11px">
+  <div class="lbl cy">💡 记忆技巧 jìyì jìqiǎo · memory trick</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>件 jiàn</b> = pieces you put over your head (tops) · <b>条 tiáo</b> = long/thin (pants, skirts, scarves) · <b>双 shuāng</b> = 2 things (shoes, socks, gloves)
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 29: SELF DESCRIPTION 4.0 ════════════════ -->
+<div class="slide">
+<span class="badge cg">Elena 4.0</span>
+<div class="tag cg">👋 Elena 描述她的穿着</div>
+<div class="title">Elena 的今天 Elena de jīntiān</div>
+<div class="title-en">Elena describes what she's wearing today!</div>
+<div style="display:flex;flex-direction:column;gap:5px;flex:1">
+  <div style="display:flex;gap:9px;background:#fce7f3;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">😊</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">你好！我叫 Elena，今天是星期一。</div>
+    <div style="font-size:9px;color:#ec4899;font-weight:600">nǐ hǎo! wǒ jiào Elena, jīntiān shì xīngqīyī.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">Hi! I'm Elena, today is Monday.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dbeafe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">👕</span>
+    <div><div style="font-size:12.5px;font-weight:900;color:#1a1a2e">我今天穿一件蓝色的 T恤和一条黑色的裤子。</div>
+    <div style="font-size:8.5px;color:#ec4899;font-weight:600">wǒ jīntiān chuān yī jiàn lánsè de T-xù hé yī tiáo hēisè de kùzi.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Today I'm wearing a blue T-shirt and black pants.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dcfce7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">👟</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我穿一双白色的运动鞋。</div>
+    <div style="font-size:9px;color:#ec4899;font-weight:600">wǒ chuān yī shuāng báisè de yùndòngxié.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I'm wearing white sneakers.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ede9fe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🎀</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我戴一个粉色的头饰。</div>
+    <div style="font-size:9px;color:#ec4899;font-weight:600">wǒ dài yī gè fěnsè de tóushì.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I'm wearing a pink hair bow.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#fef3c7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">💗</span>
+    <div><div style="font-size:12.5px;font-weight:900;color:#1a1a2e">我最喜欢粉色和紫色的衣服！</div>
+    <div style="font-size:8.5px;color:#ec4899;font-weight:600">wǒ zuì xǐhuān fěnsè hé zǐsè de yīfu!</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">I love pink and purple clothes the most!</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ffedd5;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🤝</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">你今天穿什么？</div>
+    <div style="font-size:9px;color:#ec4899;font-weight:600">nǐ jīntiān chuān shénme?</div>
+    <div style="font-size:9px;color:#888;font-style:italic">What are you wearing today?</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 30: END CELEBRATION ════════════════ -->
+<div class="slide">
+<div class="endb">
+  <div style="font-size:54px">👗🎨🎉</div>
+  <div style="font-size:30px;font-weight:900;background:linear-gradient(135deg,#ec4899,#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Elena，你会描述服装了！</div>
+  <div style="font-size:14px;color:#ec4899;font-weight:700">Elena, nǐ huì miáoshù fúzhuāng le!</div>
+  <div style="font-size:12px;color:#888;font-style:italic">Elena, you can describe clothing now!</div>
+  <div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.6">
+    你可以告诉朋友你今天穿什么！<br>
+    <span style="color:#ec4899;font-weight:700">nǐ kěyǐ gàosu péngyǒu nǐ jīntiān chuān shénme!</span><br>
+    <span style="font-style:italic">You can tell friends what you're wearing today!</span>
+  </div>
+  <div class="cklist">
+    <span class="ck">✅ 上衣 shàngyī · tops</span>
+    <span class="ck">✅ 下装 xiàzhuāng · bottoms</span>
+    <span class="ck">✅ 鞋袜 xié wà · shoes &amp; socks</span>
+    <span class="ck">✅ 配饰 pèishì · accessories</span>
+    <span class="ck">✅ 穿 chuān vs 戴 dài</span>
+    <span class="ck">✅ 颜色 yánsè · colors</span>
+    <span class="ck">✅ 量词 件/条/双</span>
+    <span class="ck">✅ 4 对话 duìhuà</span>
+    <span class="ck">✅ 角色扮演</span>
+    <span class="ck">🎮 服装问答</span>
+    <span class="ck">🎮 穿还是戴</span>
+    <span class="ck">🎮 彩色服装</span>
+    <span class="ck">🎮 服装配对</span>
+    <span class="ck">🎮 配饰配对</span>
+    <span class="ck">🎮 彩色配对</span>
+    <span class="ck">🎮 穿在哪里</span>
+    <span class="ck">🎮 量词问答</span>
+    <span class="ck">🎮 填空</span>
+    <span class="ck">🎮 穿什么</span>
+    <span class="ck">🎮 颜色配对</span>
+    <span class="ck">🎮 混合问答</span>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:6px">
+    太美了！tài měi le! · 12 个游戏！加油！jiā yóu! 💪
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年6月16日 · liù yuè shíliù rì · June 16, 2026</div>
+  <a href="index.html" style="background:linear-gradient(135deg,#ec4899,#a855f7);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
+</div>
+</div>
+
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">→</button>
+</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+let cur=0;
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>go(i);dotsEl.appendChild(d);});
+function go(n){slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');if(GI[cur])GI[cur]();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+const GI={};
+let showPY=false,showEN=false;
+function tPY(){showPY=!showPY;document.body.classList.toggle('show-py',showPY);document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('拼音')){b.textContent=showPY?'拼音 pīnyīn ✓':'拼音 pīnyīn';b.classList.toggle('on',showPY);}});}
+function tEN(){showEN=!showEN;document.body.classList.toggle('show-en',showEN);document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('English')){b.textContent=showEN?'English ✓':'English';b.classList.toggle('on',showEN);}});}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function $id(id){return document.getElementById(id)}
+
+// ═══ DATA ═══
+const CLOTHING=[
+  {em:'👕',hz:'T恤',py:'T-xù',en:'T-shirt',verb:'chuan',body:'body',mw:'件'},
+  {em:'👔',hz:'衬衫',py:'chènshān',en:'shirt',verb:'chuan',body:'body',mw:'件'},
+  {em:'🧥',hz:'外套',py:'wàitào',en:'coat',verb:'chuan',body:'body',mw:'件'},
+  {em:'🧶',hz:'毛衣',py:'máoyī',en:'sweater',verb:'chuan',body:'body',mw:'件'},
+  {em:'👖',hz:'裤子',py:'kùzi',en:'pants',verb:'chuan',body:'legs',mw:'条'},
+  {em:'🩳',hz:'短裤',py:'duǎnkù',en:'shorts',verb:'chuan',body:'legs',mw:'条'},
+  {em:'👗',hz:'连衣裙',py:'liányīqún',en:'dress',verb:'chuan',body:'body',mw:'件'},
+  {em:'👗',hz:'裙子',py:'qúnzi',en:'skirt',verb:'chuan',body:'legs',mw:'条'},
+  {em:'👟',hz:'运动鞋',py:'yùndòngxié',en:'sneakers',verb:'chuan',body:'feet',mw:'双'},
+  {em:'👞',hz:'皮鞋',py:'píxié',en:'leather shoes',verb:'chuan',body:'feet',mw:'双'},
+  {em:'🥾',hz:'靴子',py:'xuēzi',en:'boots',verb:'chuan',body:'feet',mw:'双'},
+  {em:'🧦',hz:'袜子',py:'wàzi',en:'socks',verb:'chuan',body:'feet',mw:'双'},
+];
+const ACCESSORY=[
+  {em:'🎩',hz:'帽子',py:'màozi',en:'hat',verb:'dai',body:'head',mw:'顶'},
+  {em:'👓',hz:'眼镜',py:'yǎnjìng',en:'glasses',verb:'dai',body:'head',mw:'副'},
+  {em:'🧣',hz:'围巾',py:'wéijīn',en:'scarf',verb:'dai',body:'neck',mw:'条'},
+  {em:'🧤',hz:'手套',py:'shǒutào',en:'gloves',verb:'dai',body:'hands',mw:'双'},
+  {em:'⌚',hz:'手表',py:'shǒubiǎo',en:'watch',verb:'dai',body:'hands',mw:'块'},
+  {em:'🎀',hz:'头饰',py:'tóushì',en:'hair bow',verb:'dai',body:'head',mw:'个'},
+];
+const ALL_ITEMS=[...CLOTHING,...ACCESSORY];
+const COLORS=[
+  {hz:'红色',py:'hóngsè',en:'red',hex:'#ef4444'},
+  {hz:'蓝色',py:'lánsè',en:'blue',hex:'#3b82f6'},
+  {hz:'绿色',py:'lǜsè',en:'green',hex:'#22c55e'},
+  {hz:'黄色',py:'huángsè',en:'yellow',hex:'#eab308'},
+  {hz:'紫色',py:'zǐsè',en:'purple',hex:'#a855f7'},
+  {hz:'粉色',py:'fěnsè',en:'pink',hex:'#ec4899'},
+  {hz:'黑色',py:'hēisè',en:'black',hex:'#000'},
+  {hz:'白色',py:'báisè',en:'white',hex:'#fff'},
+];
+const BODY_PARTS=[
+  {hz:'头',py:'tóu',en:'head'},
+  {hz:'手',py:'shǒu',en:'hands'},
+  {hz:'脚',py:'jiǎo',en:'feet'},
+  {hz:'身体',py:'shēntǐ',en:'body'},
+  {hz:'腿',py:'tuǐ',en:'legs'},
+  {hz:'脖子',py:'bózi',en:'neck'},
+];
+const BODY_MAP={head:'头',hands:'手',feet:'脚',body:'身体',legs:'腿',neck:'脖子'};
+
+// ═══ GAME 1: Clothing Quiz ═══
+let cqScore=0,cqQ=0,cqItems=[];
+function initCq(){cqScore=0;cqQ=0;cqItems=shuffle(ALL_ITEMS).slice(0,10);$id('cqs').textContent='0';$id('cqq').textContent='1';$id('cqr').style.display='none';showCq();}
+function showCq(){if(cqQ>=10){const r=$id('cqr');r.style.display='block';r.textContent='🎉 '+cqScore+'/10 — '+(cqScore>=9?'完美！':cqScore>=7?'很好！':'加油！');$id('cqo').innerHTML='';return;}
+  const it=cqItems[cqQ];$id('cqem').textContent=it.em;$id('cqq').textContent=cqQ+1;
+  const wrong=ALL_ITEMS.filter(o=>o.hz!==it.hz);const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('cqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');cqScore++;$id('cqs').textContent=cqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      cqQ++;setTimeout(showCq,1100);};
+    el.appendChild(btn);});}
+GI[10]=initCq;
+
+// ═══ GAME 2: 穿 vs 戴 ═══
+let cdScore=0,cdQ=0,cdItems=[];
+function initCd(){cdScore=0;cdQ=0;cdItems=shuffle(ALL_ITEMS).slice(0,10);$id('cds').textContent='0';$id('cdq').textContent='1';$id('cdr').style.display='none';$id('cdcard').style.opacity='1';showCd();}
+function showCd(){if(cdQ>=10){const r=$id('cdr');r.style.display='block';r.textContent='🎉 '+cdScore+'/10 — '+(cdScore>=9?'完美！':cdScore>=7?'很好！':'加油！');$id('cdcard').style.opacity='.4';return;}
+  const it=cdItems[cdQ];$id('cdem').textContent=it.em;$id('cdhz').textContent=it.hz;$id('cdpy').textContent=it.py;$id('cden').textContent=it.en;$id('cdq').textContent=cdQ+1;}
+function cdPick(t){if(cdQ>=cdItems.length)return;const it=cdItems[cdQ];const ok=it.verb===t;
+  if(ok){cdScore++;$id('cds').textContent=cdScore;}
+  const c=$id('cdcard');c.style.background=ok?'linear-gradient(135deg,#dcfce7,#bbf7d0)':'linear-gradient(135deg,#fee2e2,#fca5a5)';
+  cdQ++;setTimeout(()=>{c.style.background='linear-gradient(135deg,#fce7f3,#ede9fe)';showCd();},600);}
+GI[11]=initCd;
+
+// ═══ GAME 3: Colored Clothing Quiz ═══
+let ccScore=0,ccQ=0,ccItems=[];
+function initCc(){ccScore=0;ccQ=0;
+  ccItems=[];for(let i=0;i<10;i++){ccItems.push({item:CLOTHING[Math.floor(Math.random()*CLOTHING.length)],color:COLORS[Math.floor(Math.random()*COLORS.length)]});}
+  $id('ccs').textContent='0';$id('ccq').textContent='1';$id('ccr').style.display='none';showCc();}
+function showCc(){if(ccQ>=10){const r=$id('ccr');r.style.display='block';r.textContent='🎉 '+ccScore+'/10 — '+(ccScore>=9?'完美！':ccScore>=7?'很好！':'加油！');$id('cco').innerHTML='';return;}
+  const it=ccItems[ccQ];
+  $id('ccimage').innerHTML=`<div style="display:flex;flex-direction:column;align-items:center;padding:8px;border-radius:12px;background:#fff;border:3px solid ${it.color.hex==='#fff'?'#ddd':it.color.hex}"><div style="font-size:56px;line-height:1">${it.item.em}</div><div style="font-size:12px;font-weight:900;color:${it.color.hex==='#fff'?'#666':it.color.hex};margin-top:3px">${it.color.hz}</div></div>`;
+  $id('ccq').textContent=ccQ+1;
+  const correctPhrase=it.color.hz+'的'+it.item.hz;const correctPy=it.color.py+' de '+it.item.py;const correctEn=it.color.en+' '+it.item.en;
+  const wrong=[];for(let i=0;i<3;i++){const c=COLORS[Math.floor(Math.random()*COLORS.length)];const cl=CLOTHING[Math.floor(Math.random()*CLOTHING.length)];if(c.hz!==it.color.hz||cl.hz!==it.item.hz)wrong.push({phrase:c.hz+'的'+cl.hz,py:c.py+' de '+cl.py,en:c.en+' '+cl.en});}
+  const opts=[{phrase:correctPhrase,py:correctPy,en:correctEn},...wrong].slice(0,4);
+  const el=$id('cco');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12px">${opt.phrase}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.phrase===correctPhrase){btn.classList.add('ok');ccScore++;$id('ccs').textContent=ccScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===correctPhrase)b.classList.add('ok');});}
+      ccQ++;setTimeout(showCc,1100);};
+    el.appendChild(btn);});}
+GI[12]=initCc;
+
+// ═══ Generic memory match builder ═══
+function buildMemMatch(pairs,gridId,mEl,fEl,resEl,total,renderHz,renderEm){
+  let flipped=[],matched=0,flips=0,lock=false;
+  $id(mEl).textContent='0';$id(fEl).textContent='0';$id(resEl).style.display='none';
+  const cards=[];pairs.forEach(p=>{cards.push({id:p.id,side:'hz',data:p});cards.push({id:p.id,side:'em',data:p});});
+  const grid=$id(gridId);grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){if(lock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');if(card.side==='hz')el.innerHTML=renderHz(card.data);else el.innerHTML=renderEm(card.data);
+      flipped.push({el,card});
+      if(flipped.length===2){flips++;$id(fEl).textContent=flips;
+        if(flipped[0].card.id===flipped[1].card.id){flipped[0].el.classList.add('match');flipped[1].el.classList.add('match');flipped=[];matched++;$id(mEl).textContent=matched;
+          if(matched===total){setTimeout(()=>{const r=$id(resEl);r.style.display='block';r.textContent='🎉 '+flips+' 翻 · 太棒了！';},400);}}
+        else{lock=true;setTimeout(()=>{flipped[0].el.classList.remove('flip');flipped[0].el.textContent='🎴';flipped[1].el.classList.remove('flip');flipped[1].el.textContent='🎴';flipped=[];lock=false;},900);}}};
+    grid.appendChild(el);});
+}
+
+// ═══ GAME 4: Clothing Memory Match ═══
+const MEM_F=[
+  {id:1,hz:'T恤',py:'T-xù',en:'T-shirt',em:'👕'},
+  {id:2,hz:'连衣裙',py:'liányīqún',en:'dress',em:'👗'},
+  {id:3,hz:'裤子',py:'kùzi',en:'pants',em:'👖'},
+  {id:4,hz:'外套',py:'wàitào',en:'coat',em:'🧥'},
+  {id:5,hz:'运动鞋',py:'yùndòngxié',en:'sneakers',em:'👟'},
+  {id:6,hz:'袜子',py:'wàzi',en:'socks',em:'🧦'},
+  {id:7,hz:'毛衣',py:'máoyī',en:'sweater',em:'🧶'},
+  {id:8,hz:'短裤',py:'duǎnkù',en:'shorts',em:'🩳'},
+];
+function initMemF(){buildMemMatch(MEM_F,'mfgrid','mfm','mff','mfres',8,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:36px">${d.em}</div>`);}
+GI[14]=initMemF;
+
+// ═══ GAME 5: Accessories Memory Match ═══
+const MEM_A=[
+  {id:1,hz:'帽子',py:'màozi',en:'hat',em:'🎩'},
+  {id:2,hz:'眼镜',py:'yǎnjìng',en:'glasses',em:'👓'},
+  {id:3,hz:'围巾',py:'wéijīn',en:'scarf',em:'🧣'},
+  {id:4,hz:'手套',py:'shǒutào',en:'gloves',em:'🧤'},
+  {id:5,hz:'手表',py:'shǒubiǎo',en:'watch',em:'⌚'},
+  {id:6,hz:'头饰',py:'tóushì',en:'hair bow',em:'🎀'},
+];
+function initMemA(){buildMemMatch(MEM_A,'magrid','mam','maf','mares',6,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:36px">${d.em}</div>`);}
+GI[15]=initMemA;
+
+// ═══ GAME 6: Color + Clothing Memory ═══
+const MEM_C=[
+  {id:1,phrase:'红色的T恤',phrasepy:'hóngsè de T-xù',phraseen:'red T-shirt',color:'#ef4444',em:'👕'},
+  {id:2,phrase:'蓝色的裤子',phrasepy:'lánsè de kùzi',phraseen:'blue pants',color:'#3b82f6',em:'👖'},
+  {id:3,phrase:'粉色的裙子',phrasepy:'fěnsè de qúnzi',phraseen:'pink skirt',color:'#ec4899',em:'👗'},
+  {id:4,phrase:'黄色的手套',phrasepy:'huángsè de shǒutào',phraseen:'yellow gloves',color:'#eab308',em:'🧤'},
+  {id:5,phrase:'黑色的帽子',phrasepy:'hēisè de màozi',phraseen:'black hat',color:'#000',em:'🎩'},
+  {id:6,phrase:'白色的运动鞋',phrasepy:'báisè de yùndòngxié',phraseen:'white sneakers',color:'#fff',em:'👟'},
+];
+function initMemC(){buildMemMatch(MEM_C,'mcgrid','mcm','mcf','mcres',6,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-hz" style="font-size:11px">${d.phrase}</div><div class="mcard-py gpy" style="font-size:8.5px">${d.phrasepy}</div><div class="gen" style="font-size:7.5px;color:#888;font-style:italic">${d.phraseen}</div></div>`,
+  d=>`<div style="width:52px;height:52px;background:${d.color};border-radius:12px;border:${d.color==='#fff'?'2px solid #ddd':'none'};display:flex;align-items:center;justify-content:center;font-size:32px">${d.em}</div>`);}
+GI[16]=initMemC;
+
+// ═══ GAME 7: Clothing → Body Part ═══
+let bpScore=0,bpQ=0,bpItems=[];
+function initBp(){bpScore=0;bpQ=0;bpItems=shuffle(ALL_ITEMS).slice(0,8);$id('bps').textContent='0';$id('bpq').textContent='1';$id('bpr').style.display='none';showBp();}
+function showBp(){if(bpQ>=8){const r=$id('bpr');r.style.display='block';r.textContent='🎉 '+bpScore+'/8 — '+(bpScore===8?'完美！':bpScore>=6?'很好！':'加油！');$id('bpo').innerHTML='';return;}
+  const it=bpItems[bpQ];$id('bpem').textContent=it.em;$id('bphz').textContent=it.hz;$id('bppy').textContent=it.py;$id('bpq').textContent=bpQ+1;
+  const correctBody=BODY_MAP[it.body];const correct=BODY_PARTS.find(b=>b.hz===correctBody);
+  const wrong=BODY_PARTS.filter(b=>b.hz!==correctBody);
+  const opts=[correct,...shuffle(wrong).slice(0,3)];
+  const el=$id('bpo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===correctBody){btn.classList.add('ok');bpScore++;$id('bps').textContent=bpScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===correctBody)b.classList.add('ok');});}
+      bpQ++;setTimeout(showBp,1100);};
+    el.appendChild(btn);});}
+GI[17]=initBp;
+
+// ═══ GAME 8: Measure Word Quiz ═══
+const MW_OPTS=[{hz:'件',py:'jiàn',en:'tops'},{hz:'条',py:'tiáo',en:'long/thin'},{hz:'双',py:'shuāng',en:'pair'}];
+let mwScore=0,mwQ=0,mwItems=[];
+function initMw(){mwScore=0;mwQ=0;mwItems=shuffle(CLOTHING.filter(c=>['件','条','双'].includes(c.mw))).slice(0,8);$id('mws').textContent='0';$id('mwq').textContent='1';$id('mwr').style.display='none';showMw();}
+function showMw(){if(mwQ>=8){const r=$id('mwr');r.style.display='block';r.textContent='🎉 '+mwScore+'/8 — '+(mwScore===8?'完美！':mwScore>=6?'很好！':'加油！');$id('mwo').innerHTML='';return;}
+  const it=mwItems[mwQ];$id('mwem').textContent=it.em;$id('mwhz').textContent=it.hz;$id('mwpy').textContent=it.py;$id('mwq').textContent=mwQ+1;
+  const wrong=MW_OPTS.filter(o=>o.hz!==it.mw);const correct=MW_OPTS.find(o=>o.hz===it.mw);const opts=[correct,...wrong];
+  const el=$id('mwo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:22px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.mw){btn.classList.add('ok');mwScore++;$id('mws').textContent=mwScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.mw)b.classList.add('ok');});}
+      mwQ++;setTimeout(showMw,1100);};
+    el.appendChild(btn);});}
+GI[19]=initMw;
+
+// ═══ GAME 9: Fill in Blanks ═══
+const FB_ROUNDS=[
+  {sentence:'我 ___ 一件蓝色的 T恤。',py:'wǒ ___ yī jiàn lánsè de T-xù.',en:'I wear a blue T-shirt.',blanks:['穿'],bank:['穿','戴','喝','吃']},
+  {sentence:'我 ___ 一顶红色的帽子。',py:'wǒ ___ yī dǐng hóngsè de màozi.',en:'I put on a red hat.',blanks:['戴'],bank:['戴','穿','买','看']},
+  {sentence:'我穿一 ___ 白色的运动鞋。',py:'wǒ chuān yī ___ báisè de yùndòngxié.',en:'I wear a pair of white sneakers.',blanks:['双'],bank:['双','件','条','个']},
+  {sentence:'我今天穿 ___ 色的连衣裙和 ___ 色的运动鞋。',py:'wǒ jīntiān chuān ___ sè de liányīqún hé ___ sè de yùndòngxié.',en:'Today: pink dress + white sneakers.',blanks:['粉','白'],bank:['粉','白','蓝','红','黄','绿']},
+];
+let fbIdx=0,fbFilled=[];
+function initFb(){fbIdx=0;$id('fbres').style.display='none';$id('fbnext').style.display='none';$id('fbround').textContent='1';renderFb();}
+function renderFb(){const round=FB_ROUNDS[fbIdx];fbFilled=round.blanks.map(()=>null);$id('fbround').textContent=(fbIdx+1);
+  const wrap=$id('fbwrap');let html='<div class="fib-row">';let bidx=0;const parts=round.sentence.split('___');
+  parts.forEach((p,i)=>{html+=p;if(i<parts.length-1){html+=`<span class="fib-blank" id="fb-b${bidx}" data-bi="${bidx}">____</span>`;bidx++;}});
+  html+='</div>';html+=`<div class="gpy" style="font-size:10px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
+  html+=`<div class="gen" style="font-size:9.5px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
+  html+='<div class="fib-bank">';shuffle(round.bank).forEach(t=>{html+=`<button class="fib-tok" data-w="${t}">${t}</button>`;});html+='</div>';wrap.innerHTML=html;
+  wrap.querySelectorAll('.fib-tok').forEach(tok=>{tok.onclick=function(){const next=fbFilled.findIndex(x=>x===null);if(next<0)return;
+    const word=tok.dataset.w;const bk=$id('fb-b'+next);bk.textContent=word;bk.classList.add('filled');fbFilled[next]=word;tok.classList.add('used');
+    bk.onclick=function(){bk.textContent='____';bk.classList.remove('filled');fbFilled[next]=null;wrap.querySelectorAll('.fib-tok').forEach(t=>{if(t.dataset.w===word&&t.classList.contains('used')){t.classList.remove('used');}});bk.onclick=null;};
+    if(fbFilled.every(w=>w!==null)){const correct=fbFilled.every((w,i)=>w===round.blanks[i]);const r=$id('fbres');r.style.display='block';
+      if(correct){r.style.background='linear-gradient(135deg,#dcfce7,#bbf7d0)';r.style.color='#15803d';r.textContent='🎉 对了！duì le! · correct!';$id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';if(fbIdx===FB_ROUNDS.length-1){setTimeout(()=>{r.textContent='🌟 全部完成！quánbù wánchéng!';},700);}}
+      else{r.style.background='linear-gradient(135deg,#fee2e2,#fca5a5)';r.style.color='#991b1b';r.textContent='❌ 再试一次！';}}};});}
+function nextFb(){if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}}
+GI[20]=initFb;
+
+// ═══ GAME 10: What to Wear (Situation Quiz) ═══
+const SIT_QS=[
+  {em:'❄️',sit:'外面很冷！',py:'wàimiàn hěn lěng!',en:'very cold outside!',a:'外套 + 毛衣 + 围巾'},
+  {em:'☀️',sit:'今天很热！',py:'jīntiān hěn rè!',en:'very hot today!',a:'T恤 + 短裤'},
+  {em:'🌧️',sit:'外面下雨了！',py:'wàimiàn xià yǔ le!',en:'raining outside!',a:'外套 + 雨鞋'},
+  {em:'⚽',sit:'我要去踢球！',py:'wǒ yào qù tī qiú!',en:'going to play soccer!',a:'运动服 + 运动鞋'},
+  {em:'🏫',sit:'我要去学校！',py:'wǒ yào qù xuéxiào!',en:'going to school!',a:'T恤 + 裤子 + 运动鞋'},
+  {em:'🎂',sit:'我要去生日派对！',py:'wǒ yào qù shēngrì pàiduì!',en:'birthday party!',a:'连衣裙 + 头饰'},
+  {em:'🛏️',sit:'我要睡觉了！',py:'wǒ yào shuìjiào le!',en:'going to bed!',a:'睡衣'},
+  {em:'🏊',sit:'我要去游泳！',py:'wǒ yào qù yóu yǒng!',en:'going to swim!',a:'泳衣'},
+];
+const OUTFIT_OPTS=['外套 + 毛衣 + 围巾','T恤 + 短裤','外套 + 雨鞋','运动服 + 运动鞋','T恤 + 裤子 + 运动鞋','连衣裙 + 头饰','睡衣','泳衣'];
+let owScore=0,owQ=0,owItems=[];
+function initOw(){owScore=0;owQ=0;owItems=shuffle(SIT_QS).slice(0,8);$id('ows').textContent='0';$id('owq').textContent='1';$id('owr').style.display='none';showOw();}
+function showOw(){if(owQ>=8){const r=$id('owr');r.style.display='block';r.textContent='🎉 '+owScore+'/8 — '+(owScore===8?'完美！':owScore>=6?'很好！':'加油！');$id('owo').innerHTML='';return;}
+  const it=owItems[owQ];$id('owem').textContent=it.em;$id('owsit').textContent=it.sit;$id('owpy').textContent=it.py;$id('owen').textContent=it.en;$id('owq').textContent=owQ+1;
+  const wrong=OUTFIT_OPTS.filter(o=>o!==it.a);const opts=[it.a,...shuffle(wrong).slice(0,3)];
+  const el=$id('owo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12px">${opt}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt===it.a){btn.classList.add('ok');owScore++;$id('ows').textContent=owScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a)b.classList.add('ok');});}
+      owQ++;setTimeout(showOw,1200);};
+    el.appendChild(btn);});}
+GI[22]=initOw;
+
+// ═══ GAME 11: Color Memory ═══
+const MEM_COL=[
+  {id:1,hz:'红色',py:'hóngsè',en:'red',hex:'#ef4444'},
+  {id:2,hz:'蓝色',py:'lánsè',en:'blue',hex:'#3b82f6'},
+  {id:3,hz:'绿色',py:'lǜsè',en:'green',hex:'#22c55e'},
+  {id:4,hz:'黄色',py:'huángsè',en:'yellow',hex:'#eab308'},
+  {id:5,hz:'粉色',py:'fěnsè',en:'pink',hex:'#ec4899'},
+  {id:6,hz:'紫色',py:'zǐsè',en:'purple',hex:'#a855f7'},
+  {id:7,hz:'黑色',py:'hēisè',en:'black',hex:'#000'},
+  {id:8,hz:'白色',py:'báisè',en:'white',hex:'#fff'},
+];
+function initMemCol(){buildMemMatch(MEM_COL,'mcolgrid','mcolm','mcolf','mcolres',8,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="width:52px;height:36px;background:${d.hex};border-radius:8px;border:${d.hex==='#fff'?'2px solid #ddd':'none'}"></div>`);}
+GI[23]=initMemCol;
+
+// ═══ GAME 12: Mixed Final ═══
+let mxScore=0,mxQ=0,mxItems=[];
+function buildMx(){const qs=[];
+  shuffle(ALL_ITEMS).slice(0,4).forEach(f=>qs.push({type:'name',label:'服装',q:f.em,size:'44px',correct:f.hz,wrongs:ALL_ITEMS.filter(x=>x.hz!==f.hz).map(x=>x.hz)}));
+  shuffle(ALL_ITEMS).slice(0,4).forEach(f=>qs.push({type:'verb',label:f.hz+' 用什么动词？',q:f.em+' '+f.hz,size:'20px',correct:f.verb==='chuan'?'穿':'戴',wrongs:[f.verb==='chuan'?'戴':'穿']}));
+  shuffle(CLOTHING.filter(c=>['件','条','双'].includes(c.mw))).slice(0,4).forEach(f=>qs.push({type:'mw',label:'量词',q:'一 ___ '+f.hz,size:'20px',correct:f.mw,wrongs:['件','条','双'].filter(m=>m!==f.mw)}));
+  return shuffle(qs).slice(0,12);}
+function initMx(){mxScore=0;mxQ=0;mxItems=buildMx();$id('mxs').textContent='0';$id('mxq').textContent='1';$id('mxr').style.display='none';showMx();}
+function showMx(){if(mxQ>=12){const r=$id('mxr');r.style.display='block';r.textContent='🎉 '+mxScore+'/12 — '+(mxScore>=11?'完美！':mxScore>=8?'很好！':'加油！');$id('mxo').innerHTML='';return;}
+  const it=mxItems[mxQ];$id('mxlbl').textContent=it.label;$id('mxq2').innerHTML=`<div style="font-size:${it.size}">${it.q}</div>`;$id('mxq').textContent=mxQ+1;
+  const opts=shuffle([it.correct,...shuffle([...new Set(it.wrongs)]).slice(0,3)]);
+  const el=$id('mxo');el.innerHTML='';let ans=false;
+  opts.forEach(opt=>{const btn=document.createElement('button');btn.className='qopt';btn.innerHTML=`<span class="qopt-hz">${opt}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt===it.correct){btn.classList.add('ok');mxScore++;$id('mxs').textContent=mxScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.correct)b.classList.add('ok');});}
+      mxQ++;setTimeout(showMx,1100);};
+    el.appendChild(btn);});}
+GI[24]=initMx;
+</script>
+</body>
+</html>

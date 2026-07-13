@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Elena的中文课 · 家具 · Furniture &amp; Rooms</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fef3c7,#fed7aa 50%,#fbcfe8);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.app{width:880px;position:relative}
+
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#d97706,#ea580c);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
+
+.slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.cp{color:#e91e8c}.cu{color:#7c3aed}.ct{color:#0891b2}.co{color:#ea580c}.cg{color:#16a34a}.cb{color:#2563eb}.cy{color:#ca8a04}.cr{color:#dc2626}
+.bp{background:#fce7f3}.bu{background:#ede9fe}.bt{background:#cffafe}.bo{background:#ffedd5}.bg{background:#dcfce7}.bb{background:#dbeafe}.by{background:#fef9c3}.br{background:#fee2e2}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+.c6{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+
+.tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
+.title{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:1px}
+.title-py{font-size:11px;color:#ea580c;font-weight:700;margin-bottom:1px}
+.title-en{font-size:10.5px;color:#888;font-style:italic;margin-bottom:6px}
+.sub{font-size:10.5px;color:#888;margin-bottom:8px}
+.lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
+.badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
+.card{border-radius:11px;padding:8px 10px}
+
+.vc{border-radius:10px;padding:7px 4px;text-align:center}
+.vc .py{font-size:9px;color:#ea580c;font-weight:700;margin-top:2px}
+.vc .hz{font-size:13px;font-weight:900;color:#1a1a2e;margin:1px 0}
+.vc .en{font-size:8.5px;color:#888}
+
+/* Room card */
+.room{border-radius:14px;padding:10px 8px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+.room .rem{font-size:32px;line-height:1}
+.room .rpy{font-size:10px;color:#ea580c;font-weight:700}
+.room .rhz{font-size:14px;font-weight:900;color:#1a1a2e;margin-top:2px}
+.room .ren{font-size:9px;color:#888;font-style:italic}
+.room .rcount{font-size:8.5px;color:#7c3aed;font-weight:600;background:rgba(255,255,255,.7);padding:1px 6px;border-radius:5px;margin-top:2px}
+
+/* Furniture card */
+.furn{border-radius:11px;padding:8px 5px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px}
+.furn .fem{font-size:28px;line-height:1;margin-bottom:2px}
+.furn .fpy{font-size:9px;color:#ea580c;font-weight:700}
+.furn .fhz{font-size:12px;font-weight:900;color:#1a1a2e}
+.furn .fen{font-size:8.5px;color:#888}
+.furn .fmw{font-size:7.5px;color:#7c3aed;font-weight:600;margin-top:1px}
+
+/* Colour swatches */
+.color-row{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:6px 0}
+.csw{border-radius:10px;padding:8px 6px;text-align:center;min-width:60px}
+.csw .py{font-size:8.5px;color:rgba(255,255,255,.9);font-weight:700}
+.csw .hz{font-size:12px;font-weight:900;color:#fff;text-shadow:0 1px 3px rgba(0,0,0,.4)}
+.csw .en{font-size:8px;color:rgba(255,255,255,.85);margin-top:1px}
+
+/* Colored furniture combo */
+.combo-item{background:#fff;border-radius:12px;padding:8px 10px;display:flex;align-items:center;gap:8px;border:2px solid #f3f4f6}
+.combo-item .em{font-size:28px;line-height:1}
+.combo-item .info{flex:1}
+.combo-item .info .hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.combo-item .info .py{font-size:9px;color:#ea580c;font-weight:700}
+.combo-item .info .en{font-size:9px;color:#888;font-style:italic}
+.combo-item .color-dot{width:22px;height:22px;border-radius:50%;flex-shrink:0;border:2px solid rgba(0,0,0,.1)}
+
+/* Dialogue bubbles */
+.dlg{flex:1;display:flex;flex-direction:column;gap:5px}
+.dlg-turn{display:flex;gap:8px;align-items:flex-start}
+.dlg-turn.right{flex-direction:row-reverse}
+.avi{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.avi.w{background:linear-gradient(135deg,#fbbf24,#f59e0b)}
+.avi.c{background:linear-gradient(135deg,#f9a8d4,#ec4899)}
+.avi.c2{background:linear-gradient(135deg,#a5b4fc,#6366f1)}
+.avi.c3{background:linear-gradient(135deg,#86efac,#22c55e)}
+.bub{border-radius:14px;padding:6px 11px;max-width:80%;position:relative}
+.bub.w{background:#fef3c7;border-top-left-radius:4px}
+.bub.c{background:#fce7f3;border-top-right-radius:4px}
+.bub.c2{background:#e0e7ff;border-top-right-radius:4px}
+.bub.c3{background:#dcfce7;border-top-right-radius:4px}
+.bub .hz{font-size:12px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.bub .py{font-size:8.5px;color:#ea580c;font-weight:700;margin-top:1px;line-height:1.2}
+.bub .en{font-size:8px;color:#777;font-style:italic;margin-top:1px;line-height:1.2}
+.who{font-size:7.5px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:1px}
+
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11.5px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8.5px;color:#ea580c;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
+.sp .ex{font-size:10.5px;font-weight:700;margin-top:3px}
+.sp .expy{font-size:8px;color:#aaa}
+.sp .exen{font-size:8.5px;color:#999;font-style:italic}
+
+.cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cov-title{font-size:40px;font-weight:900;background:linear-gradient(135deg,#d97706,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#ffedd5;color:#c2410c;border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin:3px}
+
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:760px}
+.ck{background:#ffedd5;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#c2410c}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.nbtn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:15px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:.2s;color:#333;display:flex;align-items:center;justify-content:center}
+.nbtn:hover{transform:scale(1.1)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:680px}
+.dot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+.dot.active{background:#ea580c;transform:scale(1.4)}
+
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gsbar{font-size:12px;font-weight:800;color:#c2410c;background:#ffedd5;padding:3px 12px;border-radius:999px}
+.gbtn{background:linear-gradient(135deg,#d97706,#ea580c);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
+.gbtn:hover{opacity:.85}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
+
+.toggle-bar{position:absolute;top:10px;right:14px;display:flex;gap:6px;z-index:10}
+.tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.05)}
+.slide:has(.toggle-bar) .badge{display:none}
+
+.gpy,.gen{display:none}
+.gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
+.gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
+body.show-py .gpy{display:block}
+body.show-en .gen{display:block}
+
+.qq{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:12px 18px;text-align:center;width:100%;max-width:380px}
+.qqmain{font-size:30px;font-weight:900;color:#1a1a2e;line-height:1.1}
+.qqlbl{font-size:11px;color:#888;margin-top:3px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:460px}
+.qopts.three{grid-template-columns:repeat(3,1fr)}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:8px 10px;font-weight:800;cursor:pointer;transition:.15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:50px;justify-content:center}
+.qopt:hover{border-color:#ea580c;background:#fff7ed}
+.qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopt-hz{font-size:14px}
+
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;max-width:660px}
+.mcard{background:linear-gradient(135deg,#d97706,#ea580c);border-radius:10px;height:72px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard.flip{background:#fff;border:2px solid #ea580c;cursor:default}
+.mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
+.mcard-py{font-size:9px;color:#ea580c;font-weight:700}
+.mcard-hz{font-size:14px;font-weight:900;color:#1a1a2e}
+
+.fib{background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:14px;padding:13px 18px;width:100%;max-width:560px}
+.fib-row{font-size:15px;line-height:2.1;color:#1a1a2e;font-weight:700;text-align:center}
+.fib-blank{display:inline-block;min-width:80px;border-bottom:3px solid #ea580c;padding:0 6px;font-weight:900;color:#ea580c;text-align:center;margin:0 2px;cursor:pointer}
+.fib-blank.filled{border-bottom-color:#16a34a;color:#15803d;background:#dcfce7;border-radius:6px}
+.fib-bank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.fib-tok{background:#fff;border:2px solid #ea580c;color:#1a1a2e;padding:5px 13px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.fib-tok:hover{background:#ffedd5}
+.fib-tok.used{opacity:.3;pointer-events:none}
+
+.phr{display:flex;align-items:center;gap:9px;border-radius:10px;padding:6px 11px;margin-bottom:4px}
+.phr .em{font-size:18px;flex-shrink:0}
+.phr .hz{font-size:13px;font-weight:900;color:#1a1a2e}
+.phr .py{font-size:9px;color:#ea580c;font-weight:700}
+.phr .en{font-size:9px;color:#888;font-style:italic}
+
+/* Room map display */
+.house{display:grid;grid-template-columns:1fr 1fr;gap:8px;flex:1;padding:6px}
+.room-box{border-radius:14px;padding:9px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;border:2px solid rgba(0,0,0,.05);position:relative}
+.room-box .rt{font-size:24px}
+.room-box .rn{font-size:13px;font-weight:900;color:#1a1a2e}
+.room-box .rp{font-size:9px;color:#ea580c;font-weight:700}
+.room-box .re{font-size:8.5px;color:#888;font-style:italic}
+.room-box .rf{font-size:20px;letter-spacing:2px;margin-top:2px}
+
+/* Colored furniture swatch for color quiz */
+.cf-item{display:inline-flex;flex-direction:column;align-items:center;padding:8px;border-radius:12px;background:#fff;border:2px solid #e5e7eb}
+.cf-item .cf-em{font-size:40px;line-height:1}
+.cf-item .cf-hz{font-size:12px;font-weight:900;margin-top:3px}
+</style>
+</head>
+<body>
+<a class="home-btn" href="index.html" title="返回课程列表">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
+<div class="app">
+
+<!-- ════════════════ SLIDE 1: COVER ════════════════ -->
+<div class="slide active">
+<div class="cov">
+  <div style="font-size:48px">🏠🛋️🎨</div>
+  <div class="cov-title">家具 + 颜色<br><span style="font-size:18px;font-weight:700;background:none;-webkit-text-fill-color:#888">jiājù + yánsè · Furniture &amp; Colors</span></div>
+  <div style="background:linear-gradient(135deg,#ffedd5,#fce7f3);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#c2410c">📅 2026年6月9日 · liù yuè jiǔ rì · June 9, 2026</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:720px">
+    <span class="ctag">🏠 家里的房间 fáng jiān · rooms</span>
+    <span class="ctag">🛋️ 家具 jiājù · furniture</span>
+    <span class="ctag">🎨 颜色 yánsè · colors (review!)</span>
+    <span class="ctag">🌈 颜色 + 家具 · combine!</span>
+    <span class="ctag">💬 4 对话 duìhuà</span>
+    <span class="ctag">🎮 11 游戏 yóuxì</span>
+    <span class="ctag">🎭 角色扮演 juésè bànyǎn · role-play</span>
+  </div>
+  <div style="background:#fff;border:2px solid #fdba74;border-radius:14px;padding:9px 16px;font-size:11px;color:#c2410c;margin-top:8px;max-width:600px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b><br>
+    这节课把新学的 <b>家具 jiājù</b> 和之前的 <b>颜色 yánsè</b> 结合！<br>
+    <span style="color:#7c3aed;font-weight:600;font-size:10px">zhè jié kè bǎ xīn xué de jiājù hé zhīqián de yánsè jiéhé!</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">Combining new furniture words with the colors we already learned!</span>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sānshí yè · 30 pages</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 2: ROOMS IN THE HOUSE ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 1</span>
+<div class="tag co">🏠 家里的房间 jiā lǐ de fángjiān · rooms in the house</div>
+<div class="title">家里的房间 jiā lǐ de fángjiān</div>
+<div class="title-en">rooms of the house</div>
+<div class="c3" style="margin-bottom:6px">
+  <div class="room bo"><div class="rem">🛋️</div><div class="rpy">kètīng</div><div class="rhz">客厅</div><div class="ren">living room</div></div>
+  <div class="room bp"><div class="rem">🛏️</div><div class="rpy">wòshì</div><div class="rhz">卧室</div><div class="ren">bedroom</div></div>
+  <div class="room by"><div class="rem">🍳</div><div class="rpy">chúfáng</div><div class="rhz">厨房</div><div class="ren">kitchen</div></div>
+  <div class="room bt"><div class="rem">🛁</div><div class="rpy">yùshì</div><div class="rhz">浴室</div><div class="ren">bathroom</div></div>
+  <div class="room bg"><div class="rem">📚</div><div class="rpy">shūfáng</div><div class="rhz">书房</div><div class="ren">study</div></div>
+  <div class="room bb"><div class="rem">🍽️</div><div class="rpy">cāntīng</div><div class="rhz">餐厅</div><div class="ren">dining room</div></div>
+</div>
+<div class="card by" style="font-size:10.5px">
+  <div class="lbl cy">💡 小贴士 xiǎo tiēshì · tip</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>房 fáng</b>（房间）+ <b>意思 yìsi</b>（meaning）= "room for X"！<br>
+    · <b>厨房 chúfáng</b> = "cooking room" 🍳 &nbsp;·&nbsp; <b>书房 shūfáng</b> = "book room" 📚<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Room names combine 房/室 with what happens there!</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 3: LIVING ROOM FURNITURE ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 2</span>
+<div class="tag co">🛋️ 客厅的家具 kètīng de jiājù · living room furniture</div>
+<div class="title">客厅里有什么？kètīng lǐ yǒu shénme?</div>
+<div class="title-en">what's in the living room?</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="furn bo"><div class="fem">🛋️</div><div class="fpy">shāfā</div><div class="fhz">沙发</div><div class="fen">sofa</div><div class="fmw">一张 zhāng</div></div>
+  <div class="furn bp"><div class="fem">📺</div><div class="fpy">diànshì</div><div class="fhz">电视</div><div class="fen">TV</div><div class="fmw">一台 tái</div></div>
+  <div class="furn by"><div class="fem">🪑</div><div class="fpy">yǐzi</div><div class="fhz">椅子</div><div class="fen">chair</div><div class="fmw">一把 bǎ</div></div>
+  <div class="furn bg"><div class="fem">🟫</div><div class="fpy">zhuōzi</div><div class="fhz">桌子</div><div class="fen">table</div><div class="fmw">一张 zhāng</div></div>
+  <div class="furn bt"><div class="fem">💡</div><div class="fpy">dēng</div><div class="fhz">灯</div><div class="fen">lamp</div><div class="fmw">一盏 zhǎn</div></div>
+  <div class="furn bu"><div class="fem">🕰️</div><div class="fpy">shízhōng</div><div class="fhz">时钟</div><div class="fen">clock</div><div class="fmw">一个 gè</div></div>
+  <div class="furn br"><div class="fem">🪟</div><div class="fpy">chuānghu</div><div class="fhz">窗户</div><div class="fen">window</div><div class="fmw">一扇 shàn</div></div>
+  <div class="furn bb"><div class="fem">🚪</div><div class="fpy">mén</div><div class="fhz">门</div><div class="fen">door</div><div class="fmw">一扇 shàn</div></div>
+</div>
+<div class="card by" style="font-size:10.5px">
+  <div class="lbl cy">💡 新的量词 xīn de liàngcí · new measure words!</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>张 zhāng</b> = flat things (sofa, table, paper) · <b>把 bǎ</b> = chairs · <b>台 tái</b> = TVs/machines · <b>盏 zhǎn</b> = lamps · <b>扇 shàn</b> = doors/windows
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 4: BEDROOM FURNITURE ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 3</span>
+<div class="tag co">🛏️ 卧室的家具 wòshì de jiājù · bedroom furniture</div>
+<div class="title">卧室里有什么？wòshì lǐ yǒu shénme?</div>
+<div class="title-en">what's in the bedroom?</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="furn bp"><div class="fem">🛏️</div><div class="fpy">chuáng</div><div class="fhz">床</div><div class="fen">bed</div><div class="fmw">一张 zhāng</div></div>
+  <div class="furn bo"><div class="fem">🛌</div><div class="fpy">zhěntou</div><div class="fhz">枕头</div><div class="fen">pillow</div><div class="fmw">一个 gè</div></div>
+  <div class="furn by"><div class="fem">🧸</div><div class="fpy">bèizi</div><div class="fhz">被子</div><div class="fen">blanket</div><div class="fmw">一床 chuáng</div></div>
+  <div class="furn bu"><div class="fem">🪞</div><div class="fpy">jìngzi</div><div class="fhz">镜子</div><div class="fen">mirror</div><div class="fmw">一面 miàn</div></div>
+  <div class="furn bt"><div class="fem">🚪</div><div class="fpy">yīguì</div><div class="fhz">衣柜</div><div class="fen">wardrobe</div><div class="fmw">一个 gè</div></div>
+  <div class="furn bg"><div class="fem">📖</div><div class="fpy">shūjià</div><div class="fhz">书架</div><div class="fen">bookshelf</div><div class="fmw">一个 gè</div></div>
+  <div class="furn br"><div class="fem">🖼️</div><div class="fpy">huà</div><div class="fhz">画</div><div class="fen">painting</div><div class="fmw">一幅 fú</div></div>
+  <div class="furn bb"><div class="fem">🟪</div><div class="fpy">dìtǎn</div><div class="fhz">地毯</div><div class="fen">carpet</div><div class="fmw">一块 kuài</div></div>
+</div>
+<div class="card bp" style="font-size:10.5px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>我的卧室里有一张床和一个衣柜。</b><br>
+    <span class="cp" style="font-size:9.5px">wǒ de wòshì lǐ yǒu yī zhāng chuáng hé yī gè yīguì.</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">My bedroom has a bed and a wardrobe.</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 5: KITCHEN & BATHROOM ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 4</span>
+<div class="tag co">🍳🛁 厨房 &amp; 浴室 · kitchen &amp; bathroom</div>
+<div class="title">厨房和浴室 chúfáng hé yùshì</div>
+<div class="title-en">kitchen &amp; bathroom items</div>
+<div class="lbl co" style="margin-bottom:3px;font-size:10px">🍳 厨房 chúfáng · kitchen</div>
+<div class="c4" style="margin-bottom:5px">
+  <div class="furn by"><div class="fem">🧊</div><div class="fpy">bīngxiāng</div><div class="fhz">冰箱</div><div class="fen">fridge</div></div>
+  <div class="furn bo"><div class="fem">🍳</div><div class="fpy">lúzào</div><div class="fhz">炉灶</div><div class="fen">stove</div></div>
+  <div class="furn bp"><div class="fem">🍽️</div><div class="fpy">shuǐcáo</div><div class="fhz">水槽</div><div class="fen">sink</div></div>
+  <div class="furn bg"><div class="fem">🍴</div><div class="fpy">cānzhuō</div><div class="fhz">餐桌</div><div class="fen">dining table</div></div>
+</div>
+<div class="lbl ct" style="margin-bottom:3px;margin-top:5px;font-size:10px">🛁 浴室 yùshì · bathroom</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="furn bt"><div class="fem">🛁</div><div class="fpy">yùgāng</div><div class="fhz">浴缸</div><div class="fen">bathtub</div></div>
+  <div class="furn bb"><div class="fem">🚿</div><div class="fpy">línyù</div><div class="fhz">淋浴</div><div class="fen">shower</div></div>
+  <div class="furn bu"><div class="fem">🚽</div><div class="fpy">mǎtǒng</div><div class="fhz">马桶</div><div class="fen">toilet</div></div>
+  <div class="furn br"><div class="fem">🪥</div><div class="fpy">yáshuā</div><div class="fhz">牙刷</div><div class="fen">toothbrush</div></div>
+</div>
+<div class="lbl cu" style="margin-bottom:3px;font-size:10px">🧺 其他 · other useful appliances</div>
+<div class="c4">
+  <div class="furn bo"><div class="fem">🌀</div><div class="fpy">xǐyījī</div><div class="fhz">洗衣机</div><div class="fen">washing machine</div></div>
+  <div class="furn bp"><div class="fem">🔥</div><div class="fpy">nuǎnqì</div><div class="fhz">暖气</div><div class="fen">heater</div></div>
+  <div class="furn bg"><div class="fem">💨</div><div class="fpy">kōngtiáo</div><div class="fhz">空调</div><div class="fen">air-con</div></div>
+  <div class="furn bt"><div class="fem">🪟</div><div class="fpy">chuānglián</div><div class="fhz">窗帘</div><div class="fen">curtain</div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 6: COLOR REVIEW ════════════════ -->
+<div class="slide">
+<span class="badge cp">review</span>
+<div class="tag cp">🎨 颜色 yánsè · colors review — from lesson 1</div>
+<div class="title">颜色复习 yánsè fùxí</div>
+<div class="title-en">colors we already know!</div>
+<div class="color-row" style="margin-bottom:8px">
+  <div class="csw" style="background:#ef4444"><div class="py">hóngsè</div><div class="hz">红色</div><div class="en">red</div></div>
+  <div class="csw" style="background:#f97316"><div class="py">chéngsè</div><div class="hz">橙色</div><div class="en">orange</div></div>
+  <div class="csw" style="background:#eab308"><div class="py">huángsè</div><div class="hz">黄色</div><div class="en">yellow</div></div>
+  <div class="csw" style="background:#22c55e"><div class="py">lǜsè</div><div class="hz">绿色</div><div class="en">green</div></div>
+  <div class="csw" style="background:#3b82f6"><div class="py">lánsè</div><div class="hz">蓝色</div><div class="en">blue</div></div>
+  <div class="csw" style="background:#a855f7"><div class="py">zǐsè</div><div class="hz">紫色</div><div class="en">purple</div></div>
+  <div class="csw" style="background:#ec4899"><div class="py">fěnsè</div><div class="hz">粉色</div><div class="en">pink</div></div>
+</div>
+<div class="lbl co" style="margin-bottom:3px;font-size:10px">⭐ 新颜色 xīn yánsè · NEW colors for furniture</div>
+<div class="color-row" style="margin-bottom:8px">
+  <div class="csw" style="background:#78350f"><div class="py">zōngsè</div><div class="hz">棕色</div><div class="en">brown</div></div>
+  <div class="csw" style="background:#000"><div class="py">hēisè</div><div class="hz">黑色</div><div class="en">black</div></div>
+  <div class="csw" style="background:#e5e7eb;color:#333"><div class="py" style="color:#666">huīsè</div><div class="hz" style="color:#333;text-shadow:none">灰色</div><div class="en" style="color:#666">grey</div></div>
+  <div class="csw" style="background:#fff;color:#333;border:2px solid #ddd"><div class="py" style="color:#666">báisè</div><div class="hz" style="color:#333;text-shadow:none">白色</div><div class="en" style="color:#666">white</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 公式 gōngshì · formula</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>颜色</b> + <b>的</b> + <b>家具</b> = colored furniture!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Example: 红色的沙发 hóngsè de shāfā = red sofa 🛋️❤️</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 7: COLOR + FURNITURE COMBOS ════════════════ -->
+<div class="slide">
+<span class="badge co">vocab 5</span>
+<div class="tag co">🌈 颜色 + 家具 · colored furniture combos!</div>
+<div class="title">彩色的家具 cǎisè de jiājù</div>
+<div class="title-en">colorful furniture — put colors + furniture together!</div>
+<div class="c2" style="gap:7px;flex:1">
+  <div class="combo-item">
+    <div class="em">🛋️</div>
+    <div class="info"><div class="hz">红色的沙发</div><div class="py">hóngsè de shāfā</div><div class="en">red sofa</div></div>
+    <div class="color-dot" style="background:#ef4444"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">🛏️</div>
+    <div class="info"><div class="hz">白色的床</div><div class="py">báisè de chuáng</div><div class="en">white bed</div></div>
+    <div class="color-dot" style="background:#fff;border:2px solid #ddd"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">🪑</div>
+    <div class="info"><div class="hz">棕色的椅子</div><div class="py">zōngsè de yǐzi</div><div class="en">brown chair</div></div>
+    <div class="color-dot" style="background:#78350f"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">📺</div>
+    <div class="info"><div class="hz">黑色的电视</div><div class="py">hēisè de diànshì</div><div class="en">black TV</div></div>
+    <div class="color-dot" style="background:#000"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">💡</div>
+    <div class="info"><div class="hz">黄色的灯</div><div class="py">huángsè de dēng</div><div class="en">yellow lamp</div></div>
+    <div class="color-dot" style="background:#eab308"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">🟪</div>
+    <div class="info"><div class="hz">紫色的地毯</div><div class="py">zǐsè de dìtǎn</div><div class="en">purple carpet</div></div>
+    <div class="color-dot" style="background:#a855f7"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">🖼️</div>
+    <div class="info"><div class="hz">蓝色的画</div><div class="py">lánsè de huà</div><div class="en">blue painting</div></div>
+    <div class="color-dot" style="background:#3b82f6"></div>
+  </div>
+  <div class="combo-item">
+    <div class="em">🪟</div>
+    <div class="info"><div class="hz">绿色的窗帘</div><div class="py">lǜsè de chuānglián</div><div class="en">green curtain</div></div>
+    <div class="color-dot" style="background:#22c55e"></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 8: SENTENCE PATTERNS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 1</span>
+<div class="tag cg">💬 句型 jùxíng · sentence patterns</div>
+<div class="title">怎么描述你的房间 zěnme miáoshù nǐ de fángjiān</div>
+<div class="title-en">how to describe your room!</div>
+<div class="two" style="gap:7px">
+  <div>
+    <div class="sp bo">
+      <div class="pat">我的 ___ 里有 ___ 。</div><div class="patpy">wǒ de ___ lǐ yǒu ___ .</div>
+      <div class="paten">In my ___ there is ___.</div>
+      <div class="ex co">我的卧室里有一张床。<span class="expy"> wǒ de wòshì lǐ yǒu yī zhāng chuáng.</span></div><div class="exen">My bedroom has a bed.</div>
+    </div>
+    <div class="sp bp">
+      <div class="pat">这是 ___ 色的 ___ 。</div><div class="patpy">zhè shì ___ sè de ___ .</div>
+      <div class="paten">This is a ___-colored ___.</div>
+      <div class="ex cp">这是红色的沙发。<span class="expy"> zhè shì hóngsè de shāfā.</span></div><div class="exen">This is a red sofa.</div>
+    </div>
+    <div class="sp bu">
+      <div class="pat">我喜欢 ___ 色的 ___ 。</div><div class="patpy">wǒ xǐhuān ___ sè de ___ .</div>
+      <div class="paten">I like ___-colored ___.</div>
+      <div class="ex cu">我喜欢蓝色的椅子。<span class="expy"> wǒ xǐhuān lánsè de yǐzi.</span></div><div class="exen">I like blue chairs.</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bg">
+      <div class="pat">___ 在哪里？</div><div class="patpy">___ zài nǎli?</div>
+      <div class="paten">Where is ___?</div>
+      <div class="ex cg">电视在客厅。<span class="expy"> diànshì zài kètīng.</span></div><div class="exen">The TV is in the living room.</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">___ 在 ___ 上/下/里。</div><div class="patpy">___ zài ___ shàng / xià / lǐ.</div>
+      <div class="paten">___ is on/under/inside ___.</div>
+      <div class="ex cy">枕头在床上。<span class="expy"> zhěntou zài chuáng shàng.</span></div><div class="exen">The pillow is on the bed.</div>
+    </div>
+    <div class="sp bb">
+      <div class="pat">___ 是什么颜色？</div><div class="patpy">___ shì shénme yánsè?</div>
+      <div class="paten">What color is ___?</div>
+      <div class="ex cb">你的沙发是什么颜色？<span class="expy"> nǐ de shāfā shì shénme yánsè?</span></div><div class="exen">What color is your sofa?</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 9: POSITION WORDS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 2</span>
+<div class="tag cg">📍 位置 wèizhi · position words</div>
+<div class="title">上 · 下 · 里 · 旁边</div>
+<div class="title-en">where things are — position words!</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="furn bp"><div class="fem">⬆️</div><div class="fpy">shàng</div><div class="fhz">上</div><div class="fen">on / above</div></div>
+  <div class="furn bo"><div class="fem">⬇️</div><div class="fpy">xià</div><div class="fhz">下</div><div class="fen">under / below</div></div>
+  <div class="furn bg"><div class="fem">📥</div><div class="fpy">lǐ</div><div class="fhz">里</div><div class="fen">inside</div></div>
+  <div class="furn bt"><div class="fem">↔️</div><div class="fpy">pángbiān</div><div class="fhz">旁边</div><div class="fen">next to</div></div>
+  <div class="furn by"><div class="fem">↖️</div><div class="fpy">zuǒbiān</div><div class="fhz">左边</div><div class="fen">left side</div></div>
+  <div class="furn bu"><div class="fem">↗️</div><div class="fpy">yòubiān</div><div class="fhz">右边</div><div class="fen">right side</div></div>
+  <div class="furn bb"><div class="fem">🎯</div><div class="fpy">zhōngjiān</div><div class="fhz">中间</div><div class="fen">in the middle</div></div>
+  <div class="furn br"><div class="fem">🔙</div><div class="fpy">hòumiàn</div><div class="fhz">后面</div><div class="fen">behind</div></div>
+</div>
+<div class="c2">
+  <div class="card bp" style="font-size:10.5px">
+    <div class="lbl cp">💬 例句 lìjù · examples</div>
+    <div style="line-height:1.7;margin-top:3px">
+      枕头在床<b>上</b>。<br>
+      <span class="cp" style="font-size:9px">zhěntou zài chuáng shàng.</span><br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">The pillow is on the bed.</span>
+    </div>
+  </div>
+  <div class="card bo" style="font-size:10.5px">
+    <div class="lbl co">💬 例句 lìjù</div>
+    <div style="line-height:1.7;margin-top:3px">
+      猫在沙发<b>下</b>。<br>
+      <span class="co" style="font-size:9px">māo zài shāfā xià.</span><br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">The cat is under the sofa.</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 10: DIALOGUE 1 — MY ROOM ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 1</span>
+<div class="tag ct">💬 对话 (一) · Elena's room 我的房间</div>
+<div class="title">场景一：Elena 介绍自己的房间</div>
+<div class="title-en">scene 1: Elena introduces her bedroom</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">朋友 péngyǒu · friend</div>
+    <div class="hz">你的卧室里有什么？</div>
+    <div class="py">nǐ de wòshì lǐ yǒu shénme?</div>
+    <div class="en">What's in your bedroom?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我的卧室里有一张床、一个衣柜和一个书架。</div>
+    <div class="py">wǒ de wòshì lǐ yǒu yī zhāng chuáng, yī gè yīguì hé yī gè shūjià.</div>
+    <div class="en">In my bedroom I have a bed, a wardrobe and a bookshelf.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">朋友</div>
+    <div class="hz">你的床是什么颜色？</div>
+    <div class="py">nǐ de chuáng shì shénme yánsè?</div>
+    <div class="en">What color is your bed?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我的床是白色的，枕头是粉色的。</div>
+    <div class="py">wǒ de chuáng shì báisè de, zhěntou shì fěnsè de.</div>
+    <div class="en">My bed is white and my pillow is pink.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">朋友</div>
+    <div class="hz">好可爱！hǎo kě'ài! · so cute!</div>
+    <div class="py">hǎo kě'ài!</div>
+    <div class="en">So cute!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 11: 🎮 GAME 1 — FURNITURE QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 1</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">家具问答 jiājù wèndá</div>
+<div class="title-en">furniture quiz — see the item, pick the Chinese name!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="fqs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="fqq">1</span>/10</div>
+    <button class="gbtn" onclick="initFq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="fqem" style="font-size:64px">🛋️</div>
+    <div class="qqlbl" style="margin-top:6px">这是什么家具？<span class="gen">What furniture is this?</span></div>
+  </div>
+  <div class="qopts" id="fqo"></div>
+  <div class="gres" id="fqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 12: 🎮 GAME 2 — FURNITURE → ROOM ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 2</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">家具在哪个房间？jiājù zài nǎge fángjiān?</div>
+<div class="title-en">which room? — pick the right room!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="frs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="frq">1</span>/10</div>
+    <button class="gbtn" onclick="initFr()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:42px" id="frem">🛏️</div>
+    <div class="qqmain" id="frhz" style="margin-top:2px">床</div>
+    <div class="gpy" id="frpy" style="color:#7c3aed;font-weight:700;text-align:center">chuáng</div>
+    <div class="qqlbl" style="margin-top:4px">在哪个房间？<span class="gen">Which room?</span></div>
+  </div>
+  <div class="qopts three" id="fro" style="max-width:520px"></div>
+  <div class="gres" id="frr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 13: 🎮 GAME 3 — COLOR + FURNITURE QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 3</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">这是什么颜色的？shì shénme yánsè de?</div>
+<div class="title-en">colored furniture quiz — describe it!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="cfs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="cfq">1</span>/10</div>
+    <button class="gbtn" onclick="initCf()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div id="cfimage" style="display:flex;justify-content:center;align-items:center">
+      <div class="cf-item"><div class="cf-em" style="filter:hue-rotate(0deg)">🛋️</div><div class="cf-hz" style="color:#ef4444">红色</div></div>
+    </div>
+    <div class="qqlbl" style="margin-top:6px">这是什么？<span class="gen">Describe this!</span></div>
+  </div>
+  <div class="qopts" id="cfo"></div>
+  <div class="gres" id="cfr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 14: DIALOGUE 2 — DESCRIBING HOUSE ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 2</span>
+<div class="tag ct">💬 对话 (二) · Elena's house</div>
+<div class="title">场景二：介绍我的家</div>
+<div class="title-en">scene 2: describing my whole house</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师 lǎoshī · teacher</div>
+    <div class="hz">Elena，你的家有几个房间？</div>
+    <div class="py">Elena, nǐ de jiā yǒu jǐ gè fángjiān?</div>
+    <div class="en">Elena, how many rooms does your house have?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我家有客厅、厨房、两个卧室和一个浴室。</div>
+    <div class="py">wǒ jiā yǒu kètīng, chúfáng, liǎng gè wòshì hé yī gè yùshì.</div>
+    <div class="en">My house has a living room, kitchen, 2 bedrooms and a bathroom.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师</div>
+    <div class="hz">客厅里有什么家具？</div>
+    <div class="py">kètīng lǐ yǒu shénme jiājù?</div>
+    <div class="en">What furniture is in the living room?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">有一个棕色的沙发、一台黑色的电视和一张桌子。</div>
+    <div class="py">yǒu yī gè zōngsè de shāfā, yī tái hēisè de diànshì hé yī zhāng zhuōzi.</div>
+    <div class="en">There's a brown sofa, a black TV, and a table.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">🧑‍🏫</div><div class="bub w"><div class="who">老师</div>
+    <div class="hz">听起来很温馨！</div>
+    <div class="py">tīng qǐlái hěn wēnxīn!</div>
+    <div class="en">Sounds very cozy!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 15: 🎮 GAME 4 — FURNITURE MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 4</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">家具记忆配对 jiājù jìyì pèiduì</div>
+<div class="title-en">furniture memory match — pair the emoji with Chinese!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mfm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 <span id="mff">0</span></div>
+    <button class="gbtn" onclick="initMemF()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mfgrid"></div>
+  <div class="gres" id="mfres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 16: 🎮 GAME 5 — ROOM MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 5</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">房间记忆配对 fángjiān jìyì pèiduì</div>
+<div class="title-en">rooms memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mrm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mrf">0</span></div>
+    <button class="gbtn" onclick="initMemR()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mrgrid"></div>
+  <div class="gres" id="mrres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 17: 🎮 GAME 6 — COLOR MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 6</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">颜色记忆配对 yánsè jìyì pèiduì</div>
+<div class="title-en">colors memory match — pair color with its name!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mcm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 <span id="mcf">0</span></div>
+    <button class="gbtn" onclick="initMemC()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mcgrid"></div>
+  <div class="gres" id="mcres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 18: 🎮 GAME 7 — MEASURE WORD MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 7</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">量词配对 liàngcí pèiduì</div>
+<div class="title-en">measure words — which one for this furniture?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mws">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="mwq">1</span>/8</div>
+    <button class="gbtn" onclick="initMw()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:36px" id="mwem">🛋️</div>
+    <div class="qqmain" id="mwhz">沙发</div>
+    <div class="gpy" id="mwpy" style="color:#7c3aed;font-weight:700;text-align:center">shāfā</div>
+    <div class="qqlbl" style="margin-top:4px">一 ___ 沙发？<span class="gen">Which measure word?</span></div>
+  </div>
+  <div class="qopts three" id="mwo" style="max-width:520px"></div>
+  <div class="gres" id="mwr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 19: DIALOGUE 3 — WHERE IS ... ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 3</span>
+<div class="tag ct">💬 对话 (三) · where is my thing? 我的东西在哪里？</div>
+<div class="title">场景三：找东西 chǎngjǐng sān · zhǎo dōngxi</div>
+<div class="title-en">scene 3: looking for things around the house!</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c">😅</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">妈妈，我的书在哪里？</div>
+    <div class="py">māma, wǒ de shū zài nǎli?</div>
+    <div class="en">Mum, where is my book?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈 māma · mum</div>
+    <div class="hz">你的书在书架上。</div>
+    <div class="py">nǐ de shū zài shūjià shàng.</div>
+    <div class="en">Your book is on the bookshelf.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤔</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">那我的玩偶呢？</div>
+    <div class="py">nà wǒ de wán'ǒu ne?</div>
+    <div class="en">And what about my plushie?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">玩偶在床上，就在枕头旁边。</div>
+    <div class="py">wán'ǒu zài chuáng shàng, jiù zài zhěntou pángbiān.</div>
+    <div class="en">Your plushie is on the bed, right next to the pillow.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🎉</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">找到了！谢谢妈妈！</div>
+    <div class="py">zhǎo dào le! xièxie māma!</div>
+    <div class="en">Found it! Thanks mum!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 20: 🎮 GAME 8 — WHERE IS IT ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 8</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">位置问答 wèizhi wèndá</div>
+<div class="title-en">position quiz — up, down, inside, next to?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="pos">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="poq">1</span>/8</div>
+    <button class="gbtn" onclick="initPo()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:420px">
+    <div style="font-size:44px" id="poem">🐱🛋️</div>
+    <div class="qqmain" id="postmt" style="font-size:16px;margin-top:4px">猫在沙发 ___ 。</div>
+    <div class="gpy" id="popy" style="color:#7c3aed;font-weight:700;text-align:center;margin-top:2px">māo zài shāfā ___ .</div>
+    <div class="gen" id="poen" style="color:#888;font-style:italic;text-align:center">the cat is ___ the sofa</div>
+  </div>
+  <div class="qopts three" id="poo" style="max-width:520px"></div>
+  <div class="gres" id="por"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 21: 🎮 GAME 9 — FILL IN BLANKS ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 9</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">填空 tiánkòng</div>
+<div class="title-en">fill in the blanks!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 关 guān · level <span id="fbround">1</span>/4</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 →</button>
+  </div>
+  <div class="fib" id="fbwrap"></div>
+  <div class="gres" id="fbres" style="font-size:13px"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 22: DIALOGUE 4 — SHOPPING FOR NEW FURNITURE ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 4</span>
+<div class="tag ct">💬 对话 (四) · shopping for new furniture 买新家具</div>
+<div class="title">场景四：买新家具 mǎi xīn jiājù</div>
+<div class="title-en">scene 4: shopping for new furniture with dad!</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3"><div class="who">爸爸 bàba · dad</div>
+    <div class="hz">Elena，你的房间需要什么新家具？</div>
+    <div class="py">Elena, nǐ de fángjiān xūyào shénme xīn jiājù?</div>
+    <div class="en">Elena, what new furniture do you need for your room?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">💡</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我想要一盏新的灯和一个书架。</div>
+    <div class="py">wǒ xiǎng yào yī zhǎn xīn de dēng hé yī gè shūjià.</div>
+    <div class="en">I want a new lamp and a bookshelf.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3"><div class="who">爸爸</div>
+    <div class="hz">你想要什么颜色的灯？</div>
+    <div class="py">nǐ xiǎng yào shénme yánsè de dēng?</div>
+    <div class="en">What color lamp do you want?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">💗</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">粉色的灯和白色的书架。</div>
+    <div class="py">fěnsè de dēng hé báisè de shūjià.</div>
+    <div class="en">A pink lamp and a white bookshelf.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3"><div class="who">爸爸</div>
+    <div class="hz">好的！我们一起去买！</div>
+    <div class="py">hǎo de! wǒmen yīqǐ qù mǎi!</div>
+    <div class="en">Okay! Let's go buy them together!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 23: 🎮 GAME 10 — COLOR MEMORY MATCH (COLOR ↔ FURNITURE) ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 10</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">彩色家具配对 cǎisè jiājù pèiduì</div>
+<div class="title-en">colored furniture memory match — pair phrase with picture!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mccm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mccf">0</span></div>
+    <button class="gbtn" onclick="initMemCC()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mccgrid"></div>
+  <div class="gres" id="mccres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 24: 🎮 GAME 11 — MIXED FINAL QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge co">🎮 game 11</span>
+<div class="tag co">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">混合问答 hùnhé wèndá</div>
+<div class="title-en">mixed final quiz — furniture, rooms, colors!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mxs">0</span>/12</div>
+    <div class="gsbar">题 tí · q.<span id="mxq">1</span>/12</div>
+    <button class="gbtn" onclick="initMx()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:11px;color:#7c3aed;font-weight:700;margin-bottom:4px" id="mxlbl">家具</div>
+    <div id="mxq2" style="font-size:44px">🛋️</div>
+  </div>
+  <div class="qopts" id="mxo"></div>
+  <div class="gres" id="mxr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 25: ROLE-PLAY — ELENA'S DREAM ROOM ════════════════ -->
+<div class="slide">
+<span class="badge cg">角色扮演</span>
+<div class="tag cg">🎭 角色扮演 juésè bànyǎn · role-play</div>
+<div class="title">Elena 的梦想房间 Elena de mèngxiǎng fángjiān</div>
+<div class="title-en">Elena's dream bedroom — describing it to family!</div>
+<div class="dlg" style="gap:3px">
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">Elena，你的梦想房间是什么样的？</div><div class="py">Elena, nǐ de mèngxiǎng fángjiān shì shénme yàng de?</div><div class="en">Elena, what does your dream room look like?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🤩</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">有一张粉色的床！</div><div class="py">yǒu yī zhāng fěnsè de chuáng!</div><div class="en">It has a pink bed!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧸</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">床上有很多熊猫玩偶。</div><div class="py">chuáng shàng yǒu hěn duō xióngmāo wán'ǒu.</div><div class="en">On the bed there are lots of panda plushies.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">📚</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">一个白色的书架，上面全是书。</div><div class="py">yī gè báisè de shūjià, shàngmiàn quán shì shū.</div><div class="en">A white bookshelf full of books.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="who">爸爸</div><div class="hz" style="font-size:11.5px">墙上呢？qiáng shàng ne? · What about the walls?</div><div class="py">qiáng shàng ne?</div><div class="en">What about the walls?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🖼️</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">墙上有蓝色的画。</div><div class="py">qiáng shàng yǒu lánsè de huà.</div><div class="en">Blue paintings on the walls.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">💡</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">还有一盏黄色的灯，在桌子上。</div><div class="py">hái yǒu yī zhǎn huángsè de dēng, zài zhuōzi shàng.</div><div class="en">Also a yellow lamp on the desk.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">听起来很美！tīng qǐlái hěn měi!</div><div class="py">tīng qǐlái hěn měi!</div><div class="en">Sounds beautiful!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 26: PHRASE SUMMARY ════════════════ -->
+<div class="slide">
+<span class="badge cy">总结</span>
+<div class="tag cy">📋 短语总结 duǎnyǔ zǒngjié · phrase summary</div>
+<div class="title">家具话题必备短语</div>
+<div class="title-en">essential phrases for talking about your home!</div>
+<div class="two" style="gap:6px">
+  <div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 里有 ___。</div><div class="patpy">___ lǐ yǒu ___ .</div>
+      <div class="paten">In ___ there is ___.</div>
+    </div>
+    <div class="sp bu" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">这是 ___ 色的 ___。</div><div class="patpy">zhè shì ___ sè de ___ .</div>
+      <div class="paten">This is a ___-colored ___.</div>
+    </div>
+    <div class="sp bg" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 在哪里？</div><div class="patpy">___ zài nǎli ?</div>
+      <div class="paten">Where is ___ ?</div>
+    </div>
+    <div class="sp bo" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 在 ___ 上/下/里。</div><div class="patpy">___ zài ___ shàng / xià / lǐ .</div>
+      <div class="paten">___ is on/under/inside ___.</div>
+    </div>
+    <div class="sp by" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 在 ___ 旁边。</div><div class="patpy">___ zài ___ pángbiān .</div>
+      <div class="paten">___ is next to ___.</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bb" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 是什么颜色？</div><div class="patpy">___ shì shénme yánsè ?</div>
+      <div class="paten">What color is ___?</div>
+    </div>
+    <div class="sp bt" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我喜欢 ___ 色的 ___。</div><div class="patpy">wǒ xǐhuān ___ sè de ___ .</div>
+      <div class="paten">I like ___-colored ___.</div>
+    </div>
+    <div class="sp br" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我想要一 ___ ___。</div><div class="patpy">wǒ xiǎng yào yī ___ ___ .</div>
+      <div class="paten">I want a ___ (measure) ___.</div>
+    </div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">你的家有几个房间？</div><div class="patpy">nǐ de jiā yǒu jǐ gè fángjiān ?</div>
+      <div class="paten">How many rooms in your home?</div>
+    </div>
+    <div class="sp bu" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我家有 ___。</div><div class="patpy">wǒ jiā yǒu ___ .</div>
+      <div class="paten">My home has ___.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 27: MY DREAM HOUSE VISUAL ════════════════ -->
+<div class="slide">
+<span class="badge cg">house</span>
+<div class="tag cg">🏠 我的家 wǒ de jiā · My home layout</div>
+<div class="title">Elena 家的四个房间 sì gè fángjiān</div>
+<div class="title-en">Elena's home — 4 rooms with furniture!</div>
+<div class="house">
+  <div class="room-box bp">
+    <div class="rt">🛋️</div><div class="rn">客厅</div><div class="rp">kètīng</div><div class="re">living room</div>
+    <div class="rf">🛋️📺🪑🕰️</div>
+  </div>
+  <div class="room-box by">
+    <div class="rt">🍳</div><div class="rn">厨房</div><div class="rp">chúfáng</div><div class="re">kitchen</div>
+    <div class="rf">🧊🍳🍽️</div>
+  </div>
+  <div class="room-box bo">
+    <div class="rt">🛏️</div><div class="rn">卧室</div><div class="rp">wòshì</div><div class="re">bedroom</div>
+    <div class="rf">🛏️🧸📚🪞</div>
+  </div>
+  <div class="room-box bt">
+    <div class="rt">🛁</div><div class="rn">浴室</div><div class="rp">yùshì</div><div class="re">bathroom</div>
+    <div class="rf">🛁🚿🚽🪥</div>
+  </div>
+</div>
+<div class="card bp" style="font-size:11px;margin-top:6px">
+  <div class="lbl cp">💡 你能说吗？nǐ néng shuō ma? · can you say?</div>
+  <div style="line-height:1.7;margin-top:3px">
+    "<b>客厅里有沙发、电视和椅子</b>" · The living room has a sofa, TV and chair.
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 28: SELF DESCRIPTION 3.0 ════════════════ -->
+<div class="slide">
+<span class="badge cg">Elena 3.0</span>
+<div class="tag cg">👋 Elena 介绍自己的家</div>
+<div class="title">Elena 的家 Elena de jiā</div>
+<div class="title-en">Elena's updated intro — now with her home!</div>
+<div style="display:flex;flex-direction:column;gap:5px;flex:1">
+  <div style="display:flex;gap:9px;background:#fce7f3;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">😊</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">你好！我叫 Elena，我 8 岁。</div>
+    <div style="font-size:9px;color:#ea580c;font-weight:600">nǐ hǎo! wǒ jiào Elena, wǒ bā suì.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">Hi! I'm Elena, 8 years old.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ffedd5;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🏠</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我家有客厅、卧室、厨房和浴室。</div>
+    <div style="font-size:9px;color:#ea580c;font-weight:600">wǒ jiā yǒu kètīng, wòshì, chúfáng hé yùshì.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">My home has a living room, bedroom, kitchen, and bathroom.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dbeafe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🛏️</span>
+    <div><div style="font-size:12px;font-weight:900;color:#1a1a2e">我的卧室里有一张粉色的床和一个白色的书架。</div>
+    <div style="font-size:8.5px;color:#ea580c;font-weight:600">wǒ de wòshì lǐ yǒu yī zhāng fěnsè de chuáng hé yī gè báisè de shūjià.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">My bedroom has a pink bed and a white bookshelf.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ede9fe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🧸</span>
+    <div><div style="font-size:12px;font-weight:900;color:#1a1a2e">床上有很多玩偶，我最喜欢熊猫玩偶。</div>
+    <div style="font-size:8.5px;color:#ea580c;font-weight:600">chuáng shàng yǒu hěn duō wán'ǒu, wǒ zuì xǐhuān xióngmāo wán'ǒu.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Lots of plushies on my bed — I love the panda one most.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dcfce7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🛋️</span>
+    <div><div style="font-size:12px;font-weight:900;color:#1a1a2e">客厅里有一个棕色的沙发和一台黑色的电视。</div>
+    <div style="font-size:8.5px;color:#ea580c;font-weight:600">kètīng lǐ yǒu yī gè zōngsè de shāfā hé yī tái hēisè de diànshì.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Our living room has a brown sofa and a black TV.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#fef3c7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">💗</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我很喜欢我的家！</div>
+    <div style="font-size:9px;color:#ea580c;font-weight:600">wǒ hěn xǐhuān wǒ de jiā!</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I love my home!</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 29: FUN FACTS ════════════════ -->
+<div class="slide">
+<span class="badge cu">趣味知识</span>
+<div class="tag cu">💡 家的趣味知识 qùwèi zhīshi · fun home facts</div>
+<div class="title">家的小知识 jiā de xiǎo zhīshi</div>
+<div class="title-en">interesting facts about homes!</div>
+<div style="display:flex;flex-direction:column;gap:6px;flex:1">
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp">🏠 1. "家" — 房子里的猪 fáng zi lǐ de zhū</div>
+    <div style="margin-top:3px;line-height:1.6">
+      "家 jiā" (home) 上面 = 房屋，下面 = 猪 (豕 shǐ) — 古代有猪就是家！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">The character 家 (home) shows a roof (宀) over a pig (豕) — ancient people had homes with animals!</span>
+    </div>
+  </div>
+  <div class="card bt" style="font-size:11px">
+    <div class="lbl ct">🎨 2. 中国的红色 Zhōngguó de hóngsè</div>
+    <div style="margin-top:3px;line-height:1.6">
+      在中国，红色 <b>hóngsè</b> 代表幸运和喜悦！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">In China, red represents luck and joy — used at weddings and New Year!</span>
+    </div>
+  </div>
+  <div class="card by" style="font-size:11px">
+    <div class="lbl cy">🛏️ 3. 中国的床 Zhōngguó de chuáng</div>
+    <div style="margin-top:3px;line-height:1.6">
+      北方冬天冷，有些人睡"<b>炕 kàng</b>"—床下面有火！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">In northern China, some traditional homes have a "kang" — a heated bed with fire underneath!</span>
+    </div>
+  </div>
+  <div class="card bg" style="font-size:11px">
+    <div class="lbl cg">🎋 4. 亚洲家具 Yàzhōu jiājù</div>
+    <div style="margin-top:3px;line-height:1.6">
+      日本家里通常没有椅子 — 大家坐在<b>榻榻米 tà tà mǐ</b>（草地板）上！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Japanese homes often have tatami mats instead of chairs — you sit on the floor!</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 30: END CELEBRATION ════════════════ -->
+<div class="slide">
+<div class="endb">
+  <div style="font-size:54px">🏠🎨🎉</div>
+  <div style="font-size:30px;font-weight:900;background:linear-gradient(135deg,#d97706,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Elena，你会说家里的一切了！</div>
+  <div style="font-size:14px;color:#ea580c;font-weight:700">Elena, nǐ huì shuō jiā lǐ de yīqiè le!</div>
+  <div style="font-size:12px;color:#888;font-style:italic">Elena, you can describe everything in your home!</div>
+  <div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.6">
+    你可以告诉朋友你家有什么样的家具！<br>
+    <span style="color:#ea580c;font-weight:700">nǐ kěyǐ gàosu péngyǒu nǐ jiā yǒu shénme yàng de jiājù!</span><br>
+    <span style="font-style:italic">You can now tell friends about your home &amp; furniture!</span>
+  </div>
+  <div class="cklist">
+    <span class="ck">✅ 房间 fángjiān · rooms</span>
+    <span class="ck">✅ 客厅 kètīng · living</span>
+    <span class="ck">✅ 卧室 wòshì · bedroom</span>
+    <span class="ck">✅ 厨房 chúfáng · kitchen</span>
+    <span class="ck">✅ 浴室 yùshì · bathroom</span>
+    <span class="ck">✅ 家具 jiājù · furniture</span>
+    <span class="ck">✅ 颜色 yánsè · colors (review)</span>
+    <span class="ck">✅ 新颜色 · brown/black/white/grey</span>
+    <span class="ck">✅ 位置 wèizhi · positions</span>
+    <span class="ck">✅ 量词 liàngcí · measure words</span>
+    <span class="ck">✅ 4 对话 duìhuà</span>
+    <span class="ck">✅ 角色扮演</span>
+    <span class="ck">🎮 家具问答</span>
+    <span class="ck">🎮 家具→房间</span>
+    <span class="ck">🎮 彩色家具</span>
+    <span class="ck">🎮 家具配对</span>
+    <span class="ck">🎮 房间配对</span>
+    <span class="ck">🎮 颜色配对</span>
+    <span class="ck">🎮 量词配对</span>
+    <span class="ck">🎮 位置问答</span>
+    <span class="ck">🎮 填空</span>
+    <span class="ck">🎮 彩色配对</span>
+    <span class="ck">🎮 混合问答</span>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:6px">
+    太棒了！tài bàng le! · 11 个游戏！加油！jiā yóu! 💪
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年6月9日 · liù yuè jiǔ rì · June 9, 2026</div>
+  <a href="index.html" style="background:linear-gradient(135deg,#d97706,#ea580c);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
+</div>
+</div>
+
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">→</button>
+</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+let cur=0;
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>go(i);dotsEl.appendChild(d);});
+function go(n){slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');if(GI[cur])GI[cur]();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+const GI={};
+let showPY=false,showEN=false;
+function tPY(){showPY=!showPY;document.body.classList.toggle('show-py',showPY);document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('拼音')){b.textContent=showPY?'拼音 pīnyīn ✓':'拼音 pīnyīn';b.classList.toggle('on',showPY);}});}
+function tEN(){showEN=!showEN;document.body.classList.toggle('show-en',showEN);document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('English')){b.textContent=showEN?'English ✓':'English';b.classList.toggle('on',showEN);}});}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function $id(id){return document.getElementById(id)}
+
+// ═══ DATA ═══
+const FURN=[
+  {em:'🛋️',hz:'沙发',py:'shāfā',en:'sofa',room:'客厅',mw:'张'},
+  {em:'📺',hz:'电视',py:'diànshì',en:'TV',room:'客厅',mw:'台'},
+  {em:'🪑',hz:'椅子',py:'yǐzi',en:'chair',room:'客厅',mw:'把'},
+  {em:'🟫',hz:'桌子',py:'zhuōzi',en:'table',room:'客厅',mw:'张'},
+  {em:'💡',hz:'灯',py:'dēng',en:'lamp',room:'卧室',mw:'盏'},
+  {em:'🛏️',hz:'床',py:'chuáng',en:'bed',room:'卧室',mw:'张'},
+  {em:'📚',hz:'书架',py:'shūjià',en:'bookshelf',room:'卧室',mw:'个'},
+  {em:'🚪',hz:'衣柜',py:'yīguì',en:'wardrobe',room:'卧室',mw:'个'},
+  {em:'🪞',hz:'镜子',py:'jìngzi',en:'mirror',room:'卧室',mw:'面'},
+  {em:'🖼️',hz:'画',py:'huà',en:'painting',room:'卧室',mw:'幅'},
+  {em:'🧊',hz:'冰箱',py:'bīngxiāng',en:'fridge',room:'厨房',mw:'台'},
+  {em:'🍳',hz:'炉灶',py:'lúzào',en:'stove',room:'厨房',mw:'个'},
+  {em:'🛁',hz:'浴缸',py:'yùgāng',en:'bathtub',room:'浴室',mw:'个'},
+  {em:'🚽',hz:'马桶',py:'mǎtǒng',en:'toilet',room:'浴室',mw:'个'},
+  {em:'🌀',hz:'洗衣机',py:'xǐyījī',en:'washing machine',room:'浴室',mw:'台'},
+];
+const ROOMS=[
+  {em:'🛋️',hz:'客厅',py:'kètīng',en:'living room'},
+  {em:'🛏️',hz:'卧室',py:'wòshì',en:'bedroom'},
+  {em:'🍳',hz:'厨房',py:'chúfáng',en:'kitchen'},
+  {em:'🛁',hz:'浴室',py:'yùshì',en:'bathroom'},
+  {em:'📚',hz:'书房',py:'shūfáng',en:'study'},
+  {em:'🍽️',hz:'餐厅',py:'cāntīng',en:'dining room'},
+];
+const COLORS=[
+  {hz:'红色',py:'hóngsè',en:'red',hex:'#ef4444'},
+  {hz:'橙色',py:'chéngsè',en:'orange',hex:'#f97316'},
+  {hz:'黄色',py:'huángsè',en:'yellow',hex:'#eab308'},
+  {hz:'绿色',py:'lǜsè',en:'green',hex:'#22c55e'},
+  {hz:'蓝色',py:'lánsè',en:'blue',hex:'#3b82f6'},
+  {hz:'紫色',py:'zǐsè',en:'purple',hex:'#a855f7'},
+  {hz:'粉色',py:'fěnsè',en:'pink',hex:'#ec4899'},
+  {hz:'棕色',py:'zōngsè',en:'brown',hex:'#78350f'},
+  {hz:'黑色',py:'hēisè',en:'black',hex:'#000'},
+  {hz:'白色',py:'báisè',en:'white',hex:'#fff'},
+];
+const MW_LIST=[
+  {hz:'张',py:'zhāng',en:'flat'},
+  {hz:'把',py:'bǎ',en:'handle'},
+  {hz:'台',py:'tái',en:'machine'},
+  {hz:'盏',py:'zhǎn',en:'lamp'},
+  {hz:'个',py:'gè',en:'general'},
+  {hz:'面',py:'miàn',en:'flat surface'},
+  {hz:'幅',py:'fú',en:'painting'},
+];
+
+// ═══ GAME 1: Furniture Quiz ═══
+let fqScore=0,fqQ=0,fqItems=[];
+function initFq(){fqScore=0;fqQ=0;fqItems=shuffle(FURN).slice(0,10);$id('fqs').textContent='0';$id('fqq').textContent='1';$id('fqr').style.display='none';showFq();}
+function showFq(){if(fqQ>=10){const r=$id('fqr');r.style.display='block';r.textContent='🎉 '+fqScore+'/10 — '+(fqScore>=9?'完美！':fqScore>=7?'很好！':'加油！');$id('fqo').innerHTML='';return;}
+  const it=fqItems[fqQ];$id('fqem').textContent=it.em;$id('fqq').textContent=fqQ+1;
+  const wrong=FURN.filter(o=>o.hz!==it.hz);const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('fqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');fqScore++;$id('fqs').textContent=fqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      fqQ++;setTimeout(showFq,1100);};
+    el.appendChild(btn);});}
+GI[10]=initFq;
+
+// ═══ GAME 2: Furniture → Room ═══
+let frScore=0,frQ=0,frItems=[];
+function initFr(){frScore=0;frQ=0;frItems=shuffle(FURN).slice(0,10);$id('frs').textContent='0';$id('frq').textContent='1';$id('frr').style.display='none';showFr();}
+function showFr(){if(frQ>=10){const r=$id('frr');r.style.display='block';r.textContent='🎉 '+frScore+'/10 — '+(frScore>=9?'完美！':frScore>=7?'很好！':'加油！');$id('fro').innerHTML='';return;}
+  const it=frItems[frQ];$id('frem').textContent=it.em;$id('frhz').textContent=it.hz;$id('frpy').textContent=it.py;$id('frq').textContent=frQ+1;
+  const wrong=ROOMS.filter(o=>o.hz!==it.room);const correct=ROOMS.find(o=>o.hz===it.room);const opts=[correct,...shuffle(wrong).slice(0,2)];
+  const el=$id('fro');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<div style="font-size:26px">${opt.em}</div><span class="qopt-hz" style="font-size:12px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.room){btn.classList.add('ok');frScore++;$id('frs').textContent=frScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.room)b.classList.add('ok');});}
+      frQ++;setTimeout(showFr,1100);};
+    el.appendChild(btn);});}
+GI[11]=initFr;
+
+// ═══ GAME 3: Colored Furniture Quiz ═══
+const CF_ITEMS=[
+  {em:'🛋️',hz:'沙发',py:'shāfā'},{em:'🛏️',hz:'床',py:'chuáng'},{em:'🪑',hz:'椅子',py:'yǐzi'},{em:'💡',hz:'灯',py:'dēng'},
+  {em:'📺',hz:'电视',py:'diànshì'},{em:'🪞',hz:'镜子',py:'jìngzi'},{em:'🖼️',hz:'画',py:'huà'},{em:'🚪',hz:'门',py:'mén'},
+];
+let cfScore=0,cfQ=0,cfItems=[];
+function initCf(){cfScore=0;cfQ=0;
+  cfItems=[];for(let i=0;i<10;i++){cfItems.push({furn:CF_ITEMS[Math.floor(i%CF_ITEMS.length)],color:COLORS[Math.floor(Math.random()*8)]});}
+  cfItems=shuffle(cfItems);
+  $id('cfs').textContent='0';$id('cfq').textContent='1';$id('cfr').style.display='none';showCf();}
+function showCf(){if(cfQ>=10){const r=$id('cfr');r.style.display='block';r.textContent='🎉 '+cfScore+'/10 — '+(cfScore>=9?'完美！':cfScore>=7?'很好！':'加油！');$id('cfo').innerHTML='';return;}
+  const it=cfItems[cfQ];
+  $id('cfimage').innerHTML=`<div class="cf-item"><div class="cf-em">${it.furn.em}</div><div class="cf-hz" style="color:${it.color.hex==='#fff'?'#666':it.color.hex}">${it.color.hz}</div></div>`;
+  $id('cfq').textContent=cfQ+1;
+  const correctPhrase=it.color.hz+'的'+it.furn.hz;
+  const correctPy=it.color.py+' de '+it.furn.py;
+  const correctEn=it.color.en+' '+it.furn.py;
+  const wrong=[];for(let i=0;i<3;i++){const c=COLORS[Math.floor(Math.random()*COLORS.length)];const f=CF_ITEMS[Math.floor(Math.random()*CF_ITEMS.length)];if(c.hz!==it.color.hz||f.hz!==it.furn.hz)wrong.push({phrase:c.hz+'的'+f.hz,py:c.py+' de '+f.py,en:c.en+' '+f.py});}
+  const opts=[{phrase:correctPhrase,py:correctPy,en:correctEn},...wrong].slice(0,4);
+  const el=$id('cfo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12px">${opt.phrase}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.phrase===correctPhrase){btn.classList.add('ok');cfScore++;$id('cfs').textContent=cfScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===correctPhrase)b.classList.add('ok');});}
+      cfQ++;setTimeout(showCf,1100);};
+    el.appendChild(btn);});}
+GI[12]=initCf;
+
+// ═══ Generic memory match builder ═══
+function buildMemMatch(pairs,gridId,mEl,fEl,resEl,total,renderHz,renderEm){
+  let flipped=[],matched=0,flips=0,lock=false;
+  $id(mEl).textContent='0';$id(fEl).textContent='0';$id(resEl).style.display='none';
+  const cards=[];pairs.forEach(p=>{cards.push({id:p.id,side:'hz',data:p});cards.push({id:p.id,side:'em',data:p});});
+  const grid=$id(gridId);grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){if(lock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');if(card.side==='hz')el.innerHTML=renderHz(card.data);else el.innerHTML=renderEm(card.data);
+      flipped.push({el,card});
+      if(flipped.length===2){flips++;$id(fEl).textContent=flips;
+        if(flipped[0].card.id===flipped[1].card.id){flipped[0].el.classList.add('match');flipped[1].el.classList.add('match');flipped=[];matched++;$id(mEl).textContent=matched;
+          if(matched===total){setTimeout(()=>{const r=$id(resEl);r.style.display='block';r.textContent='🎉 '+flips+' 翻 · 太棒了！';},400);}}
+        else{lock=true;setTimeout(()=>{flipped[0].el.classList.remove('flip');flipped[0].el.textContent='🎴';flipped[1].el.classList.remove('flip');flipped[1].el.textContent='🎴';flipped=[];lock=false;},900);}}};
+    grid.appendChild(el);});
+}
+
+// ═══ GAME 4: Furniture Memory Match ═══
+const MEM_F=[
+  {id:1,hz:'沙发',py:'shāfā',en:'sofa',em:'🛋️'},
+  {id:2,hz:'床',py:'chuáng',en:'bed',em:'🛏️'},
+  {id:3,hz:'电视',py:'diànshì',en:'TV',em:'📺'},
+  {id:4,hz:'冰箱',py:'bīngxiāng',en:'fridge',em:'🧊'},
+  {id:5,hz:'灯',py:'dēng',en:'lamp',em:'💡'},
+  {id:6,hz:'镜子',py:'jìngzi',en:'mirror',em:'🪞'},
+  {id:7,hz:'马桶',py:'mǎtǒng',en:'toilet',em:'🚽'},
+  {id:8,hz:'椅子',py:'yǐzi',en:'chair',em:'🪑'},
+];
+function initMemF(){buildMemMatch(MEM_F,'mfgrid','mfm','mff','mfres',8,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:36px">${d.em}</div>`);}
+GI[14]=initMemF;
+
+// ═══ GAME 5: Room Memory Match ═══
+const MEM_R=[
+  {id:1,hz:'客厅',py:'kètīng',en:'living room',em:'🛋️'},
+  {id:2,hz:'卧室',py:'wòshì',en:'bedroom',em:'🛏️'},
+  {id:3,hz:'厨房',py:'chúfáng',en:'kitchen',em:'🍳'},
+  {id:4,hz:'浴室',py:'yùshì',en:'bathroom',em:'🛁'},
+  {id:5,hz:'书房',py:'shūfáng',en:'study',em:'📚'},
+  {id:6,hz:'餐厅',py:'cāntīng',en:'dining room',em:'🍽️'},
+];
+function initMemR(){buildMemMatch(MEM_R,'mrgrid','mrm','mrf','mrres',6,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:36px">${d.em}</div>`);}
+GI[15]=initMemR;
+
+// ═══ GAME 6: Color Memory Match ═══
+const MEM_CO=[
+  {id:1,hz:'红色',py:'hóngsè',en:'red',hex:'#ef4444'},
+  {id:2,hz:'蓝色',py:'lánsè',en:'blue',hex:'#3b82f6'},
+  {id:3,hz:'绿色',py:'lǜsè',en:'green',hex:'#22c55e'},
+  {id:4,hz:'黄色',py:'huángsè',en:'yellow',hex:'#eab308'},
+  {id:5,hz:'棕色',py:'zōngsè',en:'brown',hex:'#78350f'},
+  {id:6,hz:'黑色',py:'hēisè',en:'black',hex:'#000'},
+  {id:7,hz:'白色',py:'báisè',en:'white',hex:'#fff'},
+  {id:8,hz:'粉色',py:'fěnsè',en:'pink',hex:'#ec4899'},
+];
+function initMemC(){buildMemMatch(MEM_CO,'mcgrid','mcm','mcf','mcres',8,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="width:52px;height:36px;background:${d.hex};border-radius:8px;border:${d.hex==='#fff'?'2px solid #ddd':'none'}"></div>`);}
+GI[16]=initMemC;
+
+// ═══ GAME 7: Measure Word Quiz ═══
+let mwScore=0,mwQ=0,mwItems=[];
+function initMw(){mwScore=0;mwQ=0;mwItems=shuffle(FURN.filter(f=>MW_LIST.find(mw=>mw.hz===f.mw))).slice(0,8);$id('mws').textContent='0';$id('mwq').textContent='1';$id('mwr').style.display='none';showMw();}
+function showMw(){if(mwQ>=8){const r=$id('mwr');r.style.display='block';r.textContent='🎉 '+mwScore+'/8 — '+(mwScore===8?'完美！':mwScore>=6?'很好！':'加油！');$id('mwo').innerHTML='';return;}
+  const it=mwItems[mwQ];$id('mwem').textContent=it.em;$id('mwhz').textContent=it.hz;$id('mwpy').textContent=it.py;$id('mwq').textContent=mwQ+1;
+  const wrong=MW_LIST.filter(o=>o.hz!==it.mw);const correct=MW_LIST.find(o=>o.hz===it.mw);const opts=[correct,...shuffle(wrong).slice(0,2)];
+  const el=$id('mwo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:22px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.mw){btn.classList.add('ok');mwScore++;$id('mws').textContent=mwScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.mw)b.classList.add('ok');});}
+      mwQ++;setTimeout(showMw,1100);};
+    el.appendChild(btn);});}
+GI[17]=initMw;
+
+// ═══ GAME 8: Position Quiz ═══
+const POS_QUESTIONS=[
+  {em:'🐱🛋️',stmt:'猫在沙发 ___ 。',py:'māo zài shāfā ___ .',en:'the cat is ___ the sofa',a:'上',hint:'on top'},
+  {em:'⚽️🛏️',stmt:'球在床 ___ 。',py:'qiú zài chuáng ___ .',en:'the ball is ___ the bed',a:'下',hint:'underneath'},
+  {em:'📚🎒',stmt:'书在书包 ___ 。',py:'shū zài shūbāo ___ .',en:'the book is ___ the bag',a:'里',hint:'inside'},
+  {em:'💡🖥️',stmt:'灯在电脑 ___ 。',py:'dēng zài diànnǎo ___ .',en:'the lamp is ___ the computer',a:'旁边',hint:'next to'},
+  {em:'🐶🚪',stmt:'狗在门 ___ 。',py:'gǒu zài mén ___ .',en:'the dog is ___ the door',a:'旁边',hint:'next to'},
+  {em:'🧸🛏️',stmt:'玩偶在床 ___ 。',py:'wán\'ǒu zài chuáng ___ .',en:'the plushie is ___ the bed',a:'上',hint:'on top'},
+  {em:'🍎🧊',stmt:'苹果在冰箱 ___ 。',py:'píngguǒ zài bīngxiāng ___ .',en:'the apple is ___ the fridge',a:'里',hint:'inside'},
+  {em:'🐱🪑',stmt:'猫在椅子 ___ 。',py:'māo zài yǐzi ___ .',en:'the cat is ___ the chair',a:'下',hint:'underneath'},
+];
+const POS_OPTS=[{hz:'上',py:'shàng',en:'on'},{hz:'下',py:'xià',en:'under'},{hz:'里',py:'lǐ',en:'inside'},{hz:'旁边',py:'pángbiān',en:'next to'}];
+let poScore=0,poQ=0,poItems=[];
+function initPo(){poScore=0;poQ=0;poItems=shuffle(POS_QUESTIONS).slice(0,8);$id('pos').textContent='0';$id('poq').textContent='1';$id('por').style.display='none';showPo();}
+function showPo(){if(poQ>=8){const r=$id('por');r.style.display='block';r.textContent='🎉 '+poScore+'/8 — '+(poScore===8?'完美！':poScore>=6?'很好！':'加油！');$id('poo').innerHTML='';return;}
+  const it=poItems[poQ];$id('poem').textContent=it.em;$id('postmt').textContent=it.stmt;$id('popy').textContent=it.py;$id('poen').textContent=it.en;$id('poq').textContent=poQ+1;
+  const wrong=POS_OPTS.filter(o=>o.hz!==it.a);const correct=POS_OPTS.find(o=>o.hz===it.a);const opts=[correct,...shuffle(wrong).slice(0,2)];
+  const el=$id('poo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:18px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.a){btn.classList.add('ok');poScore++;$id('pos').textContent=poScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a)b.classList.add('ok');});}
+      poQ++;setTimeout(showPo,1100);};
+    el.appendChild(btn);});}
+GI[19]=initPo;
+
+// ═══ GAME 9: Fill in Blanks ═══
+const FB_ROUNDS=[
+  {sentence:'我的卧室里有一张 ___ 。',py:'wǒ de wòshì lǐ yǒu yī zhāng ___ .',en:'In my bedroom there is a ___.',blanks:['床'],bank:['床','厨房','汽车','菜单']},
+  {sentence:'客厅里有一个 ___ 色的沙发。',py:'kètīng lǐ yǒu yī gè ___ sè de shāfā.',en:'In the living room, a ___-colored sofa.',blanks:['红'],bank:['红','家','里','什么']},
+  {sentence:'书在书架 ___ 。',py:'shū zài shūjià ___ .',en:'The book is ___ the shelf.',blanks:['上'],bank:['上','下','里','旁边']},
+  {sentence:'冰箱在 ___ ，浴缸在 ___ 。',py:'bīngxiāng zài ___ , yùgāng zài ___ .',en:'Fridge in kitchen, tub in bathroom.',blanks:['厨房','浴室'],bank:['厨房','浴室','卧室','客厅','书房']},
+];
+let fbIdx=0,fbFilled=[];
+function initFb(){fbIdx=0;$id('fbres').style.display='none';$id('fbnext').style.display='none';$id('fbround').textContent='1';renderFb();}
+function renderFb(){const round=FB_ROUNDS[fbIdx];fbFilled=round.blanks.map(()=>null);$id('fbround').textContent=(fbIdx+1);
+  const wrap=$id('fbwrap');let html='<div class="fib-row">';let bidx=0;const parts=round.sentence.split('___');
+  parts.forEach((p,i)=>{html+=p;if(i<parts.length-1){html+=`<span class="fib-blank" id="fb-b${bidx}" data-bi="${bidx}">____</span>`;bidx++;}});
+  html+='</div>';html+=`<div class="gpy" style="font-size:10px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
+  html+=`<div class="gen" style="font-size:9.5px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
+  html+='<div class="fib-bank">';shuffle(round.bank).forEach(t=>{html+=`<button class="fib-tok" data-w="${t}">${t}</button>`;});html+='</div>';wrap.innerHTML=html;
+  wrap.querySelectorAll('.fib-tok').forEach(tok=>{tok.onclick=function(){const next=fbFilled.findIndex(x=>x===null);if(next<0)return;
+    const word=tok.dataset.w;const bk=$id('fb-b'+next);bk.textContent=word;bk.classList.add('filled');fbFilled[next]=word;tok.classList.add('used');
+    bk.onclick=function(){bk.textContent='____';bk.classList.remove('filled');fbFilled[next]=null;wrap.querySelectorAll('.fib-tok').forEach(t=>{if(t.dataset.w===word&&t.classList.contains('used')){t.classList.remove('used');}});bk.onclick=null;};
+    if(fbFilled.every(w=>w!==null)){const correct=fbFilled.every((w,i)=>w===round.blanks[i]);const r=$id('fbres');r.style.display='block';
+      if(correct){r.style.background='linear-gradient(135deg,#dcfce7,#bbf7d0)';r.style.color='#15803d';r.textContent='🎉 对了！duì le! · correct!';$id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';if(fbIdx===FB_ROUNDS.length-1){setTimeout(()=>{r.textContent='🌟 全部完成！quánbù wánchéng!';},700);}}
+      else{r.style.background='linear-gradient(135deg,#fee2e2,#fca5a5)';r.style.color='#991b1b';r.textContent='❌ 再试一次！';}}};});}
+function nextFb(){if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}}
+GI[20]=initFb;
+
+// ═══ GAME 10: Colored Furniture Memory Match ═══
+const MEM_CC=[
+  {id:1,phrase:'红色的沙发',phrasepy:'hóngsè de shāfā',phraseen:'red sofa',color:'#ef4444',em:'🛋️'},
+  {id:2,phrase:'蓝色的椅子',phrasepy:'lánsè de yǐzi',phraseen:'blue chair',color:'#3b82f6',em:'🪑'},
+  {id:3,phrase:'黄色的灯',phrasepy:'huángsè de dēng',phraseen:'yellow lamp',color:'#eab308',em:'💡'},
+  {id:4,phrase:'白色的床',phrasepy:'báisè de chuáng',phraseen:'white bed',color:'#fff',em:'🛏️'},
+  {id:5,phrase:'黑色的电视',phrasepy:'hēisè de diànshì',phraseen:'black TV',color:'#000',em:'📺'},
+  {id:6,phrase:'粉色的镜子',phrasepy:'fěnsè de jìngzi',phraseen:'pink mirror',color:'#ec4899',em:'🪞'},
+];
+function initMemCC(){buildMemMatch(MEM_CC,'mccgrid','mccm','mccf','mccres',6,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-hz" style="font-size:11px">${d.phrase}</div><div class="mcard-py gpy" style="font-size:8.5px">${d.phrasepy}</div><div class="gen" style="font-size:7.5px;color:#888;font-style:italic">${d.phraseen}</div></div>`,
+  d=>`<div style="width:52px;height:52px;background:${d.color};border-radius:12px;border:${d.color==='#fff'?'2px solid #ddd':'none'};display:flex;align-items:center;justify-content:center;font-size:32px">${d.em}</div>`);}
+GI[22]=initMemCC;
+
+// ═══ GAME 11: Mixed Final Quiz ═══
+let mxScore=0,mxQ=0,mxItems=[];
+function buildMx(){const qs=[];
+  shuffle(FURN).slice(0,4).forEach(f=>qs.push({type:'furniture',label:'家具',q:f.em,size:'44px',correct:f.hz,wrongs:FURN.filter(x=>x.hz!==f.hz).map(x=>x.hz)}));
+  shuffle(FURN.filter(f=>ROOMS.find(r=>r.hz===f.room))).slice(0,4).forEach(f=>qs.push({type:'room',label:f.hz+' 在哪？',q:f.em+' '+f.hz,size:'20px',correct:f.room,wrongs:ROOMS.filter(x=>x.hz!==f.room).map(x=>x.hz)}));
+  shuffle(FURN.filter(f=>MW_LIST.find(m=>m.hz===f.mw))).slice(0,4).forEach(f=>qs.push({type:'mw',label:'量词',q:'一 ___ '+f.hz,size:'20px',correct:f.mw,wrongs:MW_LIST.filter(x=>x.hz!==f.mw).map(x=>x.hz)}));
+  return shuffle(qs).slice(0,12);}
+function initMx(){mxScore=0;mxQ=0;mxItems=buildMx();$id('mxs').textContent='0';$id('mxq').textContent='1';$id('mxr').style.display='none';showMx();}
+function showMx(){if(mxQ>=12){const r=$id('mxr');r.style.display='block';r.textContent='🎉 '+mxScore+'/12 — '+(mxScore>=11?'完美！':mxScore>=8?'很好！':'加油！');$id('mxo').innerHTML='';return;}
+  const it=mxItems[mxQ];$id('mxlbl').textContent=it.label;$id('mxq2').innerHTML=`<div style="font-size:${it.size}">${it.q}</div>`;$id('mxq').textContent=mxQ+1;
+  const opts=shuffle([it.correct,...shuffle([...new Set(it.wrongs)]).slice(0,3)]);
+  const el=$id('mxo');el.innerHTML='';let ans=false;
+  opts.forEach(opt=>{const btn=document.createElement('button');btn.className='qopt';btn.innerHTML=`<span class="qopt-hz">${opt}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt===it.correct){btn.classList.add('ok');mxScore++;$id('mxs').textContent=mxScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.correct)b.classList.add('ok');});}
+      mxQ++;setTimeout(showMx,1100);};
+    el.appendChild(btn);});}
+GI[23]=initMx;
+</script>
+</body>
+</html>
