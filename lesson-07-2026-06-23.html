@@ -1,0 +1,1503 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<title>Elena的中文课 · 四季和天气 · Seasons &amp; Weather</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Noto+Sans+SC:wght@400;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"Nunito","Noto Sans SC",sans-serif;background:linear-gradient(135deg,#fef9c3,#dbeafe 40%,#dcfce7 70%,#fce7f3);min-height:100vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+.app{width:880px;position:relative}
+
+.home-btn{position:fixed;top:14px;left:14px;z-index:1000;background:linear-gradient(135deg,#0891b2,#ea580c);color:#fff;padding:7px 13px 7px 11px;border-radius:999px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.18);display:flex;align-items:center;gap:7px;transition:.2s;font-family:inherit}
+.home-btn:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(0,0,0,.24)}
+.home-icon{font-size:16px;font-weight:900;line-height:1}
+.home-text{display:flex;flex-direction:column;line-height:1.15;align-items:flex-start}
+.home-hz{font-size:11.5px;font-weight:900}
+.home-py{font-size:7.5px;font-weight:600;opacity:.9}
+.home-en{font-size:7.5px;font-style:italic;opacity:.85}
+
+.slide{display:none;background:#fff;border-radius:28px;padding:18px 28px 12px;box-shadow:0 8px 40px rgba(0,0,0,.12);min-height:560px;animation:fadeIn .35s ease;position:relative;flex-direction:column}
+.slide.active{display:flex}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+.cp{color:#e91e8c}.cu{color:#7c3aed}.ct{color:#0891b2}.co{color:#ea580c}.cg{color:#16a34a}.cb{color:#2563eb}.cy{color:#ca8a04}.cr{color:#dc2626}
+.bp{background:#fce7f3}.bu{background:#ede9fe}.bt{background:#cffafe}.bo{background:#ffedd5}.bg{background:#dcfce7}.bb{background:#dbeafe}.by{background:#fef9c3}.br{background:#fee2e2}
+
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:1}
+.c2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.c3{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.c4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.c5{display:grid;grid-template-columns:repeat(5,1fr);gap:5px}
+
+.tag{font-size:9px;font-weight:800;letter-spacing:.3px;color:inherit;margin-bottom:3px}
+.title{font-size:21px;font-weight:900;color:#1a1a2e;line-height:1.1;margin-bottom:1px}
+.title-py{font-size:11px;color:#0891b2;font-weight:700;margin-bottom:1px}
+.title-en{font-size:10.5px;color:#888;font-style:italic;margin-bottom:6px}
+.sub{font-size:10.5px;color:#888;margin-bottom:8px}
+.lbl{font-size:8.5px;font-weight:800;letter-spacing:.2px;margin-bottom:4px}
+.badge{font-size:8px;font-weight:800;position:absolute;top:10px;right:14px;opacity:.4}
+.card{border-radius:11px;padding:8px 10px}
+
+.vc{border-radius:10px;padding:7px 4px;text-align:center}
+.vc .py{font-size:9px;color:#0891b2;font-weight:700;margin-top:2px}
+.vc .hz{font-size:13px;font-weight:900;color:#1a1a2e;margin:1px 0}
+.vc .en{font-size:8.5px;color:#888}
+
+/* Season card — big and beautiful */
+.season-card{border-radius:16px;padding:16px 12px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:4px;position:relative;overflow:hidden}
+.season-card.spring{background:linear-gradient(135deg,#dcfce7,#bbf7d0)}
+.season-card.summer{background:linear-gradient(135deg,#fef9c3,#fde68a)}
+.season-card.autumn{background:linear-gradient(135deg,#ffedd5,#fed7aa)}
+.season-card.winter{background:linear-gradient(135deg,#dbeafe,#bfdbfe)}
+.season-card .sem{font-size:44px;line-height:1}
+.season-card .spy{font-size:11px;color:#0891b2;font-weight:700;margin-top:4px}
+.season-card .shz{font-size:20px;font-weight:900;color:#1a1a2e}
+.season-card .sen{font-size:10px;color:#666;font-style:italic}
+.season-card .stemp{font-size:9px;color:#7c3aed;font-weight:700;background:rgba(255,255,255,.8);padding:2px 8px;border-radius:8px;margin-top:4px}
+.season-card .sfeel{font-size:10px;color:#444;margin-top:3px}
+
+/* Weather card */
+.weather-card{border-radius:12px;padding:9px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative}
+.weather-card .wem{font-size:34px;line-height:1;margin-bottom:2px}
+.weather-card .wpy{font-size:9px;color:#0891b2;font-weight:700}
+.weather-card .whz{font-size:12.5px;font-weight:900;color:#1a1a2e}
+.weather-card .wen{font-size:8.5px;color:#888}
+
+/* CSS-drawn weather visuals */
+.sun{display:inline-block;width:1em;height:1em;background:radial-gradient(circle,#fde047 40%,#f59e0b 100%);border-radius:50%;position:relative;vertical-align:middle;box-shadow:0 0 0.3em rgba(251,191,36,.6)}
+.cloud-svg{display:inline-block;width:1.2em;height:0.8em;background:#fff;border-radius:0.4em;position:relative;vertical-align:middle;box-shadow:0 0.1em 0.15em rgba(0,0,0,.15)}
+.cloud-svg::before{content:"";position:absolute;left:0.1em;top:-0.25em;width:0.5em;height:0.5em;background:#fff;border-radius:50%}
+.cloud-svg::after{content:"";position:absolute;right:0.15em;top:-0.35em;width:0.6em;height:0.6em;background:#fff;border-radius:50%}
+.rain{display:inline-block;width:1.4em;height:1.3em;position:relative;vertical-align:middle}
+.rain::before{content:"☁";position:absolute;left:0;top:0;font-size:0.8em;color:#94a3b8}
+.rain::after{content:"💧💧💧";position:absolute;bottom:0;left:0.15em;font-size:0.35em;letter-spacing:0.1em}
+.snowflake{display:inline-block;font-size:1em;color:#e0f2fe;text-shadow:0 0 0.15em rgba(59,130,246,.7)}
+
+/* Weather box in dialogue */
+.weather-box{background:linear-gradient(135deg,#cffafe,#dbeafe);border-radius:14px;padding:10px 14px;display:flex;align-items:center;gap:10px;border:2px solid #67e8f9}
+.weather-box .em{font-size:32px}
+.weather-box .info{flex:1}
+.weather-box .info .hz{font-size:14px;font-weight:900;color:#1a1a2e}
+.weather-box .info .py{font-size:9.5px;color:#0891b2;font-weight:700}
+.weather-box .info .en{font-size:9.5px;color:#888;font-style:italic}
+
+/* Season → clothing combo */
+.combo-card{background:#fff;border-radius:14px;padding:10px 12px;display:flex;align-items:center;gap:10px;border:2px solid #f3f4f6}
+.combo-card .cc-season{width:80px;padding:8px;border-radius:10px;text-align:center;flex-shrink:0}
+.combo-card .cc-season .cc-em{font-size:24px;line-height:1}
+.combo-card .cc-season .cc-hz{font-size:11px;font-weight:900;margin-top:2px}
+.combo-card .cc-arrow{font-size:20px;color:#0891b2;font-weight:900}
+.combo-card .cc-clothing{flex:1}
+.combo-card .cc-clothing .cc-items{font-size:24px;letter-spacing:4px}
+.combo-card .cc-clothing .cc-hz{font-size:11.5px;font-weight:900;color:#1a1a2e;margin-top:3px}
+.combo-card .cc-clothing .cc-py{font-size:9px;color:#0891b2;font-weight:700}
+.combo-card .cc-clothing .cc-en{font-size:9px;color:#888;font-style:italic}
+
+/* Dialogue bubbles */
+.dlg{flex:1;display:flex;flex-direction:column;gap:5px}
+.dlg-turn{display:flex;gap:8px;align-items:flex-start}
+.dlg-turn.right{flex-direction:row-reverse}
+.avi{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0;box-shadow:0 1px 4px rgba(0,0,0,.12)}
+.avi.w{background:linear-gradient(135deg,#67e8f9,#0891b2)}
+.avi.c{background:linear-gradient(135deg,#f9a8d4,#ec4899)}
+.avi.c2{background:linear-gradient(135deg,#a5b4fc,#6366f1)}
+.avi.c3{background:linear-gradient(135deg,#86efac,#22c55e)}
+.bub{border-radius:14px;padding:6px 11px;max-width:80%;position:relative}
+.bub.w{background:#cffafe;border-top-left-radius:4px}
+.bub.c{background:#fce7f3;border-top-right-radius:4px}
+.bub.c2{background:#e0e7ff;border-top-right-radius:4px}
+.bub.c3{background:#dcfce7;border-top-right-radius:4px}
+.bub .hz{font-size:12px;font-weight:800;color:#1a1a2e;line-height:1.3}
+.bub .py{font-size:8.5px;color:#0891b2;font-weight:700;margin-top:1px;line-height:1.2}
+.bub .en{font-size:8px;color:#777;font-style:italic;margin-top:1px;line-height:1.2}
+.who{font-size:7.5px;font-weight:800;letter-spacing:.3px;color:#888;text-transform:uppercase;margin-bottom:1px}
+
+.sp{border-radius:10px;padding:6px 10px;margin-bottom:4px}
+.sp .pat{font-size:11.5px;font-weight:900;color:#1a1a2e}
+.sp .patpy{font-size:8.5px;color:#0891b2;font-weight:600}
+.sp .paten{font-size:8.5px;color:#666;font-style:italic;margin:1px 0}
+.sp .ex{font-size:10.5px;font-weight:700;margin-top:3px}
+.sp .expy{font-size:8px;color:#aaa}
+.sp .exen{font-size:8.5px;color:#999;font-style:italic}
+
+.cov{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px}
+.cov-title{font-size:40px;font-weight:900;background:linear-gradient(135deg,#0891b2,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.ctag{background:#cffafe;color:#0e7490;border-radius:999px;padding:4px 10px;font-size:10px;font-weight:700;display:inline-block;margin:3px}
+
+.endb{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:8px}
+.cklist{display:flex;flex-wrap:wrap;justify-content:center;gap:5px;max-width:760px}
+.ck{background:#cffafe;border-radius:999px;padding:3px 10px;font-size:10px;font-weight:700;color:#0e7490}
+
+.nav{display:flex;align-items:center;justify-content:center;gap:12px;margin-top:10px}
+.nbtn{width:36px;height:36px;border-radius:50%;border:none;cursor:pointer;font-size:15px;background:#fff;box-shadow:0 2px 10px rgba(0,0,0,.12);transition:.2s;color:#333;display:flex;align-items:center;justify-content:center}
+.nbtn:hover{transform:scale(1.1)}
+.dots{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;max-width:680px}
+.dot{width:6px;height:6px;border-radius:50%;background:#ddd;cursor:pointer;transition:.2s}
+.dot.active{background:#0891b2;transform:scale(1.4)}
+
+.gw{flex:1;display:flex;flex-direction:column;align-items:center;gap:8px}
+.gsbar{font-size:12px;font-weight:800;color:#0e7490;background:#cffafe;padding:3px 12px;border-radius:999px}
+.gbtn{background:linear-gradient(135deg,#0891b2,#ea580c);color:#fff;border:none;padding:5px 14px;border-radius:999px;font-weight:800;font-size:11px;cursor:pointer;font-family:inherit}
+.gbtn:hover{opacity:.85}
+.gres{font-size:14px;font-weight:900;text-align:center;padding:7px 16px;border-radius:12px;display:none;background:linear-gradient(135deg,#dcfce7,#bbf7d0);color:#15803d;max-width:520px}
+
+.toggle-bar{position:absolute;top:10px;right:14px;display:flex;gap:6px;z-index:10}
+.tgl{background:#ede9fe;color:#7c3aed;border:2px solid #c4b5fd;padding:3px 9px;border-radius:999px;font-size:9.5px;font-weight:800;cursor:pointer;font-family:inherit;transition:.15s}
+.tgl.on{background:#dcfce7;color:#15803d;border-color:#86efac}
+.tgl:hover{transform:scale(1.05)}
+.slide:has(.toggle-bar) .badge{display:none}
+
+.gpy,.gen{display:none}
+.gpy{font-size:8.5px;color:#7c3aed;font-weight:700;line-height:1.3}
+.gen{font-size:8.5px;color:#888;font-style:italic;line-height:1.3}
+body.show-py .gpy{display:block}
+body.show-en .gen{display:block}
+
+.qq{background:linear-gradient(135deg,#cffafe,#dbeafe);border-radius:14px;padding:12px 18px;text-align:center;width:100%;max-width:380px}
+.qqmain{font-size:30px;font-weight:900;color:#1a1a2e;line-height:1.1}
+.qqlbl{font-size:11px;color:#888;margin-top:3px}
+.qopts{display:grid;grid-template-columns:1fr 1fr;gap:7px;width:100%;max-width:460px}
+.qopts.three{grid-template-columns:repeat(3,1fr)}
+.qopt{background:#fff;border:2px solid #e0e0e0;border-radius:11px;padding:8px 10px;font-weight:800;cursor:pointer;transition:.15s;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:1px;min-height:50px;justify-content:center}
+.qopt:hover{border-color:#0891b2;background:#ecfeff}
+.qopt.ok{background:#dcfce7;border-color:#16a34a;color:#15803d}
+.qopt.no{background:#fee2e2;border-color:#dc2626;color:#991b1b}
+.qopt-hz{font-size:14px}
+
+.mgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;width:100%;max-width:660px}
+.mcard{background:linear-gradient(135deg,#0891b2,#ea580c);border-radius:10px;height:72px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:20px;color:#fff;user-select:none;transition:.25s}
+.mcard.flip{background:#fff;border:2px solid #0891b2;cursor:default}
+.mcard.match{background:linear-gradient(135deg,#dcfce7,#bbf7d0)!important;border:2px solid #16a34a!important;cursor:default}
+.mcard-py{font-size:9px;color:#0891b2;font-weight:700}
+.mcard-hz{font-size:14px;font-weight:900;color:#1a1a2e}
+
+.fib{background:linear-gradient(135deg,#cffafe,#dbeafe);border-radius:14px;padding:13px 18px;width:100%;max-width:560px}
+.fib-row{font-size:15px;line-height:2.1;color:#1a1a2e;font-weight:700;text-align:center}
+.fib-blank{display:inline-block;min-width:80px;border-bottom:3px solid #0891b2;padding:0 6px;font-weight:900;color:#0891b2;text-align:center;margin:0 2px;cursor:pointer}
+.fib-blank.filled{border-bottom-color:#16a34a;color:#15803d;background:#dcfce7;border-radius:6px}
+.fib-bank{display:flex;flex-wrap:wrap;gap:7px;justify-content:center;margin-top:10px}
+.fib-tok{background:#fff;border:2px solid #0891b2;color:#1a1a2e;padding:5px 13px;border-radius:999px;font-weight:800;font-size:13px;cursor:pointer;font-family:inherit;transition:.15s}
+.fib-tok:hover{background:#cffafe}
+.fib-tok.used{opacity:.3;pointer-events:none}
+
+/* Hot/Cold classifier */
+.hc-card{background:linear-gradient(135deg,#cffafe,#fef3c7);border-radius:14px;padding:14px 18px;text-align:center;width:100%;max-width:320px}
+.hc-em{font-size:52px;line-height:1}
+.hc-hz{font-size:20px;font-weight:900;color:#1a1a2e;margin-top:6px}
+.hc-py{font-size:11px;color:#7c3aed;font-weight:700}
+.hc-en{font-size:10px;color:#888;font-style:italic}
+.hc-btns{display:flex;gap:12px;max-width:400px;width:100%}
+.hc-btn{flex:1;padding:12px;border-radius:14px;border:none;cursor:pointer;font-family:inherit;display:flex;flex-direction:column;align-items:center;gap:2px;transition:.15s;font-weight:800}
+.hc-btn:hover{transform:scale(1.04)}
+.hc-btn.hot{background:linear-gradient(135deg,#fee2e2,#fca5a5);color:#991b1b}
+.hc-btn.cold{background:linear-gradient(135deg,#dbeafe,#bfdbfe);color:#1e40af}
+.hc-hz-btn{font-size:18px;font-weight:900}
+.hc-py-btn{font-size:9px;opacity:.85}
+.hc-en-btn{font-size:9px;font-style:italic;opacity:.85}
+
+/* Temperature bar */
+.temp-bar{background:linear-gradient(90deg,#3b82f6 0%,#22c55e 30%,#eab308 60%,#ef4444 100%);height:12px;border-radius:8px;position:relative;margin:8px 0}
+.temp-marker{position:absolute;top:-4px;width:4px;height:20px;background:#111;border-radius:2px}
+</style>
+</head>
+<body>
+<a class="home-btn" href="index.html" title="返回课程列表">
+  <span class="home-icon">←</span>
+  <div class="home-text">
+    <span class="home-hz">🏠 课程列表</span>
+    <span class="home-py">kèchéng lièbiǎo</span>
+    <span class="home-en">all lessons</span>
+  </div>
+</a>
+<div class="app">
+
+<!-- ════════════════ SLIDE 1: COVER ════════════════ -->
+<div class="slide active">
+<div class="cov">
+  <div style="font-size:48px">🌸☀️🍂❄️</div>
+  <div class="cov-title">四季和天气<br><span style="font-size:18px;font-weight:700;background:none;-webkit-text-fill-color:#888">sì jì hé tiānqì · Seasons &amp; Weather</span></div>
+  <div style="background:linear-gradient(135deg,#cffafe,#fef3c7);border-radius:999px;padding:6px 18px;font-size:13px;font-weight:800;color:#0e7490">📅 2026年6月23日 · liù yuè èrshísān rì · June 23, 2026</div>
+  <div style="display:flex;flex-wrap:wrap;gap:4px;justify-content:center;max-width:720px">
+    <span class="ctag">🌸 春天 chūntiān · spring</span>
+    <span class="ctag">☀️ 夏天 xiàtiān · summer</span>
+    <span class="ctag">🍂 秋天 qiūtiān · autumn</span>
+    <span class="ctag">❄️ 冬天 dōngtiān · winter</span>
+    <span class="ctag">🌤️ 天气 tiānqì · weather</span>
+    <span class="ctag">🌡️ 温度 wēndù · temperature</span>
+    <span class="ctag">👕 服装 fúzhuāng · clothing (review!)</span>
+    <span class="ctag">💬 4 对话 duìhuà</span>
+    <span class="ctag">🎮 12 游戏 yóuxì</span>
+  </div>
+  <div style="background:#fff;border:2px solid #67e8f9;border-radius:14px;padding:9px 16px;font-size:11px;color:#0e7490;margin-top:8px;max-width:600px;line-height:1.6">
+    <b>💡 小贴士 xiǎo tiēshì · tip:</b><br>
+    每个季节的天气不一样 — 学会说 "今天天气怎么样？"<br>
+    <span style="color:#7c3aed;font-weight:600;font-size:10px">měi gè jìjié de tiānqì bù yīyàng!</span><br>
+    <span style="color:#888;font-style:italic;font-size:10px">Every season has different weather — learn to ask "How's the weather today?"</span>
+  </div>
+  <div style="font-size:11px;color:#aaa;margin-top:6px">30 页 sānshí yè · 30 pages</div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 2: 4 SEASONS OVERVIEW ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 1</span>
+<div class="tag ct">🌸 四季 sì jì · the 4 seasons</div>
+<div class="title">四季 sì jì</div>
+<div class="title-en">the 4 seasons — spring, summer, autumn, winter</div>
+<div class="c4" style="margin-bottom:6px;flex:1">
+  <div class="season-card spring">
+    <div class="sem">🌸</div>
+    <div class="spy">chūntiān</div>
+    <div class="shz">春天</div>
+    <div class="sen">Spring</div>
+    <div class="stemp">🌡️ 15-25°C</div>
+    <div class="sfeel">暖和 nuǎnhuo · warm</div>
+  </div>
+  <div class="season-card summer">
+    <div class="sem">☀️</div>
+    <div class="spy">xiàtiān</div>
+    <div class="shz">夏天</div>
+    <div class="sen">Summer</div>
+    <div class="stemp">🌡️ 25-35°C</div>
+    <div class="sfeel">很热 hěn rè · hot</div>
+  </div>
+  <div class="season-card autumn">
+    <div class="sem">🍂</div>
+    <div class="spy">qiūtiān</div>
+    <div class="shz">秋天</div>
+    <div class="sen">Autumn</div>
+    <div class="stemp">🌡️ 10-20°C</div>
+    <div class="sfeel">凉快 liángkuai · cool</div>
+  </div>
+  <div class="season-card winter">
+    <div class="sem">❄️</div>
+    <div class="spy">dōngtiān</div>
+    <div class="shz">冬天</div>
+    <div class="sen">Winter</div>
+    <div class="stemp">🌡️ -5-10°C</div>
+    <div class="sfeel">很冷 hěn lěng · cold</div>
+  </div>
+</div>
+<div class="card by" style="font-size:11px">
+  <div class="lbl cy">💡 小贴士 xiǎo tiēshì · tip</div>
+  <div style="line-height:1.7;margin-top:3px">
+    每个季节后面都有 <b>天 tiān</b>（天气/日子）！<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">Every season name ends with 天 (day/sky) — it's like saying "spring days", "summer days"...</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 3: WEATHER VOCAB ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 2</span>
+<div class="tag ct">🌤️ 天气 tiānqì · weather words</div>
+<div class="title">天气怎么样 tiānqì zěnmeyàng?</div>
+<div class="title-en">what's the weather?</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="weather-card by"><div class="wem">☀️</div><div class="wpy">qíngtiān</div><div class="whz">晴天</div><div class="wen">sunny</div></div>
+  <div class="weather-card bt"><div class="wem">⛅</div><div class="wpy">duōyún</div><div class="whz">多云</div><div class="wen">cloudy</div></div>
+  <div class="weather-card bu"><div class="wem">☁️</div><div class="wpy">yīntiān</div><div class="whz">阴天</div><div class="wen">overcast</div></div>
+  <div class="weather-card bb"><div class="wem">🌧️</div><div class="wpy">yǔtiān</div><div class="whz">雨天</div><div class="wen">rainy</div></div>
+  <div class="weather-card bg"><div class="wem">⛈️</div><div class="wpy">léiyǔ</div><div class="whz">雷雨</div><div class="wen">thunderstorm</div></div>
+  <div class="weather-card bp"><div class="wem">🌨️</div><div class="wpy">xuětiān</div><div class="whz">雪天</div><div class="wen">snowy</div></div>
+  <div class="weather-card bo"><div class="wem">💨</div><div class="wpy">guāfēng</div><div class="whz">刮风</div><div class="wen">windy</div></div>
+  <div class="weather-card br"><div class="wem">🌫️</div><div class="wpy">wù</div><div class="whz">雾</div><div class="wen">foggy</div></div>
+</div>
+<div class="card bp" style="font-size:11px">
+  <div class="lbl cp">💬 句子 jùzi · sentence</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>今天天气怎么样？</b> <span class="cp" style="font-size:9px">jīntiān tiānqì zěnmeyàng?</span> <span style="color:#888;font-size:9px;font-style:italic">How's the weather today?</span><br>
+    <b>今天是晴天。</b> <span class="cp" style="font-size:9px">jīntiān shì qíngtiān.</span> <span style="color:#888;font-size:9px;font-style:italic">Today it's sunny.</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 4: WEATHER PHENOMENA ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 3</span>
+<div class="tag ct">🌈 天气现象 tiānqì xiànxiàng · weather phenomena</div>
+<div class="title">天气的东西 tiānqì de dōngxi</div>
+<div class="title-en">things you see in weather!</div>
+<div class="c4" style="margin-bottom:6px">
+  <div class="weather-card by"><div class="wem">☀️</div><div class="wpy">tàiyáng</div><div class="whz">太阳</div><div class="wen">sun</div></div>
+  <div class="weather-card bt"><div class="wem">☁️</div><div class="wpy">yún</div><div class="whz">云</div><div class="wen">cloud</div></div>
+  <div class="weather-card bb"><div class="wem">💧</div><div class="wpy">yǔ</div><div class="whz">雨</div><div class="wen">rain</div></div>
+  <div class="weather-card bp"><div class="wem">❄️</div><div class="wpy">xuě</div><div class="whz">雪</div><div class="wen">snow</div></div>
+  <div class="weather-card bo"><div class="wem">💨</div><div class="wpy">fēng</div><div class="whz">风</div><div class="wen">wind</div></div>
+  <div class="weather-card br"><div class="wem">⚡</div><div class="wpy">léi</div><div class="whz">雷</div><div class="wen">thunder</div></div>
+  <div class="weather-card bg"><div class="wem">🌈</div><div class="wpy">cǎihóng</div><div class="whz">彩虹</div><div class="wen">rainbow</div></div>
+  <div class="weather-card bu"><div class="wem">🌙</div><div class="wpy">yuèliàng</div><div class="whz">月亮</div><div class="wen">moon</div></div>
+</div>
+<div class="c2">
+  <div class="card by" style="font-size:11px">
+    <div class="lbl cy">💬 下雨了！</div>
+    <div style="line-height:1.7;margin-top:3px">
+      <b>下雨了！</b> <span class="cy" style="font-size:9px">xià yǔ le!</span><br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">It's raining! (下 xià = come down)</span>
+    </div>
+  </div>
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp">💬 下雪了！</div>
+    <div style="line-height:1.7;margin-top:3px">
+      <b>下雪了！</b> <span class="cp" style="font-size:9px">xià xuě le!</span><br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">It's snowing!</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 5: TEMPERATURE ADJECTIVES ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 4</span>
+<div class="tag ct">🌡️ 温度 wēndù · temperature words</div>
+<div class="title">冷 vs 热 lěng vs rè</div>
+<div class="title-en">temperature — from very cold to very hot!</div>
+<div class="c5" style="margin-bottom:6px">
+  <div class="vc bb"><div style="font-size:24px">🥶</div><div class="py">hěn lěng</div><div class="hz">很冷</div><div class="en">very cold</div></div>
+  <div class="vc bt"><div style="font-size:24px">😨</div><div class="py">lěng</div><div class="hz">冷</div><div class="en">cold</div></div>
+  <div class="vc bg"><div style="font-size:24px">😊</div><div class="py">liángkuai</div><div class="hz">凉快</div><div class="en">cool</div></div>
+  <div class="vc by"><div style="font-size:24px">😌</div><div class="py">nuǎnhuo</div><div class="hz">暖和</div><div class="en">warm</div></div>
+  <div class="vc bo"><div style="font-size:24px">😅</div><div class="py">rè</div><div class="hz">热</div><div class="en">hot</div></div>
+</div>
+<div class="temp-bar">
+  <div class="temp-marker" style="left:5%"></div>
+  <div class="temp-marker" style="left:20%"></div>
+  <div class="temp-marker" style="left:45%"></div>
+  <div class="temp-marker" style="left:70%"></div>
+  <div class="temp-marker" style="left:90%"></div>
+</div>
+<div style="display:flex;justify-content:space-between;font-size:9px;color:#666;padding:0 4px;margin-bottom:6px">
+  <span>-10°C</span><span>0°C</span><span>15°C</span><span>25°C</span><span>35°C</span>
+</div>
+<div class="card br" style="font-size:11px">
+  <div class="lbl cr">⚠️ 太 tài · TOO much!</div>
+  <div style="line-height:1.7;margin-top:3px">
+    <b>太冷了 tài lěng le</b> = too cold! · <b>太热了 tài rè le</b> = too hot!<br>
+    <span style="color:#888;font-style:italic;font-size:9.5px">"太 + adjective + 了" = "too ___"</span>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 6: SPRING & SUMMER DETAILS ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 5</span>
+<div class="tag ct">🌸☀️ 春天和夏天 chūntiān hé xiàtiān · spring &amp; summer</div>
+<div class="title">春天和夏天有什么？</div>
+<div class="title-en">what happens in spring &amp; summer?</div>
+<div class="c2" style="gap:8px;flex:1">
+  <div class="card bg" style="padding:12px">
+    <div class="lbl cg" style="font-size:12px">🌸 春天 chūntiān · spring</div>
+    <div style="font-size:11px;line-height:1.8;margin-top:5px">
+      🌡️ <b>暖和</b> nuǎnhuo · warm<br>
+      🌷 <b>开花</b> kāi huā · flowers bloom<br>
+      🐦 <b>小鸟</b> xiǎo niǎo · birds come back<br>
+      🌱 <b>草绿了</b> cǎo lǜ le · grass turns green<br>
+      🌧️ 有时下雨 · sometimes rains<br>
+      🌸 五颜六色 wǔ yán liù sè · colorful!
+    </div>
+    <div class="card" style="background:rgba(255,255,255,.7);padding:6px 8px;margin-top:6px;font-size:10px">
+      <b>我喜欢春天，因为花很漂亮。</b><br>
+      <span class="cg" style="font-size:8.5px">wǒ xǐhuān chūntiān, yīnwèi huā hěn piàoliang.</span>
+    </div>
+  </div>
+  <div class="card by" style="padding:12px">
+    <div class="lbl cy" style="font-size:12px">☀️ 夏天 xiàtiān · summer</div>
+    <div style="font-size:11px;line-height:1.8;margin-top:5px">
+      🌡️ <b>很热</b> hěn rè · very hot<br>
+      ☀️ <b>太阳</b> tàiyáng · sunshine<br>
+      🍦 <b>吃冰淇淋</b> chī bīngqílín · eat ice cream<br>
+      🏊 <b>游泳</b> yóuyǒng · swimming<br>
+      🌳 <b>大树</b> · big trees provide shade<br>
+      🎆 暑假 shǔjià · summer holidays!
+    </div>
+    <div class="card" style="background:rgba(255,255,255,.7);padding:6px 8px;margin-top:6px;font-size:10px">
+      <b>夏天太热了，我要吃冰淇淋！</b><br>
+      <span class="cy" style="font-size:8.5px">xiàtiān tài rè le, wǒ yào chī bīngqílín!</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 7: AUTUMN & WINTER DETAILS ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 6</span>
+<div class="tag ct">🍂❄️ 秋天和冬天 · autumn &amp; winter</div>
+<div class="title">秋天和冬天有什么？</div>
+<div class="title-en">what happens in autumn &amp; winter?</div>
+<div class="c2" style="gap:8px;flex:1">
+  <div class="card bo" style="padding:12px">
+    <div class="lbl co" style="font-size:12px">🍂 秋天 qiūtiān · autumn</div>
+    <div style="font-size:11px;line-height:1.8;margin-top:5px">
+      🌡️ <b>凉快</b> liángkuai · cool<br>
+      🍁 <b>落叶</b> luòyè · leaves fall<br>
+      🍎 <b>水果多</b> · lots of fruits<br>
+      🎃 <b>南瓜</b> nánguā · pumpkin<br>
+      💨 <b>刮风</b> guāfēng · windy<br>
+      🌾 丰收 fēngshōu · harvest time!
+    </div>
+    <div class="card" style="background:rgba(255,255,255,.7);padding:6px 8px;margin-top:6px;font-size:10px">
+      <b>秋天的叶子是红色和黄色的。</b><br>
+      <span class="co" style="font-size:8.5px">qiūtiān de yèzi shì hóngsè hé huángsè de.</span>
+    </div>
+  </div>
+  <div class="card bb" style="padding:12px">
+    <div class="lbl cb" style="font-size:12px">❄️ 冬天 dōngtiān · winter</div>
+    <div style="font-size:11px;line-height:1.8;margin-top:5px">
+      🌡️ <b>很冷</b> hěn lěng · very cold<br>
+      ❄️ <b>下雪</b> xià xuě · snowing<br>
+      ⛄ <b>雪人</b> xuěrén · snowman<br>
+      🧣 <b>戴围巾</b> · wear scarves<br>
+      🔥 <b>暖气</b> nuǎnqì · heater<br>
+      🎄 新年 xīnnián · New Year!
+    </div>
+    <div class="card" style="background:rgba(255,255,255,.7);padding:6px 8px;margin-top:6px;font-size:10px">
+      <b>冬天下雪，我要堆雪人！</b><br>
+      <span class="cb" style="font-size:8.5px">dōngtiān xià xuě, wǒ yào duī xuěrén!</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 8: SEASON + CLOTHING COMBINATIONS ════════════════ -->
+<div class="slide">
+<span class="badge ct">vocab 7</span>
+<div class="tag ct">👕 季节 + 服装 · seasons + clothing (from lesson 6!)</div>
+<div class="title">什么季节穿什么？</div>
+<div class="title-en">what to wear each season!</div>
+<div style="display:flex;flex-direction:column;gap:6px;flex:1">
+  <div class="combo-card">
+    <div class="cc-season" style="background:linear-gradient(135deg,#dcfce7,#bbf7d0)"><div class="cc-em">🌸</div><div class="cc-hz">春天</div></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-clothing">
+      <div class="cc-items">👕🧥</div>
+      <div class="cc-hz">T恤 + 薄外套</div>
+      <div class="cc-py">T-xù + báo wàitào</div>
+      <div class="cc-en">T-shirt + light jacket (still cool)</div>
+    </div>
+  </div>
+  <div class="combo-card">
+    <div class="cc-season" style="background:linear-gradient(135deg,#fef9c3,#fde68a)"><div class="cc-em">☀️</div><div class="cc-hz">夏天</div></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-clothing">
+      <div class="cc-items">👕🩳🩴</div>
+      <div class="cc-hz">T恤 + 短裤 + 凉鞋</div>
+      <div class="cc-py">T-xù + duǎnkù + liángxié</div>
+      <div class="cc-en">T-shirt + shorts + sandals (hot!)</div>
+    </div>
+  </div>
+  <div class="combo-card">
+    <div class="cc-season" style="background:linear-gradient(135deg,#ffedd5,#fed7aa)"><div class="cc-em">🍂</div><div class="cc-hz">秋天</div></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-clothing">
+      <div class="cc-items">🧶👖👟</div>
+      <div class="cc-hz">毛衣 + 长裤 + 鞋子</div>
+      <div class="cc-py">máoyī + chángkù + xiézi</div>
+      <div class="cc-en">sweater + pants + shoes (cool)</div>
+    </div>
+  </div>
+  <div class="combo-card">
+    <div class="cc-season" style="background:linear-gradient(135deg,#dbeafe,#bfdbfe)"><div class="cc-em">❄️</div><div class="cc-hz">冬天</div></div>
+    <div class="cc-arrow">→</div>
+    <div class="cc-clothing">
+      <div class="cc-items">🥼🎩🧣🧤</div>
+      <div class="cc-hz">羽绒服 + 帽子 + 围巾 + 手套</div>
+      <div class="cc-py">yǔróngfú + màozi + wéijīn + shǒutào</div>
+      <div class="cc-en">down jacket + hat + scarf + gloves (freezing!)</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 9: SENTENCE PATTERNS ════════════════ -->
+<div class="slide">
+<span class="badge cg">grammar 1</span>
+<div class="tag cg">💬 句型 jùxíng · sentence patterns for weather</div>
+<div class="title">怎么说天气 zěnme shuō tiānqì</div>
+<div class="title-en">how to talk about weather!</div>
+<div class="two" style="gap:7px">
+  <div>
+    <div class="sp bb">
+      <div class="pat">今天天气怎么样？</div><div class="patpy">jīntiān tiānqì zěnmeyàng?</div>
+      <div class="paten">How's the weather today?</div>
+      <div class="ex cb">今天是晴天。<span class="expy"> jīntiān shì qíngtiān.</span></div><div class="exen">It's sunny today.</div>
+    </div>
+    <div class="sp by">
+      <div class="pat">今天 ___ 度。</div><div class="patpy">jīntiān ___ dù.</div>
+      <div class="paten">Today is ___ degrees.</div>
+      <div class="ex cy">今天二十五度。<span class="expy"> èrshíwǔ dù.</span></div><div class="exen">Today is 25 degrees.</div>
+    </div>
+    <div class="sp bo">
+      <div class="pat">下 ___ 了！</div><div class="patpy">xià ___ le !</div>
+      <div class="paten">It's ___ing!</div>
+      <div class="ex co">下雨了！/ 下雪了！<span class="expy"> xià yǔ / xià xuě le!</span></div><div class="exen">It's raining/snowing!</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bg">
+      <div class="pat">你喜欢什么季节？</div><div class="patpy">nǐ xǐhuān shénme jìjié?</div>
+      <div class="paten">What season do you like?</div>
+      <div class="ex cg">我喜欢春天。<span class="expy"> wǒ xǐhuān chūntiān.</span></div><div class="exen">I like spring.</div>
+    </div>
+    <div class="sp bp">
+      <div class="pat">___ 天气很 ___ 。</div><div class="patpy">___ tiānqì hěn ___ .</div>
+      <div class="paten">In ___ (season) it's ___.</div>
+      <div class="ex cp">夏天天气很热。<span class="expy"> xiàtiān tiānqì hěn rè.</span></div><div class="exen">Summer weather is very hot.</div>
+    </div>
+    <div class="sp bu">
+      <div class="pat">我要穿 ___。</div><div class="patpy">wǒ yào chuān ___ .</div>
+      <div class="paten">I should wear ___.</div>
+      <div class="ex cu">很冷，我要穿毛衣。<span class="expy"> hěn lěng, chuān máoyī.</span></div><div class="exen">It's cold, I'll wear a sweater.</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 10: DIALOGUE 1 — WEATHER TODAY ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 1</span>
+<div class="tag ct">💬 对话 (一) · today's weather 今天的天气</div>
+<div class="title">场景一：早上问天气</div>
+<div class="title-en">scene 1: asking about the weather</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈 · mum</div>
+    <div class="hz">Elena，今天天气怎么样？</div>
+    <div class="py">Elena, jīntiān tiānqì zěnmeyàng?</div>
+    <div class="en">Elena, how's the weather today?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">今天是晴天，很暖和！</div>
+    <div class="py">jīntiān shì qíngtiān, hěn nuǎnhuo!</div>
+    <div class="en">Today is sunny and warm!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">现在几度？</div>
+    <div class="py">xiànzài jǐ dù?</div>
+    <div class="en">How many degrees now?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌡️</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">二十度左右。</div>
+    <div class="py">èrshí dù zuǒyòu.</div>
+    <div class="en">About 20 degrees.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">好，你穿 T恤就可以了。</div>
+    <div class="py">hǎo, nǐ chuān T-xù jiù kěyǐ le.</div>
+    <div class="en">Okay, you can just wear a T-shirt.</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 11: 🎮 GAME 1 — SEASON QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 1</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">季节问答 jìjié wèndá</div>
+<div class="title-en">season quiz — see the emoji, pick the season!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="sqs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="sqq">1</span>/8</div>
+    <button class="gbtn" onclick="initSq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="sqem" style="font-size:70px">🌸</div>
+    <div class="qqlbl" style="margin-top:6px">这是哪个季节？<span class="gen">Which season?</span></div>
+  </div>
+  <div class="qopts" id="sqo"></div>
+  <div class="gres" id="sqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 12: 🎮 GAME 2 — WEATHER QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 2</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">天气问答 tiānqì wèndá</div>
+<div class="title-en">weather quiz!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="wqs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="wqq">1</span>/10</div>
+    <button class="gbtn" onclick="initWq()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div class="qqmain" id="wqem" style="font-size:70px">☀️</div>
+    <div class="qqlbl" style="margin-top:6px">这是什么天气？<span class="gen">What weather is this?</span></div>
+  </div>
+  <div class="qopts" id="wqo"></div>
+  <div class="gres" id="wqr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 13: 🎮 GAME 3 — HOT OR COLD ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 3</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">冷还是热？lěng háishi rè?</div>
+<div class="title-en">hot or cold? — click the right one!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="hcs">0</span>/10</div>
+    <div class="gsbar">题 tí · q.<span id="hcq">1</span>/10</div>
+    <button class="gbtn" onclick="initHc()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="hc-card" id="hccard">
+    <div class="hc-em" id="hcem">☀️</div>
+    <div class="hc-hz" id="hchz">夏天</div>
+    <div class="hc-py gpy" id="hcpy">xiàtiān</div>
+    <div class="hc-en gen" id="hcen">summer</div>
+  </div>
+  <div class="hc-btns">
+    <button class="hc-btn hot" onclick="hcPick('hot')">
+      <div class="hc-hz-btn">🔥 热</div>
+      <div class="hc-py-btn gpy">rè</div>
+      <div class="hc-en-btn gen">hot</div>
+    </button>
+    <button class="hc-btn cold" onclick="hcPick('cold')">
+      <div class="hc-hz-btn">❄️ 冷</div>
+      <div class="hc-py-btn gpy">lěng</div>
+      <div class="hc-en-btn gen">cold</div>
+    </button>
+  </div>
+  <div class="gres" id="hcr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 14: DIALOGUE 2 — WEATHER + CLOTHING ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 2</span>
+<div class="tag ct">💬 对话 (二) · what to wear for the weather 穿什么？</div>
+<div class="title">场景二：冬天穿什么？</div>
+<div class="title-en">scene 2: winter clothing choices!</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3"><div class="who">爸爸 · dad</div>
+    <div class="hz">Elena，今天很冷，下雪了！</div>
+    <div class="py">Elena, jīntiān hěn lěng, xià xuě le!</div>
+    <div class="en">Elena, it's very cold today, it's snowing!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😨</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">哇，几度？</div>
+    <div class="py">wa, jǐ dù?</div>
+    <div class="en">Wow, how cold?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3"><div class="who">爸爸</div>
+    <div class="hz">零下五度！你要多穿一点。</div>
+    <div class="py">líng xià wǔ dù! nǐ yào duō chuān yīdiǎn.</div>
+    <div class="en">-5 degrees! You need to wear more clothes.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧣</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">好，我穿羽绒服，戴帽子和围巾。</div>
+    <div class="py">hǎo, wǒ chuān yǔróngfú, dài màozi hé wéijīn.</div>
+    <div class="en">Okay, I'll wear a down jacket, put on a hat and scarf.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3"><div class="who">爸爸</div>
+    <div class="hz">别忘了手套！</div>
+    <div class="py">bié wàng le shǒutào!</div>
+    <div class="en">Don't forget gloves!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🧤</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">好，我要堆雪人！</div>
+    <div class="py">hǎo, wǒ yào duī xuěrén!</div>
+    <div class="en">Okay, I want to build a snowman!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 15: 🎮 GAME 4 — SEASON MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 4</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">季节记忆配对 jìjié jìyì pèiduì</div>
+<div class="title-en">seasons memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="msm">0</span>/4</div>
+    <div class="gsbar">🔄 翻 <span id="msf">0</span></div>
+    <button class="gbtn" onclick="initMemS()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="msgrid" style="grid-template-columns:repeat(4,1fr);max-width:520px"></div>
+  <div class="gres" id="msres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 16: 🎮 GAME 5 — WEATHER MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 5</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">天气记忆配对 tiānqì jìyì pèiduì</div>
+<div class="title-en">weather memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mwm">0</span>/8</div>
+    <div class="gsbar">🔄 翻 <span id="mwf">0</span></div>
+    <button class="gbtn" onclick="initMemW()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mwgrid"></div>
+  <div class="gres" id="mwres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 17: 🎮 GAME 6 — WEATHER PHENOMENA MEMORY MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 6</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">天气现象配对 tiānqì xiànxiàng pèiduì</div>
+<div class="title-en">weather things memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mpm">0</span>/6</div>
+    <div class="gsbar">🔄 翻 <span id="mpf">0</span></div>
+    <button class="gbtn" onclick="initMemP()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mpgrid"></div>
+  <div class="gres" id="mpres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 18: 🎮 GAME 7 — SEASON → CLOTHING ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 7</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">季节穿什么？jìjié chuān shénme?</div>
+<div class="title-en">what to wear this season?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="scs">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="scq">1</span>/8</div>
+    <button class="gbtn" onclick="initSc()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:50px" id="scem">☀️</div>
+    <div class="qqmain" id="schz" style="margin-top:2px;font-size:22px">夏天</div>
+    <div class="gpy" id="scpy" style="color:#7c3aed;font-weight:700;text-align:center">xiàtiān</div>
+    <div class="qqlbl" style="margin-top:4px">穿什么？<span class="gen">What to wear?</span></div>
+  </div>
+  <div class="qopts" id="sco"></div>
+  <div class="gres" id="scr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 19: DIALOGUE 3 — FAVORITE SEASON ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 3</span>
+<div class="tag ct">💬 对话 (三) · favorite season 你最喜欢的季节</div>
+<div class="title">场景三：最喜欢的季节</div>
+<div class="title-en">scene 3: what's your favorite season?</div>
+<div class="dlg">
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">Elena，你最喜欢哪个季节？</div>
+    <div class="py">Elena, nǐ zuì xǐhuān nǎ ge jìjié?</div>
+    <div class="en">Elena, which season do you like most?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">我最喜欢春天，因为花很漂亮！</div>
+    <div class="py">wǒ zuì xǐhuān chūntiān, yīnwèi huā hěn piàoliang!</div>
+    <div class="en">I love spring the most, because the flowers are pretty!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">我喜欢夏天，我可以游泳！</div>
+    <div class="py">wǒ xǐhuān xiàtiān, wǒ kěyǐ yóuyǒng!</div>
+    <div class="en">I like summer, I can go swimming!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">夏天太热了！但是可以吃冰淇淋。</div>
+    <div class="py">xiàtiān tài rè le! dànshì kěyǐ chī bīngqílín.</div>
+    <div class="en">Summer is too hot! But I can eat ice cream.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi w">👧</div><div class="bub w"><div class="who">Mia</div>
+    <div class="hz">你不喜欢冬天吗？可以堆雪人！</div>
+    <div class="py">nǐ bù xǐhuān dōngtiān ma? kěyǐ duī xuěrén!</div>
+    <div class="en">You don't like winter? You can build snowmen!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🥶</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">冬天太冷了！我要穿好多衣服！</div>
+    <div class="py">dōngtiān tài lěng le! wǒ yào chuān hǎo duō yīfu!</div>
+    <div class="en">Winter is too cold! I have to wear too many clothes!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 20: 🎮 GAME 8 — SEASON MONTH MATCH ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 8</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">月份季节 yuèfèn jìjié</div>
+<div class="title-en">month → which season?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mss">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="msq">1</span>/8</div>
+    <button class="gbtn" onclick="initMs()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq">
+    <div style="font-size:24px">📅</div>
+    <div class="qqmain" id="mshz" style="margin-top:2px">四月</div>
+    <div class="gpy" id="mspy" style="color:#7c3aed;font-weight:700;text-align:center">sì yuè</div>
+    <div class="qqlbl" style="margin-top:4px">是哪个季节？<span class="gen">Which season?</span></div>
+  </div>
+  <div class="qopts" id="mso"></div>
+  <div class="gres" id="msr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 21: 🎮 GAME 9 — FILL IN BLANKS ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 9</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">填空 tiánkòng</div>
+<div class="title-en">fill in the weather blanks!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 关 guān · level <span id="fbround">1</span>/4</div>
+    <button class="gbtn" onclick="initFb()">↺ 重来</button>
+    <button class="gbtn" onclick="nextFb()" id="fbnext" style="display:none">下一关 →</button>
+  </div>
+  <div class="fib" id="fbwrap"></div>
+  <div class="gres" id="fbres" style="font-size:13px"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 22: DIALOGUE 4 — RAINY DAY ════════════════ -->
+<div class="slide">
+<span class="badge ct">对话 4</span>
+<div class="tag ct">💬 对话 (四) · rainy day 下雨天</div>
+<div class="title">场景四：下雨了，怎么办？</div>
+<div class="title-en">scene 4: it's raining, what to do?</div>
+<div class="dlg">
+  <div class="dlg-turn right"><div class="avi c">🌧️</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">妈妈，下雨了！</div>
+    <div class="py">māma, xià yǔ le!</div>
+    <div class="en">Mum, it's raining!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">是啊，你带雨伞了吗？</div>
+    <div class="py">shì a, nǐ dài yǔsǎn le ma?</div>
+    <div class="en">Yes, did you bring an umbrella?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😅</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">忘了！我怎么办？</div>
+    <div class="py">wàng le! wǒ zěnme bàn?</div>
+    <div class="en">I forgot! What should I do?</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">别担心，我给你送一把过来。</div>
+    <div class="py">bié dānxīn, wǒ gěi nǐ sòng yī bǎ guòlái.</div>
+    <div class="en">Don't worry, I'll bring you one.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">😊</div><div class="bub c"><div class="who" style="text-align:right">Elena</div>
+    <div class="hz">谢谢妈妈！我在学校门口等你。</div>
+    <div class="py">xièxie māma! wǒ zài xuéxiào ménkǒu děng nǐ.</div>
+    <div class="en">Thanks mum! I'll wait at the school gate.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2"><div class="who">妈妈</div>
+    <div class="hz">下次要记得带伞！</div>
+    <div class="py">xià cì yào jìde dài sǎn!</div>
+    <div class="en">Remember to bring an umbrella next time!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 23: 🎮 GAME 10 — WEATHER → ACTIVITY ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 10</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">天气做什么？tiānqì zuò shénme?</div>
+<div class="title-en">what to do in this weather?</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="was">0</span>/8</div>
+    <div class="gsbar">题 tí · q.<span id="waq">1</span>/8</div>
+    <button class="gbtn" onclick="initWa()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:36px" id="waem">☀️</div>
+    <div class="qqmain" id="wasit" style="font-size:16px;margin-top:4px">今天很热！</div>
+    <div class="gpy" id="wapy" style="color:#7c3aed;font-weight:700;text-align:center;margin-top:2px">jīntiān hěn rè!</div>
+    <div class="gen" id="waen" style="color:#888;font-style:italic;text-align:center">very hot today!</div>
+  </div>
+  <div class="qopts" id="wao"></div>
+  <div class="gres" id="war"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 24: 🎮 GAME 11 — WEATHER + CLOTHING MEMORY ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 11</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">季节配衣服 jìjié pèi yīfu</div>
+<div class="title-en">match season with clothing memory match!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 配对 <span id="mscm">0</span>/4</div>
+    <div class="gsbar">🔄 翻 <span id="mscf">0</span></div>
+    <button class="gbtn" onclick="initMemSC()">↺ 重来</button>
+  </div>
+  <div class="mgrid" id="mscgrid" style="grid-template-columns:repeat(4,1fr);max-width:520px"></div>
+  <div class="gres" id="mscres"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 25: 🎮 GAME 12 — MIXED FINAL QUIZ ════════════════ -->
+<div class="slide">
+<div class="toggle-bar"><button class="tgl" onclick="tPY()">拼音 pīnyīn</button><button class="tgl" onclick="tEN()">English</button></div>
+<span class="badge ct">🎮 game 12</span>
+<div class="tag ct">🎮 游戏 yóuxì · game</div>
+<div class="title" style="margin-top:6px">混合问答 hùnhé wèndá</div>
+<div class="title-en">mixed final quiz — seasons, weather, temperature, clothing!</div>
+<div class="gw">
+  <div style="display:flex;gap:7px;align-items:center;flex-wrap:wrap;justify-content:center">
+    <div class="gsbar">🎯 <span id="mxs">0</span>/12</div>
+    <div class="gsbar">题 tí · q.<span id="mxq">1</span>/12</div>
+    <button class="gbtn" onclick="initMx()">↺ 重来 chónglái · restart</button>
+  </div>
+  <div class="qq" style="max-width:440px">
+    <div style="font-size:11px;color:#7c3aed;font-weight:700;margin-bottom:4px" id="mxlbl">季节</div>
+    <div id="mxq2" style="font-size:44px">🌸</div>
+  </div>
+  <div class="qopts" id="mxo"></div>
+  <div class="gres" id="mxr"></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 26: ROLE-PLAY — 4 SEASONS FAMILY ════════════════ -->
+<div class="slide">
+<span class="badge cg">角色扮演</span>
+<div class="tag cg">🎭 角色扮演 juésè bànyǎn · role-play</div>
+<div class="title">Elena 一家人的四季 sì jì</div>
+<div class="title-en">Elena's family talking about all 4 seasons!</div>
+<div class="dlg" style="gap:3px">
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">你们最喜欢哪个季节？</div><div class="py">nǐmen zuì xǐhuān nǎ ge jìjié?</div><div class="en">Which season do you all love most?</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🌸</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">我最喜欢春天，因为有花！</div><div class="py">wǒ zuì xǐhuān chūntiān, yīnwèi yǒu huā!</div><div class="en">I love spring the most because of the flowers!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="who">爸爸</div><div class="hz" style="font-size:11.5px">我喜欢秋天，凉快，还有很多水果。</div><div class="py">wǒ xǐhuān qiūtiān, liángkuai, hái yǒu hěn duō shuǐguǒ.</div><div class="en">I like autumn — cool, and lots of fruit.</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">我喜欢冬天，可以过新年！</div><div class="py">wǒ xǐhuān dōngtiān, kěyǐ guò xīnnián!</div><div class="en">I like winter — we can celebrate New Year!</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🍦</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">夏天呢？我可以吃冰淇淋！</div><div class="py">xiàtiān ne? wǒ kěyǐ chī bīngqílín!</div><div class="en">What about summer? I can eat ice cream!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c3">👨</div><div class="bub c3" style="padding:5px 9px"><div class="who">爸爸</div><div class="hz" style="font-size:11.5px">夏天太热了，太阳很大。</div><div class="py">xiàtiān tài rè le, tàiyáng hěn dà.</div><div class="en">Summer's too hot, sun is strong.</div></div></div>
+
+  <div class="dlg-turn right"><div class="avi c">🏖️</div><div class="bub c" style="padding:5px 9px"><div class="hz" style="font-size:11.5px">但是可以去海边游泳！</div><div class="py">dànshì kěyǐ qù hǎibiān yóuyǒng!</div><div class="en">But we can swim at the beach!</div></div></div>
+
+  <div class="dlg-turn"><div class="avi c2">👩</div><div class="bub c2" style="padding:5px 9px"><div class="who">妈妈</div><div class="hz" style="font-size:11.5px">四个季节都很好！</div><div class="py">sì gè jìjié dōu hěn hǎo!</div><div class="en">All 4 seasons are great!</div></div></div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 27: PHRASE SUMMARY ════════════════ -->
+<div class="slide">
+<span class="badge cy">总结</span>
+<div class="tag cy">📋 短语总结 duǎnyǔ zǒngjié · phrase summary</div>
+<div class="title">四季天气必备短语</div>
+<div class="title-en">essential phrases for seasons &amp; weather!</div>
+<div class="two" style="gap:6px">
+  <div>
+    <div class="sp bb" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">今天天气怎么样？</div><div class="patpy">jīntiān tiānqì zěnmeyàng?</div>
+      <div class="paten">How's the weather today?</div>
+    </div>
+    <div class="sp by" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">今天是 ___ 天。</div><div class="patpy">jīntiān shì ___ tiān.</div>
+      <div class="paten">Today is a ___ day.</div>
+    </div>
+    <div class="sp bo" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">下雨了！/ 下雪了！</div><div class="patpy">xià yǔ / xià xuě le !</div>
+      <div class="paten">It's raining! / It's snowing!</div>
+    </div>
+    <div class="sp bg" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">今天 ___ 度。</div><div class="patpy">jīntiān ___ dù.</div>
+      <div class="paten">Today is ___ degrees.</div>
+    </div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">太冷了！/ 太热了！</div><div class="patpy">tài lěng / tài rè le !</div>
+      <div class="paten">Too cold! / Too hot!</div>
+    </div>
+  </div>
+  <div>
+    <div class="sp bu" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">你喜欢什么季节？</div><div class="patpy">nǐ xǐhuān shénme jìjié ?</div>
+      <div class="paten">What season do you like?</div>
+    </div>
+    <div class="sp bt" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我最喜欢 ___。</div><div class="patpy">wǒ zuì xǐhuān ___ .</div>
+      <div class="paten">I love ___ the most.</div>
+    </div>
+    <div class="sp br" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">___ 很 ___。</div><div class="patpy">___ hěn ___ .</div>
+      <div class="paten">___ is very ___.</div>
+    </div>
+    <div class="sp bp" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">我要穿 ___。</div><div class="patpy">wǒ yào chuān ___ .</div>
+      <div class="paten">I should wear ___.</div>
+    </div>
+    <div class="sp by" style="padding:5px 9px;margin-bottom:3px">
+      <div class="pat">带雨伞！</div><div class="patpy">dài yǔsǎn !</div>
+      <div class="paten">Bring an umbrella!</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 28: SELF DESCRIPTION 5.0 ════════════════ -->
+<div class="slide">
+<span class="badge cg">Elena 5.0</span>
+<div class="tag cg">👋 Elena 描述她的四季</div>
+<div class="title">Elena 谈她最爱的季节</div>
+<div class="title-en">Elena talks about her favorite season!</div>
+<div style="display:flex;flex-direction:column;gap:5px;flex:1">
+  <div style="display:flex;gap:9px;background:#fce7f3;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">😊</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">你好！我叫 Elena。</div>
+    <div style="font-size:9px;color:#0891b2;font-weight:600">nǐ hǎo! wǒ jiào Elena.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">Hi! I'm Elena.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dcfce7;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🌸</span>
+    <div><div style="font-size:13px;font-weight:900;color:#1a1a2e">我最喜欢春天，因为花很漂亮。</div>
+    <div style="font-size:9px;color:#0891b2;font-weight:600">wǒ zuì xǐhuān chūntiān, yīnwèi huā hěn piàoliang.</div>
+    <div style="font-size:9px;color:#888;font-style:italic">I love spring most, because the flowers are pretty.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#fef9c3;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">☀️</span>
+    <div><div style="font-size:12.5px;font-weight:900;color:#1a1a2e">夏天太热了，但是可以吃冰淇淋和游泳。</div>
+    <div style="font-size:8.5px;color:#0891b2;font-weight:600">xiàtiān tài rè le, dànshì kěyǐ chī bīngqílín hé yóuyǒng.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Summer is too hot, but I can eat ice cream and swim.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ffedd5;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">🍂</span>
+    <div><div style="font-size:12.5px;font-weight:900;color:#1a1a2e">秋天很凉快，叶子是红色和黄色的。</div>
+    <div style="font-size:8.5px;color:#0891b2;font-weight:600">qiūtiān hěn liángkuai, yèzi shì hóngsè hé huángsè de.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Autumn is cool, the leaves are red and yellow.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#dbeafe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">❄️</span>
+    <div><div style="font-size:12.5px;font-weight:900;color:#1a1a2e">冬天很冷，我要穿羽绒服和戴围巾。</div>
+    <div style="font-size:8.5px;color:#0891b2;font-weight:600">dōngtiān hěn lěng, wǒ yào chuān yǔróngfú hé dài wéijīn.</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Winter is cold — I need a down jacket and scarf.</div></div>
+  </div>
+  <div style="display:flex;gap:9px;background:#ede9fe;border-radius:10px;padding:8px 12px">
+    <span style="font-size:18px">💗</span>
+    <div><div style="font-size:12.5px;font-weight:900;color:#1a1a2e">四季都有不同的好玩！</div>
+    <div style="font-size:8.5px;color:#0891b2;font-weight:600">sì jì dōu yǒu bùtóng de hǎo wán!</div>
+    <div style="font-size:8.5px;color:#888;font-style:italic">Every season has its own fun!</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 29: FUN FACTS ════════════════ -->
+<div class="slide">
+<span class="badge cu">趣味知识</span>
+<div class="tag cu">💡 世界的季节 shìjiè de jìjié · seasons around the world</div>
+<div class="title">世界的季节 shìjiè de jìjié</div>
+<div class="title-en">fun facts about seasons around the world!</div>
+<div style="display:flex;flex-direction:column;gap:6px;flex:1">
+  <div class="card bb" style="font-size:11px">
+    <div class="lbl cb">🌍 1. 南半球相反 nánbànqiú xiāngfǎn</div>
+    <div style="margin-top:3px;line-height:1.6">
+      北半球是夏天时，澳大利亚是冬天！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">When it's summer in the north (China/USA), it's winter in Australia! 🇦🇺❄️</span>
+    </div>
+  </div>
+  <div class="card by" style="font-size:11px">
+    <div class="lbl cy">🌞 2. 有的地方没有四季 méi yǒu sì jì</div>
+    <div style="margin-top:3px;line-height:1.6">
+      热带国家（如新加坡、印度）一年到头都是夏天！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Tropical countries (Singapore, India) are summer all year — no winter!</span>
+    </div>
+  </div>
+  <div class="card bp" style="font-size:11px">
+    <div class="lbl cp">❄️ 3. 中国有名的冬天 Zhōngguó de dōngtiān</div>
+    <div style="margin-top:3px;line-height:1.6">
+      中国东北很冷 — <b>哈尔滨</b> 有冰雕节！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Northeast China gets very cold — Harbin has an ice sculpture festival!</span>
+    </div>
+  </div>
+  <div class="card bg" style="font-size:11px">
+    <div class="lbl cg">🌸 4. 樱花 yīnghuā · cherry blossoms</div>
+    <div style="margin-top:3px;line-height:1.6">
+      日本的春天有很多樱花，非常漂亮！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Japan's spring has cherry blossoms — very beautiful!</span>
+    </div>
+  </div>
+  <div class="card br" style="font-size:11px">
+    <div class="lbl cr">🌡️ 5. 中国最热的地方 zuì rè de dìfāng</div>
+    <div style="margin-top:3px;line-height:1.6">
+      <b>吐鲁番</b> 夏天可以到 50 度！<br>
+      <span style="color:#888;font-style:italic;font-size:9.5px">Turpan in China can reach 50°C in summer! Very hot! 🥵</span>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ════════════════ SLIDE 30: END CELEBRATION ════════════════ -->
+<div class="slide">
+<div class="endb">
+  <div style="font-size:54px">🌸☀️🍂❄️</div>
+  <div style="font-size:30px;font-weight:900;background:linear-gradient(135deg,#0891b2,#ea580c);-webkit-background-clip:text;-webkit-text-fill-color:transparent">Elena，你会说四季了！</div>
+  <div style="font-size:14px;color:#0891b2;font-weight:700">Elena, nǐ huì shuō sì jì le!</div>
+  <div style="font-size:12px;color:#888;font-style:italic">Elena, you can talk about all 4 seasons!</div>
+  <div style="font-size:11px;color:#aaa;margin-top:4px;line-height:1.6">
+    每天问天气，用中文告诉朋友！<br>
+    <span style="color:#0891b2;font-weight:700">měi tiān wèn tiānqì, yòng zhōngwén gàosu péngyǒu!</span><br>
+    <span style="font-style:italic">Ask the weather every day, tell friends in Chinese!</span>
+  </div>
+  <div class="cklist">
+    <span class="ck">✅ 四季 sì jì · 4 seasons</span>
+    <span class="ck">✅ 春天 chūntiān · spring</span>
+    <span class="ck">✅ 夏天 xiàtiān · summer</span>
+    <span class="ck">✅ 秋天 qiūtiān · autumn</span>
+    <span class="ck">✅ 冬天 dōngtiān · winter</span>
+    <span class="ck">✅ 天气 tiānqì · weather</span>
+    <span class="ck">✅ 温度 wēndù · temperature</span>
+    <span class="ck">✅ 冷热 lěng rè · hot/cold</span>
+    <span class="ck">✅ 天气现象 xiànxiàng</span>
+    <span class="ck">✅ 服装 fúzhuāng · clothing (review)</span>
+    <span class="ck">✅ 4 对话 duìhuà</span>
+    <span class="ck">✅ 角色扮演</span>
+    <span class="ck">🎮 季节问答</span>
+    <span class="ck">🎮 天气问答</span>
+    <span class="ck">🎮 冷还是热</span>
+    <span class="ck">🎮 季节配对</span>
+    <span class="ck">🎮 天气配对</span>
+    <span class="ck">🎮 天气现象配对</span>
+    <span class="ck">🎮 季节穿什么</span>
+    <span class="ck">🎮 月份季节</span>
+    <span class="ck">🎮 填空</span>
+    <span class="ck">🎮 天气活动</span>
+    <span class="ck">🎮 季节衣服配对</span>
+    <span class="ck">🎮 混合问答</span>
+  </div>
+  <div style="font-size:12px;color:#888;margin-top:6px">
+    真棒！zhēn bàng! · 12 个游戏！加油！jiā yóu! 💪
+  </div>
+  <div style="font-size:11px;color:#aaa">📅 2026年6月23日 · liù yuè èrshísān rì · June 23, 2026</div>
+  <a href="index.html" style="background:linear-gradient(135deg,#0891b2,#ea580c);color:#fff;padding:8px 20px;border-radius:999px;font-weight:800;text-decoration:none;font-size:12px;margin-top:6px">← 回到课程列表 huí dào kèchéng lièbiǎo · back to lessons</a>
+</div>
+</div>
+
+<div class="nav">
+  <button class="nbtn" onclick="go(cur-1)">←</button>
+  <div class="dots" id="dots"></div>
+  <button class="nbtn" onclick="go(cur+1)">→</button>
+</div>
+</div>
+
+<script>
+const slides=document.querySelectorAll('.slide');
+const dotsEl=document.getElementById('dots');
+let cur=0;
+slides.forEach((_,i)=>{const d=document.createElement('div');d.className='dot'+(i===0?' active':'');d.onclick=()=>go(i);dotsEl.appendChild(d);});
+function go(n){slides[cur].classList.remove('active');dotsEl.children[cur].classList.remove('active');cur=(n+slides.length)%slides.length;slides[cur].classList.add('active');dotsEl.children[cur].classList.add('active');if(GI[cur])GI[cur]();}
+document.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowDown')go(cur+1);if(e.key==='ArrowLeft'||e.key==='ArrowUp')go(cur-1);});
+const GI={};
+let showPY=false,showEN=false;
+function tPY(){showPY=!showPY;document.body.classList.toggle('show-py',showPY);document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('拼音')){b.textContent=showPY?'拼音 pīnyīn ✓':'拼音 pīnyīn';b.classList.toggle('on',showPY);}});}
+function tEN(){showEN=!showEN;document.body.classList.toggle('show-en',showEN);document.querySelectorAll('.tgl').forEach(b=>{if(b.textContent.includes('English')){b.textContent=showEN?'English ✓':'English';b.classList.toggle('on',showEN);}});}
+function shuffle(a){return a.slice().sort(()=>Math.random()-.5)}
+function $id(id){return document.getElementById(id)}
+
+// ═══ DATA ═══
+const SEASONS=[
+  {em:'🌸',hz:'春天',py:'chūntiān',en:'spring',t:'mid',months:[3,4,5]},
+  {em:'☀️',hz:'夏天',py:'xiàtiān',en:'summer',t:'hot',months:[6,7,8]},
+  {em:'🍂',hz:'秋天',py:'qiūtiān',en:'autumn',t:'mid',months:[9,10,11]},
+  {em:'❄️',hz:'冬天',py:'dōngtiān',en:'winter',t:'cold',months:[12,1,2]},
+];
+const WEATHER=[
+  {em:'☀️',hz:'晴天',py:'qíngtiān',en:'sunny'},
+  {em:'⛅',hz:'多云',py:'duōyún',en:'cloudy'},
+  {em:'☁️',hz:'阴天',py:'yīntiān',en:'overcast'},
+  {em:'🌧️',hz:'雨天',py:'yǔtiān',en:'rainy'},
+  {em:'⛈️',hz:'雷雨',py:'léiyǔ',en:'thunderstorm'},
+  {em:'🌨️',hz:'雪天',py:'xuětiān',en:'snowy'},
+  {em:'💨',hz:'刮风',py:'guāfēng',en:'windy'},
+  {em:'🌫️',hz:'雾',py:'wù',en:'foggy'},
+];
+const PHENOMENA=[
+  {em:'☀️',hz:'太阳',py:'tàiyáng',en:'sun'},
+  {em:'☁️',hz:'云',py:'yún',en:'cloud'},
+  {em:'💧',hz:'雨',py:'yǔ',en:'rain'},
+  {em:'❄️',hz:'雪',py:'xuě',en:'snow'},
+  {em:'💨',hz:'风',py:'fēng',en:'wind'},
+  {em:'🌈',hz:'彩虹',py:'cǎihóng',en:'rainbow'},
+];
+const MONTHS=[
+  {n:1,hz:'一月',py:'yī yuè',season:'冬天'},
+  {n:2,hz:'二月',py:'èr yuè',season:'冬天'},
+  {n:3,hz:'三月',py:'sān yuè',season:'春天'},
+  {n:4,hz:'四月',py:'sì yuè',season:'春天'},
+  {n:5,hz:'五月',py:'wǔ yuè',season:'春天'},
+  {n:6,hz:'六月',py:'liù yuè',season:'夏天'},
+  {n:7,hz:'七月',py:'qī yuè',season:'夏天'},
+  {n:8,hz:'八月',py:'bā yuè',season:'夏天'},
+  {n:9,hz:'九月',py:'jiǔ yuè',season:'秋天'},
+  {n:10,hz:'十月',py:'shí yuè',season:'秋天'},
+  {n:11,hz:'十一月',py:'shíyī yuè',season:'秋天'},
+  {n:12,hz:'十二月',py:'shí\'èr yuè',season:'冬天'},
+];
+
+// ═══ GAME 1: Season Quiz ═══
+let sqScore=0,sqQ=0,sqItems=[];
+function initSq(){sqScore=0;sqQ=0;
+  // Repeat seasons to get 8
+  const doubled=[...SEASONS,...SEASONS];
+  sqItems=shuffle(doubled).slice(0,8);
+  $id('sqs').textContent='0';$id('sqq').textContent='1';$id('sqr').style.display='none';showSq();}
+function showSq(){if(sqQ>=8){const r=$id('sqr');r.style.display='block';r.textContent='🎉 '+sqScore+'/8 — '+(sqScore===8?'完美！':sqScore>=6?'很好！':'加油！');$id('sqo').innerHTML='';return;}
+  const it=sqItems[sqQ];$id('sqem').textContent=it.em;$id('sqq').textContent=sqQ+1;
+  const wrong=SEASONS.filter(o=>o.hz!==it.hz);const opts=[it,...wrong];
+  const el=$id('sqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');sqScore++;$id('sqs').textContent=sqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      sqQ++;setTimeout(showSq,1100);};
+    el.appendChild(btn);});}
+GI[10]=initSq;
+
+// ═══ GAME 2: Weather Quiz ═══
+let wqScore=0,wqQ=0,wqItems=[];
+function initWq(){wqScore=0;wqQ=0;
+  const doubled=[...WEATHER,...WEATHER];
+  wqItems=shuffle(doubled).slice(0,10);
+  $id('wqs').textContent='0';$id('wqq').textContent='1';$id('wqr').style.display='none';showWq();}
+function showWq(){if(wqQ>=10){const r=$id('wqr');r.style.display='block';r.textContent='🎉 '+wqScore+'/10 — '+(wqScore>=9?'完美！':wqScore>=7?'很好！':'加油！');$id('wqo').innerHTML='';return;}
+  const it=wqItems[wqQ];$id('wqem').textContent=it.em;$id('wqq').textContent=wqQ+1;
+  const wrong=WEATHER.filter(o=>o.hz!==it.hz);const opts=[it,...shuffle(wrong).slice(0,3)];
+  const el=$id('wqo');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.hz){btn.classList.add('ok');wqScore++;$id('wqs').textContent=wqScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.hz)b.classList.add('ok');});}
+      wqQ++;setTimeout(showWq,1100);};
+    el.appendChild(btn);});}
+GI[11]=initWq;
+
+// ═══ GAME 3: Hot or Cold ═══
+const HC_ITEMS=[
+  {em:'☀️',hz:'夏天',py:'xiàtiān',en:'summer',t:'hot'},
+  {em:'❄️',hz:'冬天',py:'dōngtiān',en:'winter',t:'cold'},
+  {em:'🌸',hz:'春天',py:'chūntiān',en:'spring',t:'cold'},
+  {em:'🍂',hz:'秋天',py:'qiūtiān',en:'autumn',t:'cold'},
+  {em:'🧊',hz:'冰淇淋',py:'bīngqílín',en:'ice cream',t:'cold'},
+  {em:'♨️',hz:'热水',py:'rè shuǐ',en:'hot water',t:'hot'},
+  {em:'🔥',hz:'火',py:'huǒ',en:'fire',t:'hot'},
+  {em:'⛄',hz:'雪人',py:'xuěrén',en:'snowman',t:'cold'},
+  {em:'🌡️',hz:'35 度',py:'sānshíwǔ dù',en:'35°C',t:'hot'},
+  {em:'🌡️',hz:'-5 度',py:'língxià wǔ dù',en:'-5°C',t:'cold'},
+  {em:'☕',hz:'热咖啡',py:'rè kāfēi',en:'hot coffee',t:'hot'},
+  {em:'🍦',hz:'冰淇淋',py:'bīngqílín',en:'ice cream',t:'cold'},
+];
+let hcScore=0,hcQ=0,hcItems=[];
+function initHc(){hcScore=0;hcQ=0;hcItems=shuffle(HC_ITEMS).slice(0,10);$id('hcs').textContent='0';$id('hcq').textContent='1';$id('hcr').style.display='none';$id('hccard').style.opacity='1';showHc();}
+function showHc(){if(hcQ>=10){const r=$id('hcr');r.style.display='block';r.textContent='🎉 '+hcScore+'/10 — '+(hcScore>=9?'完美！':hcScore>=7?'很好！':'加油！');$id('hccard').style.opacity='.4';return;}
+  const it=hcItems[hcQ];$id('hcem').textContent=it.em;$id('hchz').textContent=it.hz;$id('hcpy').textContent=it.py;$id('hcen').textContent=it.en;$id('hcq').textContent=hcQ+1;}
+function hcPick(t){if(hcQ>=hcItems.length)return;const it=hcItems[hcQ];const ok=it.t===t;
+  if(ok){hcScore++;$id('hcs').textContent=hcScore;}
+  const c=$id('hccard');c.style.background=ok?'linear-gradient(135deg,#dcfce7,#bbf7d0)':'linear-gradient(135deg,#fee2e2,#fca5a5)';
+  hcQ++;setTimeout(()=>{c.style.background='linear-gradient(135deg,#cffafe,#fef3c7)';showHc();},600);}
+GI[12]=initHc;
+
+// ═══ Generic memory match builder ═══
+function buildMemMatch(pairs,gridId,mEl,fEl,resEl,total,renderHz,renderEm){
+  let flipped=[],matched=0,flips=0,lock=false;
+  $id(mEl).textContent='0';$id(fEl).textContent='0';$id(resEl).style.display='none';
+  const cards=[];pairs.forEach(p=>{cards.push({id:p.id,side:'hz',data:p});cards.push({id:p.id,side:'em',data:p});});
+  const grid=$id(gridId);grid.innerHTML='';
+  shuffle(cards).forEach(card=>{
+    const el=document.createElement('div');el.className='mcard';el.textContent='🎴';
+    el.onclick=function(){if(lock||el.classList.contains('flip')||el.classList.contains('match'))return;
+      el.classList.add('flip');if(card.side==='hz')el.innerHTML=renderHz(card.data);else el.innerHTML=renderEm(card.data);
+      flipped.push({el,card});
+      if(flipped.length===2){flips++;$id(fEl).textContent=flips;
+        if(flipped[0].card.id===flipped[1].card.id){flipped[0].el.classList.add('match');flipped[1].el.classList.add('match');flipped=[];matched++;$id(mEl).textContent=matched;
+          if(matched===total){setTimeout(()=>{const r=$id(resEl);r.style.display='block';r.textContent='🎉 '+flips+' 翻 · 太棒了！';},400);}}
+        else{lock=true;setTimeout(()=>{flipped[0].el.classList.remove('flip');flipped[0].el.textContent='🎴';flipped[1].el.classList.remove('flip');flipped[1].el.textContent='🎴';flipped=[];lock=false;},900);}}};
+    grid.appendChild(el);});
+}
+
+// ═══ GAME 4: Season Memory Match ═══
+const MEM_S=[
+  {id:1,hz:'春天',py:'chūntiān',en:'spring',em:'🌸'},
+  {id:2,hz:'夏天',py:'xiàtiān',en:'summer',em:'☀️'},
+  {id:3,hz:'秋天',py:'qiūtiān',en:'autumn',em:'🍂'},
+  {id:4,hz:'冬天',py:'dōngtiān',en:'winter',em:'❄️'},
+];
+function initMemS(){buildMemMatch(MEM_S,'msgrid','msm','msf','msres',4,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:40px">${d.em}</div>`);}
+GI[14]=initMemS;
+
+// ═══ GAME 5: Weather Memory Match ═══
+const MEM_W=[
+  {id:1,hz:'晴天',py:'qíngtiān',en:'sunny',em:'☀️'},
+  {id:2,hz:'阴天',py:'yīntiān',en:'overcast',em:'☁️'},
+  {id:3,hz:'雨天',py:'yǔtiān',en:'rainy',em:'🌧️'},
+  {id:4,hz:'雪天',py:'xuětiān',en:'snowy',em:'🌨️'},
+  {id:5,hz:'刮风',py:'guāfēng',en:'windy',em:'💨'},
+  {id:6,hz:'多云',py:'duōyún',en:'cloudy',em:'⛅'},
+  {id:7,hz:'雷雨',py:'léiyǔ',en:'thunderstorm',em:'⛈️'},
+  {id:8,hz:'雾',py:'wù',en:'foggy',em:'🌫️'},
+];
+function initMemW(){buildMemMatch(MEM_W,'mwgrid','mwm','mwf','mwres',8,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:36px">${d.em}</div>`);}
+GI[15]=initMemW;
+
+// ═══ GAME 6: Phenomena Memory Match ═══
+const MEM_P=[
+  {id:1,hz:'太阳',py:'tàiyáng',en:'sun',em:'☀️'},
+  {id:2,hz:'云',py:'yún',en:'cloud',em:'☁️'},
+  {id:3,hz:'雨',py:'yǔ',en:'rain',em:'💧'},
+  {id:4,hz:'雪',py:'xuě',en:'snow',em:'❄️'},
+  {id:5,hz:'风',py:'fēng',en:'wind',em:'💨'},
+  {id:6,hz:'彩虹',py:'cǎihóng',en:'rainbow',em:'🌈'},
+];
+function initMemP(){buildMemMatch(MEM_P,'mpgrid','mpm','mpf','mpres',6,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div class="mcard-py gpy">${d.py}</div><div class="mcard-hz">${d.hz}</div><div class="gen" style="font-size:8px;color:#888;font-style:italic">${d.en}</div></div>`,
+  d=>`<div style="font-size:36px">${d.em}</div>`);}
+GI[16]=initMemP;
+
+// ═══ GAME 7: Season → Clothing ═══
+const SC_QS=[
+  {em:'☀️',hz:'夏天',py:'xiàtiān',a:'T恤 + 短裤',ans_en:'T-shirt + shorts'},
+  {em:'❄️',hz:'冬天',py:'dōngtiān',a:'羽绒服 + 围巾',ans_en:'down jacket + scarf'},
+  {em:'🌸',hz:'春天',py:'chūntiān',a:'T恤 + 薄外套',ans_en:'T-shirt + light jacket'},
+  {em:'🍂',hz:'秋天',py:'qiūtiān',a:'毛衣 + 长裤',ans_en:'sweater + pants'},
+  {em:'🌧️',hz:'下雨天',py:'xià yǔ tiān',a:'雨伞 + 雨鞋',ans_en:'umbrella + rain boots'},
+  {em:'🥵',hz:'太热了',py:'tài rè le',a:'T恤 + 凉鞋',ans_en:'T-shirt + sandals'},
+  {em:'🥶',hz:'太冷了',py:'tài lěng le',a:'羽绒服 + 手套',ans_en:'down jacket + gloves'},
+  {em:'🌨️',hz:'下雪天',py:'xià xuě tiān',a:'羽绒服 + 靴子',ans_en:'down jacket + boots'},
+];
+const SC_OPTS=['T恤 + 短裤','羽绒服 + 围巾','T恤 + 薄外套','毛衣 + 长裤','雨伞 + 雨鞋','T恤 + 凉鞋','羽绒服 + 手套','羽绒服 + 靴子'];
+let scScore=0,scQ=0,scItems=[];
+function initSc(){scScore=0;scQ=0;scItems=shuffle(SC_QS).slice(0,8);$id('scs').textContent='0';$id('scq').textContent='1';$id('scr').style.display='none';showSc();}
+function showSc(){if(scQ>=8){const r=$id('scr');r.style.display='block';r.textContent='🎉 '+scScore+'/8 — '+(scScore===8?'完美！':scScore>=6?'很好！':'加油！');$id('sco').innerHTML='';return;}
+  const it=scItems[scQ];$id('scem').textContent=it.em;$id('schz').textContent=it.hz;$id('scpy').textContent=it.py;$id('scq').textContent=scQ+1;
+  const wrong=SC_OPTS.filter(o=>o!==it.a);const opts=[it.a,...shuffle(wrong).slice(0,3)];
+  const el=$id('sco');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:12px">${opt}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt===it.a){btn.classList.add('ok');scScore++;$id('scs').textContent=scScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a)b.classList.add('ok');});}
+      scQ++;setTimeout(showSc,1100);};
+    el.appendChild(btn);});}
+GI[17]=initSc;
+
+// ═══ GAME 8: Month → Season ═══
+let msScore=0,msQ=0,msItems=[];
+function initMs(){msScore=0;msQ=0;msItems=shuffle(MONTHS).slice(0,8);$id('mss').textContent='0';$id('msq').textContent='1';$id('msr').style.display='none';showMs();}
+function showMs(){if(msQ>=8){const r=$id('msr');r.style.display='block';r.textContent='🎉 '+msScore+'/8 — '+(msScore===8?'完美！':msScore>=6?'很好！':'加油！');$id('mso').innerHTML='';return;}
+  const it=msItems[msQ];$id('mshz').textContent=it.hz;$id('mspy').textContent=it.py;$id('msq').textContent=msQ+1;
+  const wrong=SEASONS.filter(o=>o.hz!==it.season);const correct=SEASONS.find(o=>o.hz===it.season);const opts=[correct,...wrong];
+  const el=$id('mso');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<div style="font-size:24px">${opt.em}</div><span class="qopt-hz" style="font-size:12px">${opt.hz}</span><span class="gpy">${opt.py}</span><span class="gen">${opt.en}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt.hz===it.season){btn.classList.add('ok');msScore++;$id('mss').textContent=msScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.season)b.classList.add('ok');});}
+      msQ++;setTimeout(showMs,1100);};
+    el.appendChild(btn);});}
+GI[19]=initMs;
+
+// ═══ GAME 9: Fill in Blanks ═══
+const FB_ROUNDS=[
+  {sentence:'今天是 ___ 天。',py:'jīntiān shì ___ tiān.',en:'Today is a sunny day.',blanks:['晴'],bank:['晴','雨','雪','阴']},
+  {sentence:'下 ___ 了，我要带雨伞。',py:'xià ___ le, wǒ yào dài yǔsǎn.',en:"It's raining, I need an umbrella.",blanks:['雨'],bank:['雨','雪','太阳','风']},
+  {sentence:'我最喜欢 ___ 天，因为可以吃冰淇淋。',py:'wǒ zuì xǐhuān ___ tiān, yīnwèi kěyǐ chī bīngqílín.',en:'I love summer because I can eat ice cream.',blanks:['夏'],bank:['夏','春','秋','冬']},
+  {sentence:'很 ___ ，我要穿 ___。',py:'hěn ___ , wǒ yào chuān ___ .',en:'Very cold, I need a coat.',blanks:['冷','外套'],bank:['冷','外套','热','短裤','雨','T恤']},
+];
+let fbIdx=0,fbFilled=[];
+function initFb(){fbIdx=0;$id('fbres').style.display='none';$id('fbnext').style.display='none';$id('fbround').textContent='1';renderFb();}
+function renderFb(){const round=FB_ROUNDS[fbIdx];fbFilled=round.blanks.map(()=>null);$id('fbround').textContent=(fbIdx+1);
+  const wrap=$id('fbwrap');let html='<div class="fib-row">';let bidx=0;const parts=round.sentence.split('___');
+  parts.forEach((p,i)=>{html+=p;if(i<parts.length-1){html+=`<span class="fib-blank" id="fb-b${bidx}" data-bi="${bidx}">____</span>`;bidx++;}});
+  html+='</div>';html+=`<div class="gpy" style="font-size:10px;color:#7c3aed;font-weight:600;text-align:center;margin-top:4px">${round.py}</div>`;
+  html+=`<div class="gen" style="font-size:9.5px;color:#888;font-style:italic;text-align:center">${round.en}</div>`;
+  html+='<div class="fib-bank">';shuffle(round.bank).forEach(t=>{html+=`<button class="fib-tok" data-w="${t}">${t}</button>`;});html+='</div>';wrap.innerHTML=html;
+  wrap.querySelectorAll('.fib-tok').forEach(tok=>{tok.onclick=function(){const next=fbFilled.findIndex(x=>x===null);if(next<0)return;
+    const word=tok.dataset.w;const bk=$id('fb-b'+next);bk.textContent=word;bk.classList.add('filled');fbFilled[next]=word;tok.classList.add('used');
+    bk.onclick=function(){bk.textContent='____';bk.classList.remove('filled');fbFilled[next]=null;wrap.querySelectorAll('.fib-tok').forEach(t=>{if(t.dataset.w===word&&t.classList.contains('used')){t.classList.remove('used');}});bk.onclick=null;};
+    if(fbFilled.every(w=>w!==null)){const correct=fbFilled.every((w,i)=>w===round.blanks[i]);const r=$id('fbres');r.style.display='block';
+      if(correct){r.style.background='linear-gradient(135deg,#dcfce7,#bbf7d0)';r.style.color='#15803d';r.textContent='🎉 对了！duì le!';$id('fbnext').style.display=fbIdx<FB_ROUNDS.length-1?'inline-block':'none';if(fbIdx===FB_ROUNDS.length-1){setTimeout(()=>{r.textContent='🌟 全部完成！';},700);}}
+      else{r.style.background='linear-gradient(135deg,#fee2e2,#fca5a5)';r.style.color='#991b1b';r.textContent='❌ 再试一次！';}}};});}
+function nextFb(){if(fbIdx<FB_ROUNDS.length-1){fbIdx++;$id('fbres').style.display='none';$id('fbnext').style.display='none';renderFb();}}
+GI[20]=initFb;
+
+// ═══ GAME 10: Weather → Activity ═══
+const WA_QS=[
+  {em:'☀️',sit:'今天很热！',py:'jīntiān hěn rè!',en:'Very hot today!',a:'吃冰淇淋'},
+  {em:'🌧️',sit:'外面下雨了！',py:'wàimiàn xià yǔ le!',en:'raining outside!',a:'带雨伞'},
+  {em:'❄️',sit:'下雪了！',py:'xià xuě le!',en:'It\'s snowing!',a:'堆雪人'},
+  {em:'🌸',sit:'春天很暖和！',py:'chūntiān hěn nuǎnhuo!',en:'Spring is warm!',a:'看花'},
+  {em:'☀️',sit:'夏天太阳很大！',py:'xiàtiān tàiyáng hěn dà!',en:'Summer sun is strong!',a:'去游泳'},
+  {em:'🍂',sit:'秋天有很多水果！',py:'qiūtiān yǒu hěn duō shuǐguǒ!',en:'Autumn has fruits!',a:'摘苹果'},
+  {em:'💨',sit:'今天刮风！',py:'jīntiān guāfēng!',en:'Windy today!',a:'放风筝'},
+  {em:'🥶',sit:'很冷！',py:'hěn lěng!',en:'Very cold!',a:'喝热茶'},
+];
+const WA_OPTS=['吃冰淇淋','带雨伞','堆雪人','看花','去游泳','摘苹果','放风筝','喝热茶'];
+let waScore=0,waQ=0,waItems=[];
+function initWa(){waScore=0;waQ=0;waItems=shuffle(WA_QS).slice(0,8);$id('was').textContent='0';$id('waq').textContent='1';$id('war').style.display='none';showWa();}
+function showWa(){if(waQ>=8){const r=$id('war');r.style.display='block';r.textContent='🎉 '+waScore+'/8 — '+(waScore===8?'完美！':waScore>=6?'很好！':'加油！');$id('wao').innerHTML='';return;}
+  const it=waItems[waQ];$id('waem').textContent=it.em;$id('wasit').textContent=it.sit;$id('wapy').textContent=it.py;$id('waen').textContent=it.en;$id('waq').textContent=waQ+1;
+  const wrong=WA_OPTS.filter(o=>o!==it.a);const opts=[it.a,...shuffle(wrong).slice(0,3)];
+  const el=$id('wao');el.innerHTML='';let ans=false;
+  shuffle(opts).forEach(opt=>{
+    const btn=document.createElement('button');btn.className='qopt';
+    btn.innerHTML=`<span class="qopt-hz" style="font-size:13px">${opt}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt===it.a){btn.classList.add('ok');waScore++;$id('was').textContent=waScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.a)b.classList.add('ok');});}
+      waQ++;setTimeout(showWa,1200);};
+    el.appendChild(btn);});}
+GI[22]=initWa;
+
+// ═══ GAME 11: Season + Clothing Memory ═══
+const MEM_SC=[
+  {id:1,season:'春天',seasonpy:'chūntiān',seasonem:'🌸',outfit:'T恤 + 薄外套',outfitem:'👕🧥'},
+  {id:2,season:'夏天',seasonpy:'xiàtiān',seasonem:'☀️',outfit:'T恤 + 短裤',outfitem:'👕🩳'},
+  {id:3,season:'秋天',seasonpy:'qiūtiān',seasonem:'🍂',outfit:'毛衣 + 长裤',outfitem:'🧶👖'},
+  {id:4,season:'冬天',seasonpy:'dōngtiān',seasonem:'❄️',outfit:'羽绒服 + 围巾',outfitem:'🥼🧣'},
+];
+function initMemSC(){buildMemMatch(MEM_SC,'mscgrid','mscm','mscf','mscres',4,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:1px"><div style="font-size:24px">${d.seasonem}</div><div class="mcard-hz" style="font-size:12px">${d.season}</div><div class="mcard-py gpy" style="font-size:8.5px">${d.seasonpy}</div></div>`,
+  d=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px"><div style="font-size:22px">${d.outfitem}</div><div class="mcard-hz" style="font-size:10px">${d.outfit}</div></div>`);}
+GI[23]=initMemSC;
+
+// ═══ GAME 12: Mixed Final ═══
+let mxScore=0,mxQ=0,mxItems=[];
+function buildMx(){const qs=[];
+  shuffle(WEATHER).slice(0,4).forEach(w=>qs.push({label:'天气',q:w.em,size:'44px',correct:w.hz,wrongs:WEATHER.filter(x=>x.hz!==w.hz).map(x=>x.hz)}));
+  shuffle(SEASONS).slice(0,4).forEach(s=>qs.push({label:'季节',q:s.em,size:'44px',correct:s.hz,wrongs:SEASONS.filter(x=>x.hz!==s.hz).map(x=>x.hz)}));
+  shuffle(MONTHS).slice(0,4).forEach(m=>qs.push({label:m.hz+' 是哪个季节？',q:m.hz,size:'24px',correct:m.season,wrongs:SEASONS.filter(x=>x.hz!==m.season).map(x=>x.hz)}));
+  return shuffle(qs).slice(0,12);}
+function initMx(){mxScore=0;mxQ=0;mxItems=buildMx();$id('mxs').textContent='0';$id('mxq').textContent='1';$id('mxr').style.display='none';showMx();}
+function showMx(){if(mxQ>=12){const r=$id('mxr');r.style.display='block';r.textContent='🎉 '+mxScore+'/12 — '+(mxScore>=11?'完美！':mxScore>=8?'很好！':'加油！');$id('mxo').innerHTML='';return;}
+  const it=mxItems[mxQ];$id('mxlbl').textContent=it.label;$id('mxq2').innerHTML=`<div style="font-size:${it.size}">${it.q}</div>`;$id('mxq').textContent=mxQ+1;
+  const opts=shuffle([it.correct,...shuffle([...new Set(it.wrongs)]).slice(0,3)]);
+  const el=$id('mxo');el.innerHTML='';let ans=false;
+  opts.forEach(opt=>{const btn=document.createElement('button');btn.className='qopt';btn.innerHTML=`<span class="qopt-hz">${opt}</span>`;
+    btn.onclick=function(){if(ans)return;ans=true;
+      if(opt===it.correct){btn.classList.add('ok');mxScore++;$id('mxs').textContent=mxScore;}
+      else{btn.classList.add('no');el.querySelectorAll('.qopt').forEach(b=>{if(b.querySelector('.qopt-hz').textContent===it.correct)b.classList.add('ok');});}
+      mxQ++;setTimeout(showMx,1100);};
+    el.appendChild(btn);});}
+GI[24]=initMx;
+</script>
+</body>
+</html>
